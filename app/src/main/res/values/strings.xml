@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">GrowthChecker</string>
-    <string name="slide1text">What addictions have you struggled with over
-the years.  You can free yourself now.</string>
-    <string name="slidetext2">Track your growth using tables and plotted
-graphs.</string>
-    <string name="slidetext3">Engage in many challenges ranging from 2 to
-several weeks to break out of addictions. </string>
-    <string name="slidetext4">Get awarded for every concluded challenge.</string>
+    <string name="slide1text">Get over every addiction</string>
+    <string name="slidetext2">Track your growth</string>
+    <string name="slidetext3">Partake in challenges </string>
+    <string name="slidetext4">Receive encouragement awards</string>
     <string name="slide1desc">What addictions have you struggled with over
 the years.  You can free yourself now.</string>
     <string name="slidetext2desc">Track your growth using tables and plotted

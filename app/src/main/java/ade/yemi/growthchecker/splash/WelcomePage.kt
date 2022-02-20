@@ -62,6 +62,7 @@ class WelcomePage : AppCompatActivity() {
             finish()
         }
         layouts = intArrayOf(R.layout.slide_1, R.layout.slide_2, R.layout.slide_3, R.layout.slide_4)
+
         myAdapter = WelcomeAdapter(layouts, applicationContext)
         viewpager.adapter = myAdapter
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
