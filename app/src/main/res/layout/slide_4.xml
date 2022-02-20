@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primarycolor1"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="100dp"
+        android:padding="30dp"
+        android:layout_width="390dp"
+        android:layout_height="390dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/v4" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Receive encouragement awards"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/primarycolor2"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:gravity="center"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/slidetext4"
+        android:textColor="@color/primarycolor2"
+        android:textSize="15dp"
+        android:textStyle="normal" />
+
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splash.WelcomePage">
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:id="@+id/dotsLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".5"
+        android:background="@color/white"
+        android:layout_above="@id/dotsLayout"/>
+
+    <Button
+        android:id="@+id/btn_viewpagerskip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/primarycolor2"
+        android:fontFamily="@font/productsansbold"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="Skip"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp" />
+
+    <Button
+        android:id="@+id/btn_viewpagernext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/primarycolor2"
+        android:fontFamily="@font/productsansbold"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="15dp" />
+
+</RelativeLayout>
