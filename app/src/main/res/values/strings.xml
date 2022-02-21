@@ -11,4 +11,6 @@ graphs.</string>
     <string name="slidetext3desc">Engage in many challenges ranging from 2 to
 several weeks to break out of addictions. </string>
     <string name="slidetext4desc">Get awarded for every concluded challenge.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
