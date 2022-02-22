@@ -6,7 +6,10 @@
             android:name = "Background1" >
 
             <solid android:color="@color/primarycolor1"></solid>
-            <corners android:radius="30dp"></corners>
+            <corners android:topRightRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp"></corners>
         </shape>
 
     </item>

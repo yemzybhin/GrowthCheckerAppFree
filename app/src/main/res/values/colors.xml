@@ -3,7 +3,7 @@
     <color name="primarycolor1">#F5F6FC</color>
     <color name="primarycolor2">#403765</color>
     <color name="thirdcolor">#EA2F35</color>
-    <color name="transparent">00000000</color>
+    <color name="transparent">#FF3700B3</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>

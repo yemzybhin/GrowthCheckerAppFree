@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replacefragment(Homepage())
-        var fragment = findViewById<View>(R.id.fg_home)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
         var analyticscard = findViewById<CardView>(R.id.cd_analytics)
@@ -36,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
         homecard.setOnClickListener {
+            homeview.visibility = View.VISIBLE
             replacefragment(Homepage())
             UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home1)
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             tipsimage.setImageResource(R.drawable.tips2)
         }
         analyticscard.setOnClickListener {
+            analyticsview.visibility = View.VISIBLE
             replacefragment(AnalyticsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             tipsimage.setImageResource(R.drawable.tips2)
         }
         achievementscard.setOnClickListener {
+            achievementsview.visibility = View.VISIBLE
             replacefragment(AchievementsPage())
             UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             tipsimage.setImageResource(R.drawable.tips2)
         }
         notescard.setOnClickListener {
+            notesview.visibility = View.VISIBLE
             replacefragment(NotesPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -72,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             tipsimage.setImageResource(R.drawable.tips2)
         }
         tipscard.setOnClickListener {
+            tipsview.visibility = View.VISIBLE
             replacefragment(TipsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             homeimage.setImageResource(R.drawable.home2)

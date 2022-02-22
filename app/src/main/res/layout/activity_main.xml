@@ -46,8 +46,7 @@
         android:id="@+id/fg_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="75dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -67,11 +66,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardBackgroundColor="#151320"
+            app:cardCornerRadius="10dp">
 
             <View
                 android:id="@+id/v_analytics"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/menuonclick1"></View>
@@ -79,7 +79,7 @@
             <ImageView
                 android:id="@+id/iv_analytics"
                 android:layout_width="65dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/analytics1"></ImageView>
@@ -90,11 +90,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardBackgroundColor="#151320"
+            app:cardCornerRadius="10dp">
 
             <View
                 android:id="@+id/v_achievements"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/menuonclick1"></View>
@@ -102,7 +103,7 @@
             <ImageView
                 android:id="@+id/iv_achievements"
                 android:layout_width="65dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/achievement1"></ImageView>
@@ -113,11 +114,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardBackgroundColor="#151320"
+            app:cardCornerRadius="10dp">
 
             <View
                 android:id="@+id/v_home"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/menuonclick1"></View>
@@ -125,7 +127,7 @@
             <ImageView
                 android:id="@+id/iv_home"
                 android:layout_width="65dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/home1"></ImageView>
@@ -136,11 +138,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardBackgroundColor="#151320"
+            app:cardCornerRadius="10dp">
 
             <View
                 android:id="@+id/v_notes"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/menuonclick1"></View>
@@ -148,7 +151,7 @@
             <ImageView
                 android:id="@+id/iv_notes"
                 android:layout_width="65dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/note1"></ImageView>
@@ -158,11 +161,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardBackgroundColor="#151320"
+            app:cardCornerRadius="10dp">
 
             <View
                 android:id="@+id/v_tips"
-                android:layout_width="60dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/menuonclick1"></View>
@@ -170,7 +174,7 @@
             <ImageView
                 android:id="@+id/iv_tips"
                 android:layout_width="65dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/tips1"></ImageView>
