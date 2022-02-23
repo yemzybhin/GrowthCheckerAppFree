@@ -1,7 +1,7 @@
 package ade.yemi.growthchecker.splash
 
 import ade.yemi.growthchecker.Data.DataStoreManager
-import ade.yemi.growthchecker.MainActivity
+import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

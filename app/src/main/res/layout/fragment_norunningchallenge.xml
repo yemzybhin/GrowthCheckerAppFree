@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cd_norunning_startchallenge"
         android:layout_margin="10dp"
         android:layout_width="250dp"
         android:layout_height="120dp"
@@ -44,6 +45,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
+        android:id="@+id/cd_norunning_viewbadges"
         android:layout_margin="10dp"
         android:layout_width="250dp"
         android:layout_height="120dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/homebg"
-    tools:context=".MainActivity"
+    tools:context=".Activities.MainActivity"
     android:orientation="vertical">
 
 
@@ -66,7 +66,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/analytics1"></ImageView>
+                android:src="@drawable/analytics2"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -91,7 +91,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/achievement1"></ImageView>
+                android:src="@drawable/achievement2"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -141,7 +141,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/note1"></ImageView>
+                android:src="@drawable/note2"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -165,7 +165,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/tips1"></ImageView>
+                android:src="@drawable/tips2"></ImageView>
         </androidx.cardview.widget.CardView>
 
 
@@ -219,6 +219,7 @@
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cd_homechallangeswidget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#00F5F6FC"
@@ -226,299 +227,353 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <HorizontalScrollView
-            android:id="@+id/sv_challanges"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:scrollbars="none">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="29.99dp"
-                android:layout_marginRight="50dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00F5F6FC"
-                    app:cardElevation="0dp">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/challengebg"></View>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp"
-                            android:src="@drawable/forteendays"></ImageView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:lineSpacingExtra="6sp"
-                            android:text="14 Days"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="5dp"
-                            android:lineSpacingExtra="6sp"
-                            android:text="Challenge"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00F5F6FC"
-                    app:cardElevation="0dp">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/challengebg"></View>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp"
-                            android:src="@drawable/thirtydays"></ImageView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:lineSpacingExtra="6sp"
-                            android:text="30 Days"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="5dp"
-                            android:lineSpacingExtra="6sp"
-                            android:text="Challenge"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00F5F6FC"
-                    app:cardElevation="0dp">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/challengebg"></View>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp"
-                            android:src="@drawable/sixtydays"></ImageView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:lineSpacingExtra="6sp"
-                            android:text="60 Days"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="5dp"
-                            android:lineSpacingExtra="6sp"
-                            android:text="Challenge"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00F5F6FC"
-                    app:cardElevation="0dp">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/challengebg"></View>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp"
-                            android:src="@drawable/hundreddays"></ImageView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:lineSpacingExtra="6sp"
-                            android:text="100 Days"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="5dp"
-                            android:lineSpacingExtra="6sp"
-                            android:text="Challenge"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="75dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#00F5F6FC"
-                    app:cardElevation="0dp">
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp">
 
-                    <View
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="130dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/challengebg"></View>
+                        android:text="Challenges"
+                        android:textColor="@color/primarycolor2"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"></TextView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/primarycolor2"
+                        app:cardCornerRadius="16dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_margin="6dp"
+                            android:src="@drawable/challengesicon"></ImageView>
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/arrow"></ImageView>
+                </LinearLayout>
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="29.99dp"
+                        android:layout_marginRight="50dp"
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="2dp"
-                            android:src="@drawable/twohundreddays"></ImageView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cd_14days"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#00F5F6FC"
+                            app:cardElevation="0dp">
 
-                        <TextView
-                            android:layout_width="70dp"
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="130dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/challengebg"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:src="@drawable/forteendays"></ImageView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="14 Days"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="Challenge"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cd_30days"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#00F5F6FC"
+                            app:cardElevation="0dp">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="130dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/challengebg"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:src="@drawable/thirtydays"></ImageView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="30 Days"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="Challenge"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cd_60days"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#00F5F6FC"
+                            app:cardElevation="0dp">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="130dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/challengebg"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:src="@drawable/sixtydays"></ImageView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="60 Days"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="Challenge"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cd_100days"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#00F5F6FC"
+                            app:cardElevation="0dp">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="130dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/challengebg"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:src="@drawable/hundreddays"></ImageView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="100 Days"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="Challenge"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cd_200days"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:lineSpacingExtra="6sp"
-                            android:text="200 Days"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-
-                        <TextView
-                            android:layout_width="70dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="75dp"
                             android:layout_marginBottom="5dp"
-                            android:lineSpacingExtra="6sp"
-                            android:text="Challenge"
-                            android:textAlignment="center"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"></TextView>
-                    </LinearLayout>
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#00F5F6FC"
+                            app:cardElevation="0dp">
 
-                </androidx.cardview.widget.CardView>
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="130dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/challengebg"></View>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    android:src="@drawable/twohundreddays"></ImageView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="200 Days"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+
+                                <TextView
+                                    android:layout_width="70dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="Challenge"
+                                    android:textAlignment="center"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"></TextView>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
             </LinearLayout>
-        </HorizontalScrollView>
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
