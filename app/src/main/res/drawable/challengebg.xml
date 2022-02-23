@@ -8,7 +8,7 @@
                 android:type="linear"
                 android:angle="270">
             </gradient>
-            <corners android:radius="30dp"></corners>
+            <corners android:radius="20dp"></corners>
 
 
         </shape>

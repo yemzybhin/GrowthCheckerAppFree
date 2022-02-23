@@ -4,7 +4,9 @@ import ade.yemi.growthchecker.Fragments.Pages.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.HorizontalScrollView
 import android.widget.ImageView
+import android.widget.ScrollView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 
@@ -13,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replacefragment(Homepage())
+
+        var challengesscrollview = findViewById<HorizontalScrollView>(R.id.sv_challanges)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
         var analyticscard = findViewById<CardView>(R.id.cd_analytics)
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         homecard.setOnClickListener {
             homeview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.VISIBLE
             replacefragment(Homepage())
             UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home1)
@@ -46,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
         analyticscard.setOnClickListener {
             analyticsview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
             replacefragment(AnalyticsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -56,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
         achievementscard.setOnClickListener {
             achievementsview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
             replacefragment(AchievementsPage())
             UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -66,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
         notescard.setOnClickListener {
             notesview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
             replacefragment(NotesPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
             homeimage.setImageResource(R.drawable.home2)
@@ -76,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
         tipscard.setOnClickListener {
             tipsview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
             replacefragment(TipsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             homeimage.setImageResource(R.drawable.home2)
