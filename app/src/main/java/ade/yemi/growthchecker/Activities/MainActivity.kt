@@ -50,35 +50,36 @@ class MainActivity : AppCompatActivity() {
             fourteen.setOnClickListener {
                 fourteen.click()
                 vibrate(10)
-               Timer().schedule(150) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+               Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+
             }
         }
         thirty.setOnClickListener {
             thirty.setOnClickListener {
                 thirty.click()
                 vibrate(10)
-                Timer().schedule(150) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
             }
         }
         sixty.setOnClickListener {
             sixty.setOnClickListener {
                 sixty.click()
                 vibrate(10)
-                Timer().schedule(150) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
             }
         }
         hundred.setOnClickListener {
             hundred.setOnClickListener {
                 hundred.click()
                 vibrate(10)
-                Timer().schedule(150) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
             }
         }
         twohundred.setOnClickListener {
             twohundred.setOnClickListener {
                 twohundred.click()
                 vibrate(10)
-                Timer().schedule(150) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
+                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
             }
         }
 
