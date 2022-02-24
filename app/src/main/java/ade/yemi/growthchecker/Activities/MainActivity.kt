@@ -2,7 +2,7 @@ package ade.yemi.growthchecker.Activities
 
 import ade.yemi.growthchecker.Fragments.Pages.*
 import ade.yemi.growthchecker.R
-import ade.yemi.growthchecker.Utilities.click
+import ade.yemi.growthchecker.Utilities.clicking
 import android.content.Intent
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
@@ -49,48 +49,44 @@ class MainActivity : AppCompatActivity() {
         var challengeintent = Intent(this@MainActivity, ChallengeStart::class.java)
 
         fourteen.setOnClickListener {
-                fourteen.click()
+                fourteen.clicking()
                 vibrate(10)
                Timer().schedule(100) {
                    challengeintent.putExtra("Challenge", 1)
                    startActivity(Intent(challengeintent))
-                   finish()
                }
         }
         thirty.setOnClickListener {
-                thirty.click()
+                thirty.clicking()
                 vibrate(10)
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 2)
                     startActivity(Intent(challengeintent))
-                    finish()
                 }
         }
         sixty.setOnClickListener {
-                sixty.click()
+                sixty.clicking()
                 vibrate(10)
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 3)
                     startActivity(Intent(challengeintent))
-                    finish()
                 }
         }
         hundred.setOnClickListener {
-                hundred.click()
+                hundred.clicking()
                 vibrate(10)
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 4)
                     startActivity(Intent(challengeintent))
-                    finish()
                 }
         }
         twohundred.setOnClickListener {
-                twohundred.click()
+                twohundred.clicking()
                 vibrate(10)
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 5)
                     startActivity(Intent(challengeintent))
-                    finish()
+
                 }
         }
 

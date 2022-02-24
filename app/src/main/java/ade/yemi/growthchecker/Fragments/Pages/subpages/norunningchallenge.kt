@@ -6,15 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
-import ade.yemi.growthchecker.Utilities.click
+import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.zoom_in
-import android.content.Context
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentActivity
-import java.util.*
 
 class norunningchallenge : Fragment() {
     override fun onCreateView(
@@ -30,10 +24,10 @@ class norunningchallenge : Fragment() {
 
 
         card1.setOnClickListener {
-            card1.click()
+            card1.clicking()
         }
         card2.setOnClickListener {
-            card2.click()
+            card2.clicking()
         }
         return view
     }

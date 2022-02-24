@@ -9,7 +9,7 @@ fun View.zoom_in(){
     val animation = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
     this.startAnimation(animation)
 }
-fun View.click(){
+fun View.clicking(){
     val animation = AnimationUtils.loadAnimation(context, R.anim.click)
     this.startAnimation(animation)
 }

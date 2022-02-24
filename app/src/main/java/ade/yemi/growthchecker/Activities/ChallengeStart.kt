@@ -1,7 +1,7 @@
 package ade.yemi.growthchecker.Activities
 
 import ade.yemi.growthchecker.R
-import ade.yemi.growthchecker.Utilities.click
+import ade.yemi.growthchecker.Utilities.clicking
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -54,14 +54,14 @@ class ChallengeStart : AppCompatActivity() {
         t6.text = text6
 
         cancl.setOnClickListener {
-            cancl.click()
+            cancl.clicking()
             vibrate(10)
             Timer().schedule(100) {
                 startActivity(Intent(this@ChallengeStart, MainActivity::class.java))
             }
         }
         next.setOnClickListener {
-            next.click()
+            next.clicking()
             vibrate(10)
 //            Timer().schedule(100) {
 //                startActivity(Intent(this@ChallengeStart, MainActivity::class.java))
