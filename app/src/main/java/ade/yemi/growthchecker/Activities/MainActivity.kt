@@ -46,41 +46,52 @@ class MainActivity : AppCompatActivity() {
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
 
+        var challengeintent = Intent(this@MainActivity, ChallengeStart::class.java)
+
         fourteen.setOnClickListener {
-            fourteen.setOnClickListener {
                 fourteen.click()
                 vibrate(10)
-               Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
-
-            }
+               Timer().schedule(100) {
+                   challengeintent.putExtra("Challenge", 1)
+                   startActivity(Intent(challengeintent))
+                   finish()
+               }
         }
         thirty.setOnClickListener {
-            thirty.setOnClickListener {
                 thirty.click()
                 vibrate(10)
-                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
-            }
+                Timer().schedule(100) {
+                    challengeintent.putExtra("Challenge", 2)
+                    startActivity(Intent(challengeintent))
+                    finish()
+                }
         }
         sixty.setOnClickListener {
-            sixty.setOnClickListener {
                 sixty.click()
                 vibrate(10)
-                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
-            }
+                Timer().schedule(100) {
+                    challengeintent.putExtra("Challenge", 3)
+                    startActivity(Intent(challengeintent))
+                    finish()
+                }
         }
         hundred.setOnClickListener {
-            hundred.setOnClickListener {
                 hundred.click()
                 vibrate(10)
-                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
-            }
+                Timer().schedule(100) {
+                    challengeintent.putExtra("Challenge", 4)
+                    startActivity(Intent(challengeintent))
+                    finish()
+                }
         }
         twohundred.setOnClickListener {
-            twohundred.setOnClickListener {
                 twohundred.click()
                 vibrate(10)
-                Timer().schedule(100) {startActivity(Intent(this@MainActivity, ChallengeStart::class.java)) }
-            }
+                Timer().schedule(100) {
+                    challengeintent.putExtra("Challenge", 5)
+                    startActivity(Intent(challengeintent))
+                    finish()
+                }
         }
 
         homecard.setOnClickListener {

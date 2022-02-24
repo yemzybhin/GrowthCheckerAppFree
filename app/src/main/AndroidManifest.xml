@@ -16,15 +16,18 @@
         <activity
             android:name=".splash.WelcomePage"
             android:screenOrientation="portrait" />
-        <activity android:name=".splash.SplashScreen" />
-        <activity
-            android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".splash.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait">
+
         </activity>
     </application>
 
