@@ -58,7 +58,6 @@ class ChallengeStart : AppCompatActivity() {
             vibrate(10)
             Timer().schedule(100) {
                 startActivity(Intent(this@ChallengeStart, MainActivity::class.java))
-                finish()
             }
         }
         next.setOnClickListener {
