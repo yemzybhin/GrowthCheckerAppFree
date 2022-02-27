@@ -4,6 +4,8 @@
     <color name="primarycolor2">#403765</color>
     <color name="thirdcolor">#EA2F35</color>
     <color name="appgreen">#1CA000</color>
+    <color name="MenuItem">#DFDFDF</color>
+    <color name="MyTransparent">#D9000000</color>
     <color name="transparent">#FF3700B3</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>

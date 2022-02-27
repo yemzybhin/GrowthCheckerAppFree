@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ChallengeStart"
+    tools:context=".Activities.Activity2"
     android:background="@color/primarycolor1">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,35 +23,11 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:backgroundTint="@color/primarycolor2"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp">
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Challenge"
-                    android:textColor="@color/primarycolor1"
-                    android:textSize="13sp"
-                    android:textStyle="bold"></TextView>
-
-            </androidx.cardview.widget.CardView>
-
             <ImageView
                 android:id="@+id/iv_challengestart"
                 android:layout_width="300dp"
                 android:layout_height="250dp"
-                android:layout_marginTop="-22dp"
+                android:layout_marginTop="-13dp"
                 app:srcCompat="@drawable/forteendays" />
 
             <TextView
@@ -431,63 +408,34 @@
     </ScrollView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cd_challengestartnext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:backgroundTint="@color/appgreen"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:backgroundTint="@color/primarycolor1"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_margin="15dp"
+            android:text="Challenge"
+            android:textAllCaps="true"
+            android:textColor="@color/primarycolor2"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:background="@color/white"
+            android:layout_gravity="bottom"></View>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Next"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:src="@drawable/arrow2"></ImageView>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_challengestartcancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="65dp"
-        app:cardBackgroundColor="#00FFFFFF"
-        app:cardElevation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/cancel1" />
 
     </androidx.cardview.widget.CardView>
 

@@ -1,5 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+    <style name="mydialog">
+        <item name="android:windowBackground">@drawable/menuwindowbackground</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowSoftInputMode">stateUnspecified</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimAmount">.70</item>
+    </style>
     <style name="Theme.GrowthChecker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primarycolor1</item>

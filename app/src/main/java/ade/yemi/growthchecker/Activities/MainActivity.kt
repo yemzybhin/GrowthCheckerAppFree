@@ -1,15 +1,24 @@
 package ade.yemi.growthchecker.Activities
 
+import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.shortvibrate
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -17,9 +26,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         replacefragment(Homepage())
 
         var challengesscrollview = findViewById<CardView>(R.id.cd_homechallangeswidget)
+        var menubutton = findViewById<CardView>(R.id.cd_homemenu)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
         var analyticscard = findViewById<CardView>(R.id.cd_analytics)
@@ -44,13 +55,24 @@ class MainActivity : AppCompatActivity() {
         var achievementsimage = findViewById<ImageView>(R.id.iv_achievements)
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
-        UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
 
-        var challengeintent = Intent(this@MainActivity, ChallengeStart::class.java)
+        UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
+        var dialog = Menu()
+        menubutton.setOnClickListener {
+            menubutton.clicking()
+            menubutton.shortvibrate()
+            Timer().schedule(100) {
+            }
+            dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
+            dialog.show(supportFragmentManager, "Menudialog")
+        }
+
+        var challengeintent = Intent(this@MainActivity, Activity2::class.java)
 
         fourteen.setOnClickListener {
+            savedata(2)
                 fourteen.clicking()
-                vibrate(10)
+                fourteen.shortvibrate()
                Timer().schedule(100) {
                    challengeintent.putExtra("Challenge", 1)
                    startActivity(Intent(challengeintent))
@@ -58,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
         thirty.setOnClickListener {
                 thirty.clicking()
-                vibrate(10)
+                thirty.shortvibrate()
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 2)
                     startActivity(Intent(challengeintent))
@@ -66,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
         sixty.setOnClickListener {
                 sixty.clicking()
-                vibrate(10)
+               sixty.shortvibrate()
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 3)
                     startActivity(Intent(challengeintent))
@@ -74,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
         hundred.setOnClickListener {
                 hundred.clicking()
-                vibrate(10)
+                hundred.shortvibrate()
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 4)
                     startActivity(Intent(challengeintent))
@@ -82,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
         twohundred.setOnClickListener {
                 twohundred.clicking()
-                vibrate(10)
+                twohundred.shortvibrate()
                 Timer().schedule(100) {
                     challengeintent.putExtra("Challenge", 5)
                     startActivity(Intent(challengeintent))
@@ -91,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         homecard.setOnClickListener {
-            vibrate(10)
+            homecard.shortvibrate()
             homeview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.VISIBLE
             replacefragment(Homepage())
@@ -106,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         analyticscard.setOnClickListener {
-            vibrate(10)
+            analyticscard.shortvibrate()
             analyticsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
             replacefragment(AnalyticsPage())
@@ -115,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         achievementscard.setOnClickListener {
-            vibrate(10)
+            achievementscard.shortvibrate()
             achievementsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
             replacefragment(AchievementsPage())
@@ -125,7 +147,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         notescard.setOnClickListener {
-            vibrate(10)
+            notescard.shortvibrate()
             notesview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
             replacefragment(NotesPage())
@@ -134,13 +156,18 @@ class MainActivity : AppCompatActivity() {
 
         }
         tipscard.setOnClickListener {
-            vibrate(10)
+            tipscard.shortvibrate()
             tipsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
             replacefragment(TipsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
         }
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
+        finish()
     }
     private fun replacefragment(fragment:Fragment) {
         val fragmentManager = supportFragmentManager
@@ -159,13 +186,25 @@ class MainActivity : AppCompatActivity() {
         }
         setimage.setImageResource(image)
     }
-    private fun vibrate(millisecond: Long) {
-        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(millisecond, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            vibrator.vibrate(millisecond)
+    private fun savedata(vall : Int){
+        lifecycleScope.launch {
+            DataStoreManager.saveInt(this@MainActivity, "red", vall)
         }
     }
+//    private fun showMenupopup( ){
+//        var popup = Dialog(this)
+//        popup.setCancelable(true)
+//        popup.setContentView(R.layout.fragment_menu)
+//        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        popup.show()
+//
+//        var cancel = popup.findViewById<CardView>(R.id.cd_homemenucancel)
+//        cancel.setOnClickListener {
+//            cancel.clicking()
+//            cancel.shortvibrate()
+//            Timer().schedule(100) {
+//            }
+//            popup.dismiss()
+//        }
+//    }
 }
