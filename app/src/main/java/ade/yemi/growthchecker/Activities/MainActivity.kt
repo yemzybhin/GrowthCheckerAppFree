@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -23,13 +24,30 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
+    private val challengesscrollview: CardView by lazy {
+        findViewById(R.id.cd_homechallangeswidget)
+    }
+    private val homeview: View by lazy {
+        findViewById(R.id.v_home)
+    }
+    private val analyticsview: View by lazy {
+        findViewById(R.id.v_analytics)
+    }
+    private val achievementsview: View by lazy {
+        findViewById(R.id.v_achievements)
+    }
+    private val notesview: View by lazy {
+        findViewById(R.id.v_notes)
+    }
+    private val tipsview: View by lazy {
+        findViewById(R.id.v_tips)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         replacefragment(Homepage())
 
-        var challengesscrollview = findViewById<CardView>(R.id.cd_homechallangeswidget)
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
@@ -43,12 +61,6 @@ class MainActivity : AppCompatActivity() {
         var sixty = findViewById<CardView>(R.id.cd_60days)
         var hundred = findViewById<CardView>(R.id.cd_100days)
         var twohundred = findViewById<CardView>(R.id.cd_200days)
-
-        var homeview= findViewById<View>(R.id.v_home)
-        var analyticsview = findViewById<View>(R.id.v_analytics)
-        var achievementsview = findViewById<View>(R.id.v_achievements)
-        var notesview = findViewById<View>(R.id.v_notes)
-        var tipsview = findViewById<View>(R.id.v_tips)
 
         var homeimage= findViewById<ImageView>(R.id.iv_home)
         var analyticsimage = findViewById<ImageView>(R.id.iv_analytics)
@@ -169,11 +181,20 @@ class MainActivity : AppCompatActivity() {
         finishAffinity()
         finish()
     }
-    private fun replacefragment(fragment:Fragment) {
+    internal fun replacefragment(fragment:Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fg_home, fragment)
         fragmentTransaction.commit()
+    }
+    internal fun ChangeToAchivement(fragment: Fragment){
+        achievementsview.visibility = View.VISIBLE
+        challengesscrollview.visibility = View.GONE
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fg_home, fragment)
+        fragmentTransaction.commit()
+        UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
     }
     private fun UpdateOnclickElement(views: List<View>){
         for (i in views){

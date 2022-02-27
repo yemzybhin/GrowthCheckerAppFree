@@ -1,5 +1,7 @@
 package ade.yemi.growthchecker.Fragments.Pages.subpages
 
+import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.Fragments.Pages.AchievementsPage
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.delay
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import ade.yemi.growthchecker.Utilities.zoom_in
 import androidx.cardview.widget.CardView
@@ -29,6 +32,8 @@ class norunningchallenge : Fragment() {
         card2.setOnClickListener {
             card2.shortvibrate()
             card2.clicking()
+            delay(100)
+            (activity as MainActivity).ChangeToAchivement(AchievementsPage())
         }
         return view
     }
