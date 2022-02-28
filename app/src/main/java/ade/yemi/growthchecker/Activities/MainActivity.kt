@@ -24,6 +24,7 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
+    private var ne = ""
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -82,43 +83,53 @@ class MainActivity : AppCompatActivity() {
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
 
         fourteen.setOnClickListener {
-            savedata(2)
-                fourteen.clicking()
-                fourteen.shortvibrate()
+
+            fourteen.clicking()
+            fourteen.shortvibrate()
                Timer().schedule(100) {
-                   challengeintent.putExtra("Challenge", 1)
+                   ne = "challenge14"
+                   savedata()
+                   challengeintent.putExtra("ActivityFragtoset", "Challengeview")
                    startActivity(Intent(challengeintent))
                }
         }
         thirty.setOnClickListener {
+            ne = "challenge30"
+            savedata()
                 thirty.clicking()
                 thirty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("Challenge", 2)
+                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
         sixty.setOnClickListener {
-                sixty.clicking()
+            ne = "challenge60"
+            savedata()
+            sixty.clicking()
                sixty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("Challenge", 3)
+                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
         hundred.setOnClickListener {
+            ne = "challenge100"
+            savedata()
                 hundred.clicking()
                 hundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("Challenge", 4)
+                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
         twohundred.setOnClickListener {
+            ne = "challenge200"
+            savedata()
                 twohundred.clicking()
                 twohundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("Challenge", 5)
+                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
                     startActivity(Intent(challengeintent))
 
                 }
@@ -207,9 +218,9 @@ class MainActivity : AppCompatActivity() {
         }
         setimage.setImageResource(image)
     }
-    private fun savedata(vall : Int){
+    private fun savedata(){
         lifecycleScope.launch {
-            DataStoreManager.saveInt(this@MainActivity, "red", vall)
+            DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", ne)
         }
     }
 //    private fun showMenupopup( ){
