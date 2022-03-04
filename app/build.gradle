@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -54,6 +56,16 @@ dependencies {
 
     //Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //For Room
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
+    implementation "androidx.room:room-ktx:2.2.5"
+    androidTestImplementation "androidx.room:room-testing:2.2.5"
+    implementation 'com.google.code.gson:gson:2.8.8' // Old 2.8.6
+
+    //For Graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Pages.Menu">
+    tools:context=".PopUp_Fragments.Menu">
 
     <View
         android:layout_width="1000dp"
@@ -23,7 +23,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cd_homemenucancel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#00F5F6FC"
             app:cardElevation="0dp">

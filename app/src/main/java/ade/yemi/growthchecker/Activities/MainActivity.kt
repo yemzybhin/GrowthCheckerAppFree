@@ -2,29 +2,27 @@ package ade.yemi.growthchecker.Activities
 
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
+import ade.yemi.growthchecker.PopUp_Fragments.Menu
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.shortvibrate
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
     private var ne = ""
+    private var ungoingchallenge = false
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
-
         fourteen.setOnClickListener {
 
             fourteen.clicking()
@@ -188,6 +185,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    internal fun ShowMainpopUp(view: View, dialogFragment: DialogFragment){
+        view.clicking()
+        view.shortvibrate()
+        Timer().schedule(100) {
+        }
+        dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
+        dialogFragment.show(supportFragmentManager, "$dialogFragment popup")
+    }
+
     override fun onBackPressed() {
         finishAffinity()
         finish()
@@ -221,6 +227,14 @@ class MainActivity : AppCompatActivity() {
     private fun savedata(){
         lifecycleScope.launch {
             DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", ne)
+        }
+    }
+    private fun initdata(){
+        lifecycleScope.launch {
+            val pushresult = async {
+                DataStoreManager.getBoolean(this@MainActivity , "ungoingchallenge")
+            }
+            ungoingchallenge = pushresult.await()
         }
     }
 //    private fun showMenupopup( ){

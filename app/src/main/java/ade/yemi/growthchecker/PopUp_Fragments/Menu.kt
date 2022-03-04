@@ -1,5 +1,7 @@
-package ade.yemi.growthchecker.Fragments.Pages
+package ade.yemi.growthchecker.PopUp_Fragments
 
+import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.Fragments.Pages.AchievementsPage
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,7 +32,6 @@ class Menu : DialogFragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        setStyle(STYLE_NO_TITLE, R.style.mydialog)
         var view = inflater.inflate(R.layout.fragment_menu, container, false)
         var myinfo = view.findViewById<CardView>(R.id.cd_MenuMyInfo)
         var addiction = view.findViewById<CardView>(R.id.cd_menuAddiction)
@@ -38,11 +39,11 @@ class Menu : DialogFragment(){
         var settingss = view.findViewById<CardView>(R.id.cd_menuSettings)
         var cancel = view.findViewById<CardView>(R.id.cd_homemenucancel)
 
+
+        var myinfopopup = PopUp_Myinfo()
         myinfo.setOnClickListener {
-            myinfo.clicking()
-            myinfo.shortvibrate()
             dismiss()
-            showMenupopup()
+            (activity as MainActivity).ShowMainpopUp(myinfo, myinfopopup)
         }
         addiction.setOnClickListener {
             addiction.clicking()
@@ -65,21 +66,4 @@ class Menu : DialogFragment(){
         }
         return view
     }
-        private fun showMenupopup(){
-        var popup = Dialog(requireContext())
-        popup.setCancelable(false)
-        popup.setContentView(R.layout.popup_myinfo)
-        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        popup.show()
-        var cancel = popup.findViewById<CardView>(R.id.cd_menupopupcancel)
-        cancel.setOnClickListener {
-            cancel.clicking()
-            cancel.shortvibrate()
-            Timer().schedule(100) {
-                popup.dismiss()
-            }
-
-        }
-    }
-
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MYDIALOG2">
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowSoftInputMode">stateUnspecified</item>
+        <item name="android:windowActionModeOverlay">false</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimAmount">.70</item>
+    </style>
+
+</resources>
