@@ -8,30 +8,31 @@
     android:orientation="vertical">
 
     <HorizontalScrollView
+        android:id="@+id/HS_ungoingpage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white">
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="20dp">
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cd_takeassessmentRunning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -47,7 +48,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="20dp"
                                 android:text="Take Assessment"
                                 android:textColor="@color/primarycolor2"
                                 android:textSize="13sp"
@@ -76,6 +76,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cd_trackgrowthRunning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:cardElevation="0dp">
@@ -111,7 +112,7 @@
                             </androidx.cardview.widget.CardView>
 
                             <ImageView
-                                android:layout_width="20dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="20dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/arrow"></ImageView>
@@ -119,14 +120,12 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <View
-                android:layout_width="30dp"
-                android:layout_height="1dp"></View>
         </LinearLayout>
-
-
     </HorizontalScrollView>
+
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cd_ungoingpagecontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -136,65 +135,79 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:cardElevation="0dp">-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp">
 
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:layout_margin="10dp">-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
 
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_marginLeft="20dp"-->
-<!--                        android:text="Graph snippet"-->
-<!--                        android:textColor="@color/primarycolor2"-->
-<!--                        android:textSize="13sp"-->
-<!--                        android:textStyle="bold"></TextView>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:text="Graph snippet"
+                        android:textColor="@color/primarycolor2"
+                        android:textSize="13sp"
+                        android:textStyle="bold"></TextView>
 
-<!--                    <androidx.cardview.widget.CardView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        app:cardElevation="0dp"-->
-<!--                        android:backgroundTint="@color/primarycolor2"-->
-<!--                        app:cardCornerRadius="16dp">-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        app:cardElevation="0dp"
+                        android:backgroundTint="@color/primarycolor2"
+                        app:cardCornerRadius="16dp">
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="14dp"-->
-<!--                            android:layout_height="14dp"-->
-<!--                            android:layout_margin="6dp"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:src="@drawable/graphicon"></ImageView>-->
-<!--                    </androidx.cardview.widget.CardView>-->
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_margin="6dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/graphicon"></ImageView>
+                    </androidx.cardview.widget.CardView>
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="13dp"-->
-<!--                        android:layout_height="20dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:src="@drawable/arrow"></ImageView>-->
-<!--                </LinearLayout>-->
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/arrow"></ImageView>
+                </LinearLayout>
 
 
-<!--            </androidx.cardview.widget.CardView>-->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChartHome"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:padding="9dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChartHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="9dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_nochartdata"
+                    android:layout_width="200dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="12dp"
+                    android:textStyle="italic"
+                    android:text="Not Enough Data to display graph. After 2 assessments, graph would be displayed"
+                    android:textColor="@color/primary5"></TextView>
+
+            </RelativeLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -204,15 +217,270 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:textColor="@color/primarycolor2"></TextView>
-            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_runningChallengeImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/forteendays"
+                    android:layout_margin="10dp"></ImageView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ungoing Challenge:  "
+                            android:layout_gravity="center"
+                            android:textSize="10sp"
+                            android:textColor="@color/primarycolor2"></TextView>
+                        <TextView
+                            android:id="@+id/tv_runningChallengetype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="14 Days Challenge"
+                            android:textColor="@color/primarycolor2"
+                            android:textSize="10sp"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cumulative Point So Far: "
+                            android:layout_gravity="center"
+                            android:textSize="10sp"
+                            android:textColor="@color/primarycolor2"></TextView>
+                        <TextView
+                            android:id="@+id/tv_runningCumulative"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2000 Points"
+                            android:textSize="10sp"
+                            android:textColor="@color/primarycolor2"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_ungoingpagereport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="horizontal">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="4dp"
+                                android:background="#4D403765"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_marginTop="3dp"
+                                android:background="@drawable/dot1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/tv_challengestartcomment1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginBottom="30dp"
+                                    android:text="Your cumulative point is negative."
+                                    android:textColor="@color/primarycolor2"
+                                    android:textSize="13sp" />
+
+                            </LinearLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:background="#4D403765"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/dot2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <TextView
+                                android:id="@+id/tv_challengestartcomment2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:text="Is there a cause / reason? If so, put down this
+cause on notes at the notes page. Constantly check your notes for
+better reference on what and what not to do."
+                                android:textColor="@color/primarycolor2"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/dot2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_challengestartcomment3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="-4dp"
+                                android:text="Regardless of the state of the graph and your
+cumulative, you can still get your points higher
+and ultimately break the addiction."
+                                android:textColor="@color/primarycolor2"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp"></View>
+        android:layout_height="5dp"></View>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

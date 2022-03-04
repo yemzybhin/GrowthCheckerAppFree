@@ -134,9 +134,6 @@
                 android:layout_gravity="center"
                 >
             </androidx.fragment.app.FragmentContainerView>
-            <View
-                android:layout_width="20dp"
-                android:layout_height="195dp"></View>
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package ade.yemi.growthchecker.Activities
 
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
+import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
 import ade.yemi.growthchecker.PopUp_Fragments.Menu
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
@@ -10,6 +11,7 @@ import android.content.Intent
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -21,8 +23,10 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
+    private var assessmentnotification = false
     private var ne = ""
     private var ungoingchallenge = false
+    private var ungoinchallenge = false
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         replacefragment(Homepage())
 
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
+        var notificationbutton = findViewById<CardView>(R.id.cd_assessmentnotification)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
         var analyticscard = findViewById<CardView>(R.id.cd_analytics)
@@ -67,6 +72,31 @@ class MainActivity : AppCompatActivity() {
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
+        lifecycleScope.launch {
+            val pushresult = async {
+                DataStoreManager.getBoolean( this@MainActivity , "challengeungoing")
+            }
+            val pushresult1 = async {
+                DataStoreManager.getBoolean( this@MainActivity , "assessmentnotification")
+            }
+            ungoinchallenge = pushresult.await()
+            ungoingchallenge = ungoinchallenge
+
+            assessmentnotification = pushresult1.await()
+
+
+            if (assessmentnotification == true && ungoingchallenge == true){
+                notificationbutton.visibility = View.VISIBLE
+                notificationbutton.animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.notification)
+            }else{
+                notificationbutton.visibility = View.GONE
+            }
+
+            if (ungoingchallenge == true){
+                challengesscrollview.visibility = View.GONE
+            }else{
+                challengesscrollview.visibility = View.VISIBLE
+            }
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         var dialog = Menu()
         menubutton.setOnClickListener {
@@ -77,6 +107,11 @@ class MainActivity : AppCompatActivity() {
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialog.show(supportFragmentManager, "Menudialog")
         }
+            var dialog2 = DailyAssessment()
+            notificationbutton.setOnClickListener {
+                notificationbutton.shortvibrate()
+                showassessmentdialog(dialog2)
+            }
 
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
         fourteen.setOnClickListener {
@@ -86,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                Timer().schedule(100) {
                    ne = "challenge14"
                    savedata()
-                   challengeintent.putExtra("ActivityFragtoset", "Challengeview")
+                   challengeintent.putExtra("ActivityToset", "challengeview")
                    startActivity(Intent(challengeintent))
                }
         }
@@ -96,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                 thirty.clicking()
                 thirty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
+                    challengeintent.putExtra("ActivityToset", "challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
@@ -106,7 +141,7 @@ class MainActivity : AppCompatActivity() {
             sixty.clicking()
                sixty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
+                    challengeintent.putExtra("ActivityToset", "challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
@@ -116,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                 hundred.clicking()
                 hundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
+                    challengeintent.putExtra("ActivityToset", "challengeview")
                     startActivity(Intent(challengeintent))
                 }
         }
@@ -126,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                 twohundred.clicking()
                 twohundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityFragtoset", "Challengeview")
+                    challengeintent.putExtra("ActivityToset", "challengeview")
                     startActivity(Intent(challengeintent))
 
                 }
@@ -135,7 +170,12 @@ class MainActivity : AppCompatActivity() {
         homecard.setOnClickListener {
             homecard.shortvibrate()
             homeview.visibility = View.VISIBLE
-            challengesscrollview.visibility = View.VISIBLE
+
+            if (ungoingchallenge == true){
+                challengesscrollview.visibility = View.GONE
+            }else{
+                challengesscrollview.visibility = View.VISIBLE
+            }
             replacefragment(Homepage())
             UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
             homeimage.setImageResource(R.drawable.home1)
@@ -183,7 +223,7 @@ class MainActivity : AppCompatActivity() {
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
         }
-    }
+    }}
 
     internal fun ShowMainpopUp(view: View, dialogFragment: DialogFragment){
         view.clicking()
@@ -213,6 +253,15 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
         UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
     }
+    internal fun ChangeToAnalytics(fragment: Fragment){
+        analyticsview.visibility = View.VISIBLE
+        challengesscrollview.visibility = View.GONE
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fg_home, fragment)
+        fragmentTransaction.commit()
+        UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
+    }
     private fun UpdateOnclickElement(views: List<View>){
         for (i in views){
             i.visibility = View.GONE
@@ -229,13 +278,9 @@ class MainActivity : AppCompatActivity() {
             DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", ne)
         }
     }
-    private fun initdata(){
-        lifecycleScope.launch {
-            val pushresult = async {
-                DataStoreManager.getBoolean(this@MainActivity , "ungoingchallenge")
-            }
-            ungoingchallenge = pushresult.await()
-        }
+    internal fun showassessmentdialog(dialogFragment: DialogFragment){
+            dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
+            dialogFragment.show(supportFragmentManager, "Assessmentdialog")
     }
 //    private fun showMenupopup( ){
 //        var popup = Dialog(this)

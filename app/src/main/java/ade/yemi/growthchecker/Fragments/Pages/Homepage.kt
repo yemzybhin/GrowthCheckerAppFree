@@ -21,8 +21,6 @@ class Homepage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_homepage, container, false)
-
-
         lifecycleScope.launch {
             val pushresult = async {
                 context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }

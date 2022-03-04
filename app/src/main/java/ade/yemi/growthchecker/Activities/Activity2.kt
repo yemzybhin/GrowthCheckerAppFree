@@ -1,6 +1,5 @@
 package ade.yemi.growthchecker.Activities
 
-import ade.yemi.growthchecker.Fragments.Pages.DetailedChallengeView
 import ade.yemi.growthchecker.Fragments.Pages.challengeview
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
@@ -18,11 +17,7 @@ class Activity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activity2)
         var cancl = findViewById<CardView>(R.id.cd_challengestartcancel)
-        replacefragment(intent.getStringExtra("ActivityFragtoset").toString())
-
-
-//       tofragment(challengeview())
-
+        replacefragment(intent.getStringExtra("ActivityToset")!!)
         cancl.setOnClickListener {
             cancl.clicking()
             cancl.shortvibrate()
@@ -38,9 +33,10 @@ class Activity2 : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         when(string){
-            "Challengeview" -> fragmentTransaction.replace(R.id.fr_activity2, challengeview())
-            "DetailedChallengeView" -> fragmentTransaction.replace(R.id.fr_activity2, DetailedChallengeView())
+            "challengeview" -> fragmentTransaction.replace(R.id.fr_activity2, challengeview())
+
         }
+
         fragmentTransaction.commit()
     }
 //    private fun tofragment(fragment: Fragment){

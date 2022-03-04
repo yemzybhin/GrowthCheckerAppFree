@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class Startchallenge : Fragment() {
+    private var assessmentnotification = false
     private var ungoing = false
     private lateinit var challengeViewModel: ChallengeViewModel
     private var challengetype = ""
@@ -37,7 +38,6 @@ class Startchallenge : Fragment() {
     ): View? {
        var view = inflater.inflate(R.layout.fragment_startchallenge, container, false)
         var start = view.findViewById<CardView>(R.id.cd_challengestartstart)
-
 
         lifecycleScope.launch {
             val pushresult = async {
@@ -60,15 +60,15 @@ class Startchallenge : Fragment() {
         var points = mutableListOf<String>()
 
         when(string){
-            "challenge14" -> {challengetype = "14DaysChallenge"
+            "challenge14" -> {challengetype = "14 Days Challenge"
                               days = "14"}
-            "challenge30" -> {challengetype = "30DaysChallenge"
+            "challenge30" -> {challengetype = "30 Days Challenge"
                 days = "30"}
-            "challenge60" -> {challengetype = "60DaysChallenge"
+            "challenge60" -> {challengetype = "60 Days Challenge"
                 days = "60"}
-            "challenge100" -> {challengetype = "100DaysChallenge"
-                days = "100"}
-            "challenge200" -> {challengetype = "200DaysChallenge"
+            "challenge100" -> {challengetype = "100 Days Challenge"
+                                        days = "100"}
+            "challenge200" -> {challengetype = "200 Days Challenge"
                 days = "200"}
         }
         var challenge = Challenge(0, challengetype, days, points)
@@ -76,7 +76,7 @@ class Startchallenge : Fragment() {
     }
     private fun confirmpopup( string: String){
         var popup = Dialog(requireContext())
-        popup.setCancelable(true)
+        popup.setCancelable(false)
         popup.setContentView(R.layout.popup_startchallenge_confirmation)
         popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         popup.show()
@@ -91,12 +91,15 @@ class Startchallenge : Fragment() {
         }
 
         start.setOnClickListener {
+            start.clicking()
+            start.shortvibrate()
             var challenge = challengedetails(string)
             challengeViewModel = ViewModelProvider(this).get(ChallengeViewModel::class.java)
 
             try {
                 challengeViewModel.insertChallengeInfo(challenge)
                 Toast.makeText(requireContext(), "$string Challenge Started Successfully", Toast.LENGTH_LONG).show()
+                assessmentnotification = true
                 ungoing = true
                 savedata()
                 popup.dismiss()
@@ -114,8 +117,7 @@ class Startchallenge : Fragment() {
         private fun savedata(){
         lifecycleScope.launch {
             context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", ungoing) }
-
-
+            context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", assessmentnotification) }
         }
     }
 }
