@@ -220,7 +220,6 @@
             </TextView>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cd_homechallangeswidget"
         android:layout_width="match_parent"

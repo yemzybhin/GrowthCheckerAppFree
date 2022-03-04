@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker.Fragments.Pages
 
 import ade.yemi.growthchecker.Data.DataStoreManager
+import ade.yemi.growthchecker.Fragments.Pages.subpages.RunningChallenge
 import ade.yemi.growthchecker.Fragments.Pages.subpages.norunningchallenge
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,12 +21,21 @@ class Homepage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_homepage, container, false)
-        initdata()
-        if (challengeungoing == false){
-            replacefragment(norunningchallenge())
-        }else{
-            replacefragment(norunningchallenge())
+
+
+        lifecycleScope.launch {
+            val pushresult = async {
+                context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
+            }
+            challengeungoin = pushresult.await()!!
+            challengeungoing = challengeungoin
+            if (challengeungoing == false){
+                replacefragment(norunningchallenge())
+            }else{
+            replacefragment(RunningChallenge())
         }
+    }
+
         return view
     }
 

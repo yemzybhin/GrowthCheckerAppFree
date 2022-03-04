@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class Startchallenge : Fragment() {
+    private var ungoing = false
     private lateinit var challengeViewModel: ChallengeViewModel
     private var challengetype = ""
     override fun onCreateView(
@@ -96,13 +97,26 @@ class Startchallenge : Fragment() {
             try {
                 challengeViewModel.insertChallengeInfo(challenge)
                 Toast.makeText(requireContext(), "$string Challenge Started Successfully", Toast.LENGTH_LONG).show()
+                ungoing = true
+                savedata()
                 popup.dismiss()
                 startActivity(Intent(requireContext(), MainActivity :: class.java))
             }catch(e:Exception){
+                ungoing = false
+                savedata()
                 popup.dismiss()
                 Toast.makeText(requireContext(), "Could Not Start Challenge", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(requireContext(), MainActivity :: class.java))
             }
         }
     }
+
+        private fun savedata(){
+        lifecycleScope.launch {
+            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", ungoing) }
+
+
+        }
+    }
 }
+//challengeungoing
