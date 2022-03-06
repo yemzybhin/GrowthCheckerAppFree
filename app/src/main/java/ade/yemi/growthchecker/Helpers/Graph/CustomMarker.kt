@@ -13,10 +13,10 @@ class CustomMarker(context: Context, layoutResource: Int):  MarkerView(context, 
         val value = entry?.y?.toDouble() ?: 0.0
         var resText = ""
         if(value.toString().length > 8){
-            resText = "Cumulative Point: " + value.toString().substring(0,7)
+            resText = "Cumulative: " + value.toString().substring(0,7)
         }
         else{
-            resText = "Cumulative Point: " + value.toString()
+            resText = "Cumulative: " + value.toString()
         }
         tvPrice.text = resText
         super.refreshContent(entry, highlight)

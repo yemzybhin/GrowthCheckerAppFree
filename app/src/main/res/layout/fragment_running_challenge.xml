@@ -203,7 +203,7 @@
                     android:layout_centerInParent="true"
                     android:textSize="12dp"
                     android:textStyle="italic"
-                    android:text="Not Enough Data to display graph. After 2 assessments, graph would be displayed"
+                    android:text="Not Enough Data to display graph. After the first assessment, graph would be displayed"
                     android:textColor="@color/primary5"></TextView>
 
             </RelativeLayout>
@@ -250,9 +250,32 @@
                             android:id="@+id/tv_runningChallengetype"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="14 Days Challenge"
+                            android:text="..."
                             android:textColor="@color/primarycolor2"
                             android:textSize="10sp"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Current Day: "
+                            android:layout_gravity="center"
+                            android:textSize="10sp"
+                            android:textColor="@color/primarycolor2"></TextView>
+                        <TextView
+                            android:id="@+id/tv_runningDay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="..."
+                            android:textSize="10sp"
+                            android:textColor="@color/primarycolor2"
                             android:textStyle="bold"></TextView>
 
                     </LinearLayout>
@@ -272,13 +295,12 @@
                             android:id="@+id/tv_runningCumulative"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2000 Points"
+                            android:text="..."
                             android:textSize="10sp"
                             android:textColor="@color/primarycolor2"
                             android:textStyle="bold"></TextView>
 
                     </LinearLayout>
-
                 </LinearLayout>
 
 

@@ -54,6 +54,7 @@ class RunningChallenge : Fragment() {
         var image = view.findViewById<ImageView>(R.id.iv_runningChallengeImage)
         var takeassess = view.findViewById<CardView>(R.id.cd_takeassessmentRunning)
         var trackgrowth = view.findViewById<CardView>(R.id.cd_trackgrowthRunning)
+        var daydisplay = view.findViewById<TextView>(R.id.tv_runningDay)
 
 
 
@@ -65,6 +66,7 @@ class RunningChallenge : Fragment() {
         viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
 
             var details = it.first().Point
+            daydisplay.text = "Day ${details.size}"
             var commenntings = thecomments(cumulativelast(details))
             challengecumulative.text = "${cumulativelast(details)} points"
             challengeinfo.text = it.first().ChallengeType
@@ -75,7 +77,7 @@ class RunningChallenge : Fragment() {
             comment3.text = commenntings.encourage
 
 
-            if (details.size < 2){
+            if (details.size < 1){
                 handlertext.visibility = View.VISIBLE
             }else{
                 handlertext.visibility = View.GONE
@@ -94,7 +96,7 @@ class RunningChallenge : Fragment() {
             lineChartHome.setPinchZoom(true)
             lineChartHome.description.text = "Days"
             lineChartHome.setNoDataText("Not Enough Data!")
-            lineChartHome.animateX(800, Easing.EaseInExpo)
+            lineChartHome.animateX(100, Easing.EaseInExpo)
             val markerView = CustomMarker(requireContext(), R.layout.marker_view)
             lineChartHome.marker = markerView
         })

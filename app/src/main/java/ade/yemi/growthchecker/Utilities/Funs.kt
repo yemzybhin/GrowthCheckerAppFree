@@ -44,7 +44,7 @@ fun thecomments(int: Int): Commenntings{
     when{
         int < -100 -> {state = "Your cumulative point is slightly too negative"
                         solution = "Is there a noticeable cause or reason for this? If so, put down this cause on notes at the notes page. Constantly check your notes for better reference on what to do and what to avoid."
-                        encourage = "There are always setbacks, no one is perfect. Addictions can always be broken tho regardless of how deep one is into it. Don't mind the state of the graph and your cumulative points, you can still raise your points and ultimately get fulfilled"}
+                        encourage = "There are always setbacks, no one is perfect. Addictions can always be broken though regardless of how deep one is into it. Don't mind the state of the graph and your cumulative points, you can still raise your points and ultimately get fulfilled"}
         int < 0 && int >= -100 -> { state= "Your cumulative point is negative"
             solution = "Have you noticed any cause as to why your cumulative is negative, it would be a good idea to jot it down. Keep your notes at the notes page. Also check and update your notes for easy reference"
             encourage = "It might seem like addictions are hard to break. It all balls down to our state of mind. You can break free from anything, you are in control. Don't be discouraged. Keep trying to get your points higher by avoiding the addiction"
@@ -74,3 +74,33 @@ fun thecomments(int: Int): Commenntings{
     var commenntings : Commenntings = Commenntings(state, solution, encourage)
     return commenntings
 }
+
+fun generatecumulative(stuff: MutableList<String>):String{
+    var list1 = mutableListOf<Int>()
+    var num1 = 0
+    var shown2 = ""
+    for (i in stuff){
+        num1 = num1 + i.toInt()
+        list1.add(num1)
+    }
+    for (i in list1){
+        shown2 = "$shown2 $i \n\n"
+    }
+    return shown2
+}
+fun generatepoints(stuff: MutableList<String>) :String{
+    var shown = ""
+    for(i in stuff){
+        shown = "$shown $i \n\n"
+    }
+    return shown
+}
+
+fun generatedays(stuff: MutableList<String>) :String{
+    var shown = ""
+    for (i in 1..stuff.size){
+        shown = "$shown $i \n\n"
+    }
+    return  shown
+}
+

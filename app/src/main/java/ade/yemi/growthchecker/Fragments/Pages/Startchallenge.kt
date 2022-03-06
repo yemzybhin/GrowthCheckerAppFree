@@ -1,6 +1,4 @@
 package ade.yemi.growthchecker.Fragments.Pages
-
-import ade.yemi.growthchecker.Activities.Activity2
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.Data.DataStoreManager
 import android.os.Bundle
@@ -19,35 +17,58 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.util.*
 
 class Startchallenge : Fragment() {
+    private val Cadder1:EditText by lazy {
+        requireView().findViewById(R.id.et_challengeadder1)
+    }
+    private val Cadder2:EditText by lazy {
+        requireView().findViewById(R.id.et_challengeadder2)
+    }
+    private val Cadder3:EditText by lazy {
+        requireView().findViewById(R.id.et_challengeadder3)
+    }
+
+
     private var assessmentnotification = false
     private var ungoing = false
     private lateinit var challengeViewModel: ChallengeViewModel
     private var challengetype = ""
+
+    private var adder1 = ""
+    private var adder2 = ""
+    private var adder3 = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        var view = inflater.inflate(R.layout.fragment_startchallenge, container, false)
         var start = view.findViewById<CardView>(R.id.cd_challengestartstart)
+        var image = view.findViewById<ImageView>(R.id.iv_startpageimage)
 
         lifecycleScope.launch {
             val pushresult = async {
                 context?.let { DataStoreManager.getString(it, "challengeviewChallenge") }
             }
             challengetype = pushresult.await()!!
+            imageset(challengetype, image)
             start.setOnClickListener {
                 start.clicking()
                 start.shortvibrate()
-                confirmpopup(challengetype)
+
+                if (checkempty(Cadder1, Cadder2, Cadder3) == true){
+                        confirmpopup(challengetype)
+                }else{
+                    Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -74,6 +95,15 @@ class Startchallenge : Fragment() {
         var challenge = Challenge(0, challengetype, days, points)
         return challenge
     }
+    private fun imageset(string: String, imageView: ImageView){
+        when(string){
+            "challenge14" -> imageView.setImageResource(R.drawable.forteendays)
+            "challenge30" -> imageView.setImageResource(R.drawable.thirtydays)
+            "challenge60" -> imageView.setImageResource(R.drawable.sixtydays)
+            "challenge100" -> imageView.setImageResource(R.drawable.hundreddays)
+            "challenge200" -> imageView.setImageResource(R.drawable.twohundreddays)
+        }
+    }
     private fun confirmpopup( string: String){
         var popup = Dialog(requireContext())
         popup.setCancelable(false)
@@ -95,12 +125,14 @@ class Startchallenge : Fragment() {
             start.shortvibrate()
             var challenge = challengedetails(string)
             challengeViewModel = ViewModelProvider(this).get(ChallengeViewModel::class.java)
-
             try {
                 challengeViewModel.insertChallengeInfo(challenge)
                 Toast.makeText(requireContext(), "$string Challenge Started Successfully", Toast.LENGTH_LONG).show()
                 assessmentnotification = true
                 ungoing = true
+                adder1 = Cadder1.text.toString()
+                adder2 = Cadder2.text.toString()
+                adder3 = Cadder3.text.toString()
                 savedata()
                 popup.dismiss()
                 startActivity(Intent(requireContext(), MainActivity :: class.java))
@@ -118,7 +150,19 @@ class Startchallenge : Fragment() {
         lifecycleScope.launch {
             context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", ungoing) }
             context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", assessmentnotification) }
+            context?.let { DataStoreManager.saveString(it, "Ungoingchallengeadder1", adder1) }
+            context?.let { DataStoreManager.saveString(it, "Ungoingchallengeadder2", adder2) }
+            context?.let { DataStoreManager.saveString(it, "Ungoingchallengeadder3", adder3) }
         }
+    }
+    private fun checkempty(text1: EditText, text2:EditText, text3: EditText): Boolean{
+        var check = false
+        if (text1.text.isEmpty() || text2.text.isEmpty() || text3.text.isEmpty()){
+            check = false
+        }else{
+            check = true
+        }
+        return check
     }
 }
 //challengeungoing

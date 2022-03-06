@@ -39,7 +39,10 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="25dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="23dp">
 
@@ -79,27 +82,112 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="-10dp"
                     app:cardCornerRadius="30dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <ImageView
                             android:id="@+id/iv_assmentChallengeimage"
                             android:layout_width="130dp"
                             android:layout_height="130dp"
                             android:layout_gravity="center"
                             android:src="@drawable/forteendays"></ImageView>
+
                         <TextView
                             android:id="@+id/tv_assessmentChallenge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="14 Days Challenge"
+                            android:layout_gravity="center"
                             android:layout_marginTop="-5dp"
                             android:layout_marginBottom="15dp"
-                            android:textSize="10dp"
+                            android:text="14 Days Challenge"
                             android:textColor="@color/primarycolor2"
-                            android:layout_gravity="center"></TextView>
+                            android:textSize="10dp"></TextView>
                     </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_assessmentday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Day 14"
+                            android:textColor="@color/primarycolor2"
+                            android:textSize="12sp"
+                            android:textStyle="bold"></TextView>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="Progress: "
+                                android:textColor="@color/primarycolor2"
+                                android:textSize="9.5sp"></TextView>
+
+                            <TextView
+                                android:id="@+id/tv_assessmentpercent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="75%"
+                                android:textColor="@color/primarycolor2"
+                                android:textSize="9.5sp"
+                                android:textStyle="bold"></TextView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="10dp"
+                                app:cardElevation="0dp">
+
+                                <View
+                                    android:layout_width="45dp"
+                                    android:layout_height="3dp"
+                                    android:layout_gravity="left"
+                                    android:layout_margin="2dp"
+                                    android:background="@drawable/progressindicator2"></View>
+
+                                <View
+                                    android:id="@+id/v_assessmentpercentview"
+                                    android:layout_width="45dp"
+                                    android:layout_height="3dp"
+                                    android:layout_gravity="left"
+                                    android:layout_margin="2dp"
+                                    android:background="@drawable/progressindicator1"></View>
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -149,6 +237,7 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cd_fisnishAssessment"
                         android:layout_width="wrap_content"
@@ -254,6 +343,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_addertext1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Did you indulge in the addiction today?"
@@ -302,6 +392,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_addertext2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Did you indulge in the addiction today?"
@@ -350,6 +441,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_addertext3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Did you indulge in the addiction today?"

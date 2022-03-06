@@ -18,15 +18,14 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.view.TextureView
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class DailyAssessment : DialogFragment() {
@@ -34,12 +33,19 @@ class DailyAssessment : DialogFragment() {
     private lateinit var some: Challenge
     private var ungoingchallenge = false
 
+    private var word1 = ""
+    private var word2 = ""
+    private var word3 = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
        var view = inflater.inflate(R.layout.fragment_daily_assessment, container, false)
+
+        var addertext1 = view.findViewById<TextView>(R.id.tv_addertext1)
+        var addertext2 = view.findViewById<TextView>(R.id.tv_addertext2)
+        var addertext3 = view.findViewById<TextView>(R.id.tv_addertext3)
 
         var text1 = view.findViewById<TextView>(R.id.tv_adder1)
         var text2 = view.findViewById<TextView>(R.id.tv_adder2)
@@ -58,6 +64,11 @@ class DailyAssessment : DialogFragment() {
         var imae = view.findViewById<ImageView>(R.id.iv_assmentChallengeimage)
         var challengeteext = view.findViewById<TextView>(R.id.tv_assessmentChallenge)
         var finishchal = view.findViewById<CardView>(R.id.cd_fisnishAssessment)
+
+
+        var partiday = view.findViewById<TextView>(R.id.tv_assessmentday)
+        var progresspercent = view.findViewById<TextView>(R.id.tv_assessmentpercent)
+        var viewcol = view.findViewById<View>(R.id.v_assessmentpercentview)
 
         var c1 = false
         var c2 = false
@@ -119,6 +130,27 @@ class DailyAssessment : DialogFragment() {
             var a = 0
             score4.text = a.toString()
         }
+
+
+        lifecycleScope.launch {
+                val pushresult1 = async {
+                    context?.let { DataStoreManager.getString(it, "Ungoingchallengeadder1") }
+                }
+                val pushresult2 = async {
+                    context?.let { DataStoreManager.getString(it, "Ungoingchallengeadder2") }
+                }
+                val pushresult3 = async {
+                    context?.let { DataStoreManager.getString(it, "Ungoingchallengeadder3") }
+                }
+            word1 = pushresult1.await()!!
+            word2 = pushresult2.await()!!
+            word3 = pushresult3.await()!!
+            addertext1.text = word1
+            addertext2.text = word2
+            addertext3.text = word3
+
+            }
+
         challengeViewModel = ViewModelProvider(this).get(ChallengeViewModel::class.java)
         challengeViewModel.allChallenges.observe(this, Observer {
 
@@ -131,8 +163,19 @@ class DailyAssessment : DialogFragment() {
             challengeimage(days, imae)
             challengeteext.text = challnegtype
 
+            partiday.text = "Day ${it.first().Point.size + 1}"
+            var toset1 = it.first().Point.size + 1
+            var toset2 = 100/(it.first().Days.toDouble())
+            var toset = toset1 * toset2
+            progresspercent.text = "${toset.toInt()}%"
 
-            if (days.toInt() == point.size + 1 ){
+            val mParams = viewcol.layoutParams as FrameLayout.LayoutParams
+            mParams.apply {
+                width = (toset * 1.34).toInt()
+                height *= 1
+            }
+            viewcol.layoutParams = mParams
+            if (  (point.size + 1 ) >= days.toInt()  ){
                 submit.visibility = View.GONE
                 finishchal.visibility = View.VISIBLE
             }else{
@@ -175,7 +218,7 @@ class DailyAssessment : DialogFragment() {
 
                 four.add(total.toString())
                 challengeViewModel.updateChallenge(Challenge(one, two, three, four))
-                Toast.makeText(requireContext(), "Today's point is ${four.last()}  \n Challenge Finished Successfully", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Today's point is ${four.last()}  \n Challenge Finished Successfully \n Check analytics page for analytics", Toast.LENGTH_LONG).show()
                 ungoingchallenge = false
                 savedata()
                 dismiss()
