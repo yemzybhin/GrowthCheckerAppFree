@@ -13,7 +13,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scrollbars="none">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,26 +20,46 @@
             android:orientation="vertical">
 
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fr_analytics1"
+                android:id="@+id/fr_NotesFrag1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"></androidx.fragment.app.FragmentContainerView>
-
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fr_analytics2"
+                android:id="@+id/fr_NotesFrag2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view3"></androidx.fragment.app.FragmentContainerView>
-
+                app:layout_constraintTop_toBottomOf="@+id/cardView"></androidx.fragment.app.FragmentContainerView>
         </LinearLayout>
     </ScrollView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_addnewnote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/primarycolor2"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="Add new note"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"></TextView>
+
+    </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
@@ -58,11 +77,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="Daily Routine "
+            android:text="Daily Routine and Notes"
             android:textAllCaps="true"
             android:textColor="@color/primarycolor2"
             android:textSize="16sp"
             android:textStyle="bold"></TextView>
 
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

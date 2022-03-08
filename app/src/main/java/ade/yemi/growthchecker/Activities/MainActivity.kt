@@ -4,7 +4,9 @@ import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
 import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
 import ade.yemi.growthchecker.PopUp_Fragments.Menu
+import ade.yemi.growthchecker.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.NoteCommunicator
 import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
 import ade.yemi.growthchecker.Utilities.shortvibrate
@@ -23,7 +25,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoteCommunicator {
     private var ne = ""
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
@@ -210,7 +212,7 @@ class MainActivity : AppCompatActivity() {
             challengesscrollview.visibility = View.GONE
             replacefragment(NotesPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
-            setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note2)
+            setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note1)
 
         }
         tipscard.setOnSingleClickListener {
@@ -279,6 +281,18 @@ class MainActivity : AppCompatActivity() {
     internal fun showassessmentdialog(dialogFragment: DialogFragment){
             dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialogFragment.show(supportFragmentManager, "Assessmentdialog")
+    }
+
+    override fun passnotedetails(id: Int, title: String, content: String) {
+        var dialog = Popup_AddNote()
+        val bundle = Bundle()
+        bundle.putString("notetype", "Edit")
+        bundle.putInt("id", id)
+        bundle.putString("title", title)
+        bundle.putString("content", content)
+        dialog.arguments = bundle
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
+        dialog.show(supportFragmentManager, "Menudialog")
     }
 
 //    private fun showMenupopup( ){

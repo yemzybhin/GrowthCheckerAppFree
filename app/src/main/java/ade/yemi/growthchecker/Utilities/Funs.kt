@@ -21,7 +21,7 @@ class OnSingleClickListener(private val block: () -> Unit) : View.OnClickListene
     private var lastClickTime = 0L
 
     override fun onClick(view: View) {
-        if (SystemClock.elapsedRealtime() - lastClickTime < 1200) {
+        if (SystemClock.elapsedRealtime() - lastClickTime < 800) {
             return
         }
         lastClickTime = SystemClock.elapsedRealtime()
