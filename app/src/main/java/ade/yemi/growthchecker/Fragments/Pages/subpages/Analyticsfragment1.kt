@@ -14,6 +14,7 @@ import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.*
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import ade.yemi.roomdatabseapp.Graph.CustomMarker
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -46,6 +47,7 @@ class Analyticsfragment1 : Fragment() {
         var handlertextt = view.findViewById<TextView>(R.id.tv_nochartdata11)
         var carr = view.findViewById<CardView>(R.id.analytics1careed)
         var carr2 = view.findViewById<CardView>(R.id.cd_analytics1nmae)
+        var currentimage = view.findViewById<ImageView>(R.id.iv_analyticscurrentimage)
 
         carr.zoom_in()
         carr2.zoom_in()
@@ -73,9 +75,10 @@ class Analyticsfragment1 : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
-
+            setimage(it.first().Days, currentimage)
             var details = it.first().Point
             var sub = mutableListOf("0")
+
 
             if (details.size < 1){
                 handlertextt.visibility = View.VISIBLE
@@ -107,14 +110,23 @@ class Analyticsfragment1 : Fragment() {
             lc_graphforanalytics1.setTouchEnabled(true)
             lc_graphforanalytics1.setPinchZoom(true)
             lc_graphforanalytics1.description.text = "Days"
-            lc_graphforanalytics1.setNoDataText("Not Enough Data!")
+            lc_graphforanalytics1.setNoDataText("")
             lc_graphforanalytics1.animateX(100, Easing.EaseInExpo)
             val markerView = CustomMarker(requireContext(), R.layout.marker_view)
             lc_graphforanalytics1.marker = markerView
         })
 
-
         return view
+    }
+
+    private fun setimage(string: String, imageView: ImageView){
+        when(string){
+            "14" -> imageView.setImageResource(R.drawable.forteendays)
+            "30" -> imageView.setImageResource(R.drawable.thirtydays)
+            "60" -> imageView.setImageResource(R.drawable.sixtydays)
+            "100" -> imageView.setImageResource(R.drawable.hundreddays)
+            "200" -> imageView.setImageResource(R.drawable.twohundreddays)
+        }
     }
 
 

@@ -11,7 +11,7 @@
         android:id="@+id/cd_norunning_startchallenge"
         android:layout_margin="10dp"
         android:layout_width="250dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:backgroundTint="@color/white"
         app:cardElevation="5dp"
         app:cardCornerRadius="40dp">
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VIEW CONCLUDED"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"></TextView>
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CHALLENGES"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="@color/primarycolor2"
@@ -49,7 +49,7 @@
         android:id="@+id/cd_norunning_viewbadges"
         android:layout_margin="10dp"
         android:layout_width="250dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:backgroundTint="@color/white"
         app:cardElevation="5dp"
         app:cardCornerRadius="40dp">
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VIEW"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textAlignment="center"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"></TextView>
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BADGES"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textAlignment="center"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"></TextView>

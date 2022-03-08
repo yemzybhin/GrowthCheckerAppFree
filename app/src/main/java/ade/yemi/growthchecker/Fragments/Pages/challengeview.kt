@@ -18,7 +18,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class challengeview : Fragment() {
-   private var challengetype = ""
     private var point = 0
     private var days = 0
     private var stage = 0
@@ -29,7 +28,6 @@ class challengeview : Fragment() {
 
         var image = view.findViewById<ImageView>(R.id.iv_challengestart)
         var next = view.findViewById<CardView>(R.id.cd_challengestartnext)
-
         var t0 = view.findViewById<TextView>(R.id.tv_challengestart0)
         var t1 = view.findViewById<TextView>(R.id.tv_challengestart1)
         var t2 = view.findViewById<TextView>(R.id.tv_challengestart2)
@@ -43,14 +41,13 @@ class challengeview : Fragment() {
             val pushresult = async {
                 context?.let { DataStoreManager.getString(it, "challengeviewChallenge") }
             }
-            challengetype = pushresult.await()!!
+            var challengetype = pushresult.await()!!
             valuess(challengetype, image)
-
-
             //initdata(image)
             //valuess(challengetype1,image)
             //val data = arguments?.getInt("Challengetoshow", 1)
             //valuess(challengetype1, image)
+
 
             next.setOnClickListener {
                 next.clicking()
@@ -111,5 +108,4 @@ class challengeview : Fragment() {
             }
         }
     }
-
 }

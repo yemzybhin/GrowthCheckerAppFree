@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".Fragments.Pages.subpages.Analyticsfragment2">
 
-
     <View
         android:id="@+id/view8"
         android:layout_width="match_parent"
@@ -97,7 +96,7 @@
         tools:listitem="@layout/olderchallengesview"></androidx.recyclerview.widget.RecyclerView>
 <View
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="50dp"
     app:layout_constraintTop_toBottomOf="@id/rv_recycler"
     app:layout_constraintRight_toLeftOf="parent"></View>
 

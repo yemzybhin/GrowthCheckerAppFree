@@ -6,6 +6,7 @@ import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
 import ade.yemi.growthchecker.PopUp_Fragments.Menu
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.content.Intent
 import android.os.*
@@ -23,10 +24,7 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
-    private var assessmentnotification = false
     private var ne = ""
-    private var ungoingchallenge = false
-    private var ungoinchallenge = false
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -45,6 +43,9 @@ class MainActivity : AppCompatActivity() {
     private val tipsview: View by lazy {
         findViewById(R.id.v_tips)
     }
+    private val notificationbutton: CardView by lazy {
+        findViewById(R.id.cd_assessmentnotification)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         replacefragment(Homepage())
 
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
-        var notificationbutton = findViewById<CardView>(R.id.cd_assessmentnotification)
 
         var homecard = findViewById<CardView>(R.id.cd_home)
         var analyticscard = findViewById<CardView>(R.id.cd_analytics)
@@ -79,11 +79,14 @@ class MainActivity : AppCompatActivity() {
             val pushresult1 = async {
                 DataStoreManager.getBoolean( this@MainActivity , "assessmentnotification")
             }
-            ungoinchallenge = pushresult.await()
-            ungoingchallenge = ungoinchallenge
-
-            assessmentnotification = pushresult1.await()
-
+            var ungoinchallenge = pushresult.await()
+            var ungoingchallenge = ungoinchallenge
+            var assessmentnotification = pushresult1.await()
+            if (ungoingchallenge == true){
+                challengesscrollview.visibility = View.GONE
+            }else{
+                challengesscrollview.visibility = View.VISIBLE
+            }
 
             if (assessmentnotification == true && ungoingchallenge == true){
                 notificationbutton.visibility = View.VISIBLE
@@ -92,23 +95,18 @@ class MainActivity : AppCompatActivity() {
                 notificationbutton.visibility = View.GONE
             }
 
-            if (ungoingchallenge == true){
-                challengesscrollview.visibility = View.GONE
-            }else{
-                challengesscrollview.visibility = View.VISIBLE
-            }
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         var dialog = Menu()
-        menubutton.setOnClickListener {
+        menubutton.setOnSingleClickListener {
             menubutton.clicking()
             menubutton.shortvibrate()
-            Timer().schedule(100) {
-            }
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialog.show(supportFragmentManager, "Menudialog")
+
         }
             var dialog2 = DailyAssessment()
-            notificationbutton.setOnClickListener {
+            notificationbutton.setOnSingleClickListener{
+                notificationbutton.visibility = View.GONE
                 notificationbutton.shortvibrate()
                 showassessmentdialog(dialog2)
             }
@@ -167,7 +165,7 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        homecard.setOnClickListener {
+        homecard.setOnSingleClickListener {
             homecard.shortvibrate()
             homeview.visibility = View.VISIBLE
 
@@ -187,7 +185,7 @@ class MainActivity : AppCompatActivity() {
             setpageclickimage(listOf(notesimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.note2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), homeimage, R.drawable.home1)
 
         }
-        analyticscard.setOnClickListener {
+        analyticscard.setOnSingleClickListener {
             analyticscard.shortvibrate()
             analyticsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
@@ -196,7 +194,7 @@ class MainActivity : AppCompatActivity() {
             setpageclickimage(listOf(homeimage, notesimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.note2, R.drawable.achievement2, R.drawable.tips2), analyticsimage, R.drawable.analytics1)
 
         }
-        achievementscard.setOnClickListener {
+        achievementscard.setOnSingleClickListener {
             achievementscard.shortvibrate()
             achievementsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
@@ -206,7 +204,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-        notescard.setOnClickListener {
+        notescard.setOnSingleClickListener {
             notescard.shortvibrate()
             notesview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
@@ -215,7 +213,7 @@ class MainActivity : AppCompatActivity() {
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note2)
 
         }
-        tipscard.setOnClickListener {
+        tipscard.setOnSingleClickListener {
             tipscard.shortvibrate()
             tipsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
@@ -282,6 +280,7 @@ class MainActivity : AppCompatActivity() {
             dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialogFragment.show(supportFragmentManager, "Assessmentdialog")
     }
+
 //    private fun showMenupopup( ){
 //        var popup = Dialog(this)
 //        popup.setCancelable(true)

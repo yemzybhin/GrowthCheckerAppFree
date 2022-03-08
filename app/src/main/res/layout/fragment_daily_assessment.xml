@@ -37,7 +37,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
@@ -81,6 +81,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="-10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     app:cardCornerRadius="30dp">
 
                     <LinearLayout
@@ -113,7 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="15dp">
 
@@ -192,15 +195,16 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cd_submitAssessment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="30dp"
                         android:backgroundTint="@color/primarycolor2"
                         app:cardCornerRadius="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -242,7 +246,6 @@
                         android:id="@+id/cd_fisnishAssessment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="30dp"
                         android:backgroundTint="@color/appgreen"
                         app:cardCornerRadius="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -280,7 +283,7 @@
 
                     </androidx.cardview.widget.CardView>
 
-                </RelativeLayout>
+                </LinearLayout>
 
 
             </LinearLayout>

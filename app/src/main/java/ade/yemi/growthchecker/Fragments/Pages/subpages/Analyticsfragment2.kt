@@ -29,6 +29,8 @@ class Analyticsfragment2 : Fragment() {
         var view = inflater.inflate(R.layout.fragment_analyticsfragment2, container, false)
         var rv_recyclerr = view.findViewById<RecyclerView>(R.id.rv_recycler)
 
+//        rv_recyclerr.isNestedScrollingEnabled = false
+
         rv_recyclerr.apply {
             layoutManager = LinearLayoutManager(requireContext())
             recyclerViewAdapter = Listadapter()

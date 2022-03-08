@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker.Fragments.Pages
 
+import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.subpages.RunningChallenge
 import ade.yemi.growthchecker.Fragments.Pages.subpages.norunningchallenge
@@ -14,8 +15,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class Homepage : Fragment() {
-    private var challengeungoing = false
-    private var challengeungoin = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,8 +25,8 @@ class Homepage : Fragment() {
             val pushresult = async {
                 context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
             }
-            challengeungoin = pushresult.await()!!
-            challengeungoing = challengeungoin
+            var challengeungoin = pushresult.await()!!
+            var challengeungoing = challengeungoin
             if (challengeungoing == false){
                 replacefragment(norunningchallenge())
             }else{
@@ -49,13 +49,13 @@ class Homepage : Fragment() {
 //            context?.let { DataStoreManager.saveBoolean(it, "challengeviewChallenge", challengeungoing) }
 //        }
 //    }
-    private fun initdata(){
-        lifecycleScope.launch {
-            val pushresult = async {
-                context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
-            }
-            challengeungoin = pushresult.await()!!
-            challengeungoing = challengeungoin
-        }
-    }
+//    private fun initdata(){
+//        lifecycleScope.launch {
+//            val pushresult = async {
+//                context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
+//            }
+//            challengeungoin = pushresult.await()!!
+//            challengeungoing = challengeungoin
+//        }
+//    }
 }

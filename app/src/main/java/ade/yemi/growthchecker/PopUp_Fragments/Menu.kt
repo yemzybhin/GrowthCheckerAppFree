@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.delay
+import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.annotation.SuppressLint
 import android.app.ActionBar
@@ -41,26 +42,27 @@ class Menu : DialogFragment(){
 
 
         var myinfopopup = PopUp_Myinfo()
-        myinfo.setOnClickListener {
-            dismiss()
+        myinfo.setOnSingleClickListener {
             (activity as MainActivity).ShowMainpopUp(myinfo, myinfopopup)
+            delay(200)
+            dismiss()
         }
-        addiction.setOnClickListener {
+        addiction.setOnSingleClickListener {
             addiction.clicking()
             addiction.shortvibrate()
             Toast.makeText( requireContext(), "Working", Toast.LENGTH_SHORT).show()
         }
-        myrating.setOnClickListener {
+        myrating.setOnSingleClickListener {
             myrating.clicking()
             myrating.shortvibrate()
             Toast.makeText( requireContext(), "Working", Toast.LENGTH_SHORT).show()
         }
-        settingss.setOnClickListener {
+        settingss.setOnSingleClickListener {
             settingss.clicking()
             settingss.shortvibrate()
             Toast.makeText( requireContext(), "Working", Toast.LENGTH_SHORT).show()
         }
-        cancel.setOnClickListener {
+        cancel.setOnSingleClickListener {
             cancel.shortvibrate()
             dismiss()
         }

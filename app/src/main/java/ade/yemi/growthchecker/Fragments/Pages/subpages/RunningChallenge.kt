@@ -95,9 +95,9 @@ class RunningChallenge : Fragment() {
             lineChartHome.setTouchEnabled(true)
             lineChartHome.setPinchZoom(true)
             lineChartHome.description.text = "Days"
-            lineChartHome.setNoDataText("Not Enough Data!")
+            lineChartHome.setNoDataText("")
             lineChartHome.animateX(100, Easing.EaseInExpo)
-            val markerView = CustomMarker(requireContext(), R.layout.marker_view)
+            val markerView = context?.let { it1 -> CustomMarker(it1, R.layout.marker_view) }
             lineChartHome.marker = markerView
         })
 

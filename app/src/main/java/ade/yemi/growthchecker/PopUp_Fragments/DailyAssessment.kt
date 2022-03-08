@@ -27,6 +27,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.concurrent.schedule
 
 class DailyAssessment : DialogFragment() {
     private lateinit var challengeViewModel: ChallengeViewModel
@@ -174,6 +176,7 @@ class DailyAssessment : DialogFragment() {
                 width = (toset * 1.34).toInt()
                 height *= 1
             }
+
             viewcol.layoutParams = mParams
             if (  (point.size + 1 ) >= days.toInt()  ){
                 submit.visibility = View.GONE
@@ -183,7 +186,6 @@ class DailyAssessment : DialogFragment() {
                 finishchal.visibility = View.GONE
             }
         })
-
 
             submit.setOnClickListener {
                 submit.shortvibrate()
@@ -197,11 +199,14 @@ class DailyAssessment : DialogFragment() {
 
                    four.add(total.toString())
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
+                       lifecycleScope.launch {
+                           //change back to false
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                           context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
+                           dismiss()
+                           startActivity(Intent(requireContext(), MainActivity::class.java))
+                       }
                    Toast.makeText(requireContext(), "Today's point is ${four.last()}  ", Toast.LENGTH_LONG).show()
-                   ungoingchallenge = true
-                   savedata()
-                   dismiss()
-                   startActivity(Intent(requireContext(), MainActivity::class.java))
                }else{
                    Toast.makeText(requireContext(), "Fill all fields", Toast.LENGTH_SHORT).show()
                }
@@ -217,19 +222,22 @@ class DailyAssessment : DialogFragment() {
                 var total  = score1.text.toString().toInt() + score2.text.toString().toInt() + score3.text.toString().toInt() + score4.text.toString().toInt()
 
                 four.add(total.toString())
-                challengeViewModel.updateChallenge(Challenge(one, two, three, four))
-                Toast.makeText(requireContext(), "Today's point is ${four.last()}  \n Challenge Finished Successfully \n Check analytics page for analytics", Toast.LENGTH_LONG).show()
-                ungoingchallenge = false
-                savedata()
-                dismiss()
-                startActivity(Intent(requireContext(), MainActivity::class.java))
+             try {
+                 challengeViewModel.updateChallenge(Challenge(one, two, three, four))
+             lifecycleScope.launch {
+        //change back to false
+                   context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                   context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", false) }
+                   dismiss()
+                   startActivity(Intent(requireContext(), MainActivity::class.java))
+                    }
+                    Toast.makeText(requireContext(), "Today's point is ${four.last()}  \n Challenge Finished Successfully \n Check analytics page for analytics", Toast.LENGTH_LONG).show()
+            }catch (Ex: Exception){
+             Toast.makeText(requireContext(), "One Extra day added", Toast.LENGTH_SHORT).show() }
             }else{
                 Toast.makeText(requireContext(), "Fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
 
         return view
     }
@@ -250,11 +258,11 @@ class DailyAssessment : DialogFragment() {
             "200" -> imageView.setImageResource(R.drawable.twohundreddays)
         }
     }
-    private fun savedata(){
+    private fun savedata(boolean: Boolean){
         lifecycleScope.launch {
             //change back to false
             context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
-            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", ungoingchallenge) }
+            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", boolean) }
         }
     }
 }
