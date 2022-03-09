@@ -100,8 +100,8 @@ class Startchallenge : Fragment() {
             "challenge14" -> imageView.setImageResource(R.drawable.forteendays)
             "challenge30" -> imageView.setImageResource(R.drawable.thirtydays)
             "challenge60" -> imageView.setImageResource(R.drawable.sixtydays)
-            "challenge100" -> imageView.setImageResource(R.drawable.hundreddays)
-            "challenge200" -> imageView.setImageResource(R.drawable.twohundreddays)
+            "challenge100"-> imageView.setImageResource(R.drawable.hundreddays)
+            "challenge200"-> imageView.setImageResource(R.drawable.twohundreddays)
         }
     }
     private fun confirmpopup( string: String){

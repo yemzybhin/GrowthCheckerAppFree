@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
+        UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         lifecycleScope.launch {
             val pushresult = async {
                 DataStoreManager.getBoolean( this@MainActivity , "challengeungoing")
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
                 notificationbutton.visibility = View.GONE
             }
 
-        UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
+
         var dialog = Menu()
         menubutton.setOnSingleClickListener {
             menubutton.clicking()
@@ -119,52 +120,56 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
             fourteen.clicking()
             fourteen.shortvibrate()
                Timer().schedule(100) {
-                   ne = "challenge14"
-                   savedata()
+                   lifecycleScope.launch {
+                       DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge14")
+                   }
                    challengeintent.putExtra("ActivityToset", "challengeview")
                    startActivity(Intent(challengeintent))
                }
         }
         thirty.setOnClickListener {
-            ne = "challenge30"
-            savedata()
                 thirty.clicking()
                 thirty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityToset", "challengeview")
-                    startActivity(Intent(challengeintent))
+                    lifecycleScope.launch {
+                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge30")
+                    }
                 }
+            challengeintent.putExtra("ActivityToset", "challengeview")
+            startActivity(Intent(challengeintent))
         }
         sixty.setOnClickListener {
-            ne = "challenge60"
-            savedata()
             sixty.clicking()
                sixty.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityToset", "challengeview")
-                    startActivity(Intent(challengeintent))
+                    lifecycleScope.launch {
+                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge60")
+                    }
                 }
+            challengeintent.putExtra("ActivityToset", "challengeview")
+            startActivity(Intent(challengeintent))
         }
         hundred.setOnClickListener {
-            ne = "challenge100"
-            savedata()
                 hundred.clicking()
                 hundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityToset", "challengeview")
-                    startActivity(Intent(challengeintent))
+                    lifecycleScope.launch {
+                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge100")
+                    }
                 }
+            challengeintent.putExtra("ActivityToset", "challengeview")
+            startActivity(Intent(challengeintent))
         }
         twohundred.setOnClickListener {
-            ne = "challenge200"
-            savedata()
                 twohundred.clicking()
                 twohundred.shortvibrate()
                 Timer().schedule(100) {
-                    challengeintent.putExtra("ActivityToset", "challengeview")
-                    startActivity(Intent(challengeintent))
-
+                    lifecycleScope.launch {
+                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge14")
+                    }
                 }
+            challengeintent.putExtra("ActivityToset", "challengeview")
+            startActivity(Intent(challengeintent))
         }
 
         homecard.setOnSingleClickListener {
