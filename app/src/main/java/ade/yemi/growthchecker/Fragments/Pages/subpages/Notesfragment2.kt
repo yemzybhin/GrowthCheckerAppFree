@@ -16,6 +16,7 @@ import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.NoteCommunicator
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.content.Intent
+import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -39,7 +40,9 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
 
         var view = inflater.inflate(R.layout.fragment_notesfragment2, container, false)
         var noteRV = view.findViewById<RecyclerView>(R.id.rv_notesrecycler)
+        var nonotes = view.findViewById<TextView>(R.id.tv_nonotes)
         noteRV.layoutManager = LinearLayoutManager(requireContext())
+
 
         val noteRvAdapter = NoteRvAdapter(this, this, this)
         noteRV.adapter = noteRvAdapter
@@ -47,7 +50,12 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
         viewmodal.allNotes.observe( requireActivity(), Observer {
             list ->
             list?.let {
-                noteRvAdapter.updateList(it)
+                if (it.size==0){
+                    nonotes.text = "No note, add new note below"
+                }else{
+                    nonotes.text = ""
+                }
+                    noteRvAdapter.updateList(it)
             }
         })
 

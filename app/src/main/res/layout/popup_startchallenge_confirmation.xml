@@ -46,15 +46,28 @@
                 android:layout_height="wrap_content"
                 android:text="Check that the daily assessment activities are thoroughly thought through!! Once challenge starts, they cannot be edited!!"
                 android:gravity="center"
-                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:textStyle="bold|italic"
                 android:textColor="@color/primary5"></TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/MenuItem"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"></View>
             <Button
                 android:id="@+id/btn_startchallengeconfirmed"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Start"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/primarycolor2"
                 android:textSize="15sp"
                 android:textStyle="bold"

@@ -6,10 +6,7 @@ import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
 import ade.yemi.growthchecker.PopUp_Fragments.Menu
 import ade.yemi.growthchecker.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker.R
-import ade.yemi.growthchecker.Utilities.NoteCommunicator
-import ade.yemi.growthchecker.Utilities.clicking
-import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
-import ade.yemi.growthchecker.Utilities.shortvibrate
+import ade.yemi.growthchecker.Utilities.*
 import android.content.Intent
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
-class MainActivity : AppCompatActivity(), NoteCommunicator {
+class MainActivity : AppCompatActivity(), NoteCommunicator{
     private var ne = ""
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
@@ -120,9 +117,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
             fourteen.clicking()
             fourteen.shortvibrate()
                Timer().schedule(100) {
-                   lifecycleScope.launch {
-                       DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge14")
-                   }
+
+                   challengeintent.putExtra("challengeviewChallenge", "challenge14")
                    challengeintent.putExtra("ActivityToset", "challengeview")
                    startActivity(Intent(challengeintent))
                }
@@ -131,21 +127,19 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
                 thirty.clicking()
                 thirty.shortvibrate()
                 Timer().schedule(100) {
-                    lifecycleScope.launch {
-                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge30")
-                    }
+
                 }
             challengeintent.putExtra("ActivityToset", "challengeview")
+            challengeintent.putExtra("challengeviewChallenge", "challenge30")
             startActivity(Intent(challengeintent))
         }
         sixty.setOnClickListener {
             sixty.clicking()
                sixty.shortvibrate()
                 Timer().schedule(100) {
-                    lifecycleScope.launch {
-                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge60")
-                    }
+
                 }
+            challengeintent.putExtra("challengeviewChallenge", "challenge60")
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
@@ -153,10 +147,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
                 hundred.clicking()
                 hundred.shortvibrate()
                 Timer().schedule(100) {
-                    lifecycleScope.launch {
-                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge100")
-                    }
+
                 }
+            challengeintent.putExtra("challengeviewChallenge", "challenge100")
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
@@ -164,10 +157,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
                 twohundred.clicking()
                 twohundred.shortvibrate()
                 Timer().schedule(100) {
-                    lifecycleScope.launch {
-                        DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", "challenge14")
-                    }
+
                 }
+            challengeintent.putExtra("challengeviewChallenge", "challenge200")
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
@@ -228,7 +220,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
         }
-    }}
+    }
+    }
 
     internal fun ShowMainpopUp(view: View, dialogFragment: DialogFragment){
         view.clicking()
@@ -278,11 +271,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator {
         }
         setimage.setImageResource(image)
     }
-    private fun savedata(){
-        lifecycleScope.launch {
-            DataStoreManager.saveString(this@MainActivity, "challengeviewChallenge", ne)
-        }
-    }
+
     internal fun showassessmentdialog(dialogFragment: DialogFragment){
             dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialogFragment.show(supportFragmentManager, "Assessmentdialog")

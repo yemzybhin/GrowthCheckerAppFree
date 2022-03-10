@@ -41,7 +41,6 @@ class Startchallenge : Fragment() {
     private var assessmentnotification = false
     private var ungoing = false
     private lateinit var challengeViewModel: ChallengeViewModel
-    private var challengetype = ""
 
     private var adder1 = ""
     private var adder2 = ""
@@ -54,24 +53,19 @@ class Startchallenge : Fragment() {
         var start = view.findViewById<CardView>(R.id.cd_challengestartstart)
         var image = view.findViewById<ImageView>(R.id.iv_startpageimage)
 
-        lifecycleScope.launch {
-            val pushresult = async {
-                context?.let { DataStoreManager.getString(it, "challengeviewChallenge") }
-            }
-            challengetype = pushresult.await()!!
-            imageset(challengetype, image)
+        val challenge = arguments?.getString("challengeviewchallenge")
+            imageset(challenge!!, image)
+
             start.setOnClickListener {
                 start.clicking()
                 start.shortvibrate()
 
                 if (checkempty(Cadder1, Cadder2, Cadder3) == true){
-                        confirmpopup(challengetype)
+                        confirmpopup(challenge)
                 }else{
                     Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
-
         return view
     }
 

@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.NoteCommunicator
+import ade.yemi.growthchecker.Utilities.challengecommunicator
 import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.widget.ImageView
@@ -18,6 +20,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class challengeview : Fragment() {
+    private lateinit var communicator: challengecommunicator
     private var point = 0
     private var days = 0
     private var stage = 0
@@ -36,23 +39,14 @@ class challengeview : Fragment() {
         var t5 = view.findViewById<TextView>(R.id.tv_challengestart5)
         var t6 = view.findViewById<TextView>(R.id.tv_challengestart6)
 
-
-        lifecycleScope.launch {
-            val pushresult = async {
-                context?.let { DataStoreManager.getString(it, "challengeviewChallenge") }
-            }
-            var challengetype = pushresult.await()!!
-            valuess(challengetype, image)
-            //initdata(image)
-            //valuess(challengetype1,image)
-            //val data = arguments?.getInt("Challengetoshow", 1)
-            //valuess(challengetype1, image)
-
+            val data = arguments?.getString("challengeviewChallenge")
+            valuess(data!!, image)
 
             next.setOnClickListener {
                 next.clicking()
                 next.shortvibrate()
-                (activity as Activity2).SetToStart(Startchallenge())
+                communicator = activity as challengecommunicator
+                communicator.passchallengedetails(data)
             }
 
 
@@ -71,7 +65,6 @@ class challengeview : Fragment() {
             t4.text = text4
             t5.text = text5
             t6.text = text6
-        }
         return view
     }
     private fun valuess(valx: String, ige: ImageView){
