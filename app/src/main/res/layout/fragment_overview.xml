@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Fragments.Pages.subpages.Overview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/overview1">
+
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is an addiction?"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addiction is a complex, chronic brain condition
+influenced by genes and the environment that
+is characterized by substance use or compulsive
+actions that continue despite harmful
+consequences. For a long time, addiction meant an
+uncontrollable habit of using alcohol or other drugs.
+More recently, the concept of addiction has
+expanded to include behaviours, such as excessive
+sexual behaviours, as well as substances, and even
+ordinary and necessary activities, such as exercise
+and eating. Addiction is both psychological and
+behavioural. Addictions are characterized by craving,
+compulsion, an inability to stop using the drug and
+lifestyle dysfunction due to drug use, or inability
+to stop the behaviour in question.
+"
+            android:lineSpacingExtra="6dp"
+            android:layout_margin="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Types"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addictions in general are classified into two.
+Substance abuse and behavioural addictions.
+"
+            android:lineSpacingExtra="6dp"
+            android:layout_margin="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
+            android:src="@drawable/overview2"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Behavioural Addictions"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Behavioural addictions are those not involving a
+substance. This type of addiction can be an impulse
+control disorder or an addiction identified by an
+addiction professional. Behavioural addictions are
+controversial and many don't feel they meet the
+requirement of being an official addiction. Some
+behavioural addictions are: Food (eating), Sex,
+Pornography (attaining, viewing), Masturbation,
+Using computers / the internet, Playing
+video games, Cutting, Shopping and so on."
+            android:lineSpacingExtra="6dp"
+            android:layout_margin="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
+            android:src="@drawable/overview3"></ImageView>
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package ade.yemi.growthchecker.Fragments.Pages
+import ade.yemi.growthchecker.Activities.Activity2
 import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.AlarmReceiver
 import ade.yemi.growthchecker.Data.DataStoreManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,21 +14,36 @@ import ade.yemi.growthchecker.Utilities.delay
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import ade.yemi.roomdatabseapp.Data.Challenge
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
-import android.app.Dialog
+import android.app.*
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.StyleRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.*
 
 class Startchallenge : Fragment() {
+    private lateinit var picker: MaterialTimePicker
+    private lateinit var calendar: Calendar
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
+
     private val Cadder1:EditText by lazy {
         requireView().findViewById(R.id.et_challengeadder1)
     }
@@ -36,8 +53,6 @@ class Startchallenge : Fragment() {
     private val Cadder3:EditText by lazy {
         requireView().findViewById(R.id.et_challengeadder3)
     }
-
-
     private var assessmentnotification = false
     private var ungoing = false
     private lateinit var challengeViewModel: ChallengeViewModel
@@ -52,6 +67,7 @@ class Startchallenge : Fragment() {
        var view = inflater.inflate(R.layout.fragment_startchallenge, container, false)
         var start = view.findViewById<CardView>(R.id.cd_challengestartstart)
         var image = view.findViewById<ImageView>(R.id.iv_startpageimage)
+        createnotificationchannel()
 
         val challenge = arguments?.getString("challengeviewchallenge")
             imageset(challenge!!, image)
@@ -61,7 +77,26 @@ class Startchallenge : Fragment() {
                 start.shortvibrate()
 
                 if (checkempty(Cadder1, Cadder2, Cadder3) == true){
+                    picker = MaterialTimePicker.Builder()
+                            .setTimeFormat(TimeFormat.CLOCK_12H)
+                            .setHour(12)
+                            .setMinute(0)
+                            .setTitleText("Select Time For Daily Assessment")
+                            .setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD)
+                            .setTheme(R.style.TimePicker)
+                            .build()
+
+                    picker.show(childFragmentManager, "AssessmentNotification")
+
+                    picker.addOnPositiveButtonClickListener {
+                        calendar = Calendar.getInstance()
+                        calendar[Calendar.HOUR_OF_DAY] = picker.hour
+                        calendar[Calendar.MINUTE] = picker.minute
+                        calendar[Calendar.SECOND] = 0
+                        calendar[Calendar.MILLISECOND] = 0
                         confirmpopup(challenge)
+                    }
+//                        confirmpopup(challenge)
                 }else{
                     Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
                 }
@@ -120,6 +155,7 @@ class Startchallenge : Fragment() {
             var challenge = challengedetails(string)
             challengeViewModel = ViewModelProvider(this).get(ChallengeViewModel::class.java)
             try {
+                setalarm()
                 challengeViewModel.insertChallengeInfo(challenge)
                 Toast.makeText(requireContext(), "$string Challenge Started Successfully", Toast.LENGTH_LONG).show()
                 assessmentnotification = true
@@ -157,6 +193,35 @@ class Startchallenge : Fragment() {
             check = true
         }
         return check
+    }
+
+    private fun setalarm() {
+        alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), AlarmReceiver::class.java)
+
+        pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
+
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY, pendingIntent
+        )
+        Toast.makeText(requireContext(), "Alarm set successfully", Toast.LENGTH_SHORT).show()
+
+    }
+
+
+    private fun createnotificationchannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name: CharSequence = "Assessment Notification"
+            val description = "Assessment Channel"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("AssessmentNotification", name, importance)
+            channel.description = description
+            val notificationManager = context?.getSystemService(
+                    NotificationManager::class.java
+            )
+            notificationManager?.createNotificationChannel(channel)
+        }
     }
 }
 //challengeungoing

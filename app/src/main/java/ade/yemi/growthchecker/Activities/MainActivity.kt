@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -71,6 +72,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
+//        var incomming = intent?.getStringExtra("assessmentnotification11")
+//        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
+
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         lifecycleScope.launch {
             val pushresult = async {
@@ -81,7 +85,18 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             }
             var ungoinchallenge = pushresult.await()
             var ungoingchallenge = ungoinchallenge
-            var assessmentnotification = pushresult1.await()
+            var assessmentnotification = false
+
+
+
+            var tome = intent?.getBooleanExtra("toacess", false)
+            if (tome == true){
+                assessmentnotification = true
+            }else{
+                assessmentnotification = pushresult1.await()
+            }
+            DataStoreManager.saveBoolean(this@MainActivity, "assessmentnotification", assessmentnotification)
+
             if (ungoingchallenge == true){
                 challengesscrollview.visibility = View.GONE
             }else{
@@ -289,6 +304,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         dialog.show(supportFragmentManager, "Menudialog")
     }
 
+
 //    private fun showMenupopup( ){
 //        var popup = Dialog(this)
 //        popup.setCancelable(true)
@@ -305,4 +321,10 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 //            popup.dismiss()
 //        }
 //    }
+
+     fun savedata(boolean: Boolean){
+        lifecycleScope.launch {
+            DataStoreManager.saveBoolean(this@MainActivity, "assessmentnotification", boolean)
+        }
+    }
 }

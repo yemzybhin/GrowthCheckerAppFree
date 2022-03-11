@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker.PopUp_Fragments
 
 import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.AlarmReceiver
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.AnalyticsPage
 import android.os.Bundle
@@ -14,6 +15,9 @@ import ade.yemi.growthchecker.Utilities.delay
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import ade.yemi.roomdatabseapp.Data.Challenge
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
@@ -31,6 +35,8 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class DailyAssessment : DialogFragment() {
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
     private lateinit var challengeViewModel: ChallengeViewModel
     private lateinit var some: Challenge
     private var ungoingchallenge = false
@@ -201,7 +207,7 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
@@ -226,8 +232,9 @@ class DailyAssessment : DialogFragment() {
                  challengeViewModel.updateChallenge(Challenge(one, two, three, four))
              lifecycleScope.launch {
         //change back to false
-                   context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                   context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                    context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", false) }
+                   cancelalarm()
                    dismiss()
                    startActivity(Intent(requireContext(), MainActivity::class.java))
                     }
@@ -258,11 +265,12 @@ class DailyAssessment : DialogFragment() {
             "200" -> imageView.setImageResource(R.drawable.twohundreddays)
         }
     }
-    private fun savedata(boolean: Boolean){
-        lifecycleScope.launch {
-            //change back to false
-            context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
-            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", boolean) }
-        }
+    private fun cancelalarm(){
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), AlarmReceiver::class.java)
+        pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
+        alarmManager.cancel(pendingIntent)
+        Toast.makeText(requireContext(), "Alarm Successfully canceled", Toast.LENGTH_SHORT).show()
     }
+
 }
