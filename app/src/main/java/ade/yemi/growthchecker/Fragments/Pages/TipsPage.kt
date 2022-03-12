@@ -11,7 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
+import ade.yemi.growthchecker.Utilities.shortvibrate
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.widget.ImageView
@@ -39,6 +42,7 @@ class TipsPage : Fragment() {
 
         var back = view.findViewById<CardView>(R.id.cd_quoteback)
         var next = view.findViewById<CardView>(R.id.cd_quoteNext)
+        var share = view.findViewById<CardView>(R.id.cd_sharequote)
 
 
         var overview = view.findViewById<CardView>(R.id.cd_overviewcard)
@@ -70,6 +74,8 @@ class TipsPage : Fragment() {
 
 
             next.setOnClickListener {
+                next.clicking()
+                next.shortvibrate()
                 counter++
                 if (counter > quotes.size-1){
                     counter = 0
@@ -84,7 +90,8 @@ class TipsPage : Fragment() {
 
             }
             back.setOnClickListener {
-
+                back.clicking()
+                back.shortvibrate()
                 counter--
                 if (counter < 0){
                     counter = quotes.size-1
@@ -98,14 +105,23 @@ class TipsPage : Fragment() {
                 }
 
             }
+
+            share.setOnClickListener {
+                share.clicking()
+                share.shortvibrate()
+
+                val word = "${quotetext.text} \nby ${authourtext.text}. \n\nSee More on the Growth chacker app via https://play.google.com/store/apps/details?id=ade.yemi.growthchecker"
+                val shareintent = Intent()
+                shareintent.action = Intent.ACTION_SEND
+                shareintent.type = "text/plain"
+                shareintent.putExtra(Intent.EXTRA_TEXT,word )
+                startActivity(Intent.createChooser(shareintent, "Share Quote Via"))
+            }
         }
 
-
-
-
-
-
         overview.setOnClickListener {
+            overview.clicking()
+            overview.shortvibrate()
             initialimage.visibility = View.GONE
             changecolours(cards, images, texts)
             singlestate(overview,t1, image1 )
@@ -113,6 +129,8 @@ class TipsPage : Fragment() {
         }
 
         addictions.setOnClickListener {
+            addictions.clicking()
+            addictions.shortvibrate()
             initialimage.visibility = View.GONE
             changecolours(cards, images, texts)
             singlestate(addictions,t2, image2 )
@@ -120,6 +138,8 @@ class TipsPage : Fragment() {
         }
 
         aftermath.setOnClickListener {
+            aftermath.clicking()
+            aftermath.shortvibrate()
             initialimage.visibility = View.GONE
             changecolours(cards, images, texts)
             singlestate(aftermath,t3, image3 )

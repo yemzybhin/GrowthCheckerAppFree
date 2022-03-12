@@ -1,6 +1,8 @@
 package ade.yemi.growthchecker.PopUp_Fragments
 
+import ade.yemi.growthchecker.Activities.Activity2
 import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.Fragments.Pages.AboutsPage
 import ade.yemi.growthchecker.Fragments.Pages.AchievementsPage
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -37,10 +39,11 @@ class Menu : DialogFragment(){
         var myinfo = view.findViewById<CardView>(R.id.cd_MenuMyInfo)
         var addiction = view.findViewById<CardView>(R.id.cd_menuAddiction)
         var myrating = view.findViewById<LinearLayout>(R.id.LL_menuMyrating)
-        var settingss = view.findViewById<CardView>(R.id.cd_menuSettings)
+        var abouts = view.findViewById<CardView>(R.id.cd_menuSettings)
         var cancel = view.findViewById<CardView>(R.id.cd_homemenucancel)
 
 
+        var intent = Intent(requireContext(), Activity2::class.java)
         var myinfopopup = PopUp_Myinfo()
         myinfo.setOnSingleClickListener {
             (activity as MainActivity).ShowMainpopUp(myinfo, myinfopopup)
@@ -57,10 +60,11 @@ class Menu : DialogFragment(){
             myrating.shortvibrate()
             Toast.makeText( requireContext(), "Working", Toast.LENGTH_SHORT).show()
         }
-        settingss.setOnSingleClickListener {
-            settingss.clicking()
-            settingss.shortvibrate()
-            Toast.makeText( requireContext(), "Working", Toast.LENGTH_SHORT).show()
+        abouts.setOnSingleClickListener {
+            abouts.clicking()
+            abouts.shortvibrate()
+            intent.putExtra("ActivityToset", "Aboutspage")
+            startActivity(intent)
         }
         cancel.setOnSingleClickListener {
             cancel.shortvibrate()

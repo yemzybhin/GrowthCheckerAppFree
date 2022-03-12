@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker.Activities
 
 import ade.yemi.growthchecker.AlarmReceiver
+import ade.yemi.growthchecker.Fragments.Pages.AboutsPage
 import ade.yemi.growthchecker.Fragments.Pages.Startchallenge
 import ade.yemi.growthchecker.Fragments.Pages.challengeview
 import ade.yemi.growthchecker.R
@@ -47,6 +48,7 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
         var fragment = Fragment()
         when(string){
             "challengeview" -> fragment = challengeview()
+            "Aboutspage" -> fragment = AboutsPage()
         }
         var bundle = Bundle()
         fragment.arguments = bundle
