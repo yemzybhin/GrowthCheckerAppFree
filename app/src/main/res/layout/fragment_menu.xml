@@ -49,7 +49,7 @@
                 app:cardCornerRadius="25dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/iv_menuimage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/testimage" />
@@ -61,6 +61,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_menuname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -72,6 +73,7 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
+                    android:id="@+id/tv_menuage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -124,6 +126,28 @@
                 android:layout_marginRight="0dp"
                 android:layout_marginBottom="10dp"
                 android:text="Addiction"
+                android:textColor="@color/MenuItem"
+                android:textSize="11sp"
+                android:textStyle="bold"></TextView>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cd_menuSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="#00F5F6FC"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="20dp"
+                android:text="About"
                 android:textColor="@color/MenuItem"
                 android:textSize="11sp"
                 android:textStyle="bold"></TextView>
@@ -311,28 +335,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cd_menuSettings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="#00F5F6FC"
-            app:cardElevation="0dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="35dp"
-                android:text="About"
-                android:textColor="@color/MenuItem"
-                android:textSize="11sp"
-                android:textStyle="bold"></TextView>
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

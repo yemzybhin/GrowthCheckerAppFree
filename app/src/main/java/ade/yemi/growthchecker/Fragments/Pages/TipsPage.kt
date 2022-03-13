@@ -19,6 +19,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentContainerView
@@ -109,7 +110,7 @@ class TipsPage : Fragment() {
             share.setOnClickListener {
                 share.clicking()
                 share.shortvibrate()
-
+                Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_LONG).show()
                 val word = "${quotetext.text} \nby ${authourtext.text}. \n\nSee More on the Growth chacker app via https://play.google.com/store/apps/details?id=ade.yemi.growthchecker"
                 val shareintent = Intent()
                 shareintent.action = Intent.ACTION_SEND
