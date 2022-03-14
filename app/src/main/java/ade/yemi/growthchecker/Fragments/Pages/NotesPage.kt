@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -43,7 +44,7 @@ class NotesPage : Fragment() {
             }
             replacefragment(R.id.fr_NotesFrag2, Notesfragment2())
         }
-        addnew.setOnClickListener {
+        addnew.setOnSingleClickListener {
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialog.show(childFragmentManager, "huig")
         }

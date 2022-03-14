@@ -3,6 +3,7 @@ package ade.yemi.growthchecker.Adapters
 import ade.yemi.growthchecker.Data.NoteData.Note
 import ade.yemi.growthchecker.Fragments.Pages.subpages.Notesfragment2
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,10 +32,10 @@ class NoteRvAdapter(
         holder.noteTv.setText(allNotes.get(position).Notetitle)
         holder.notecontent.setText(allNotes.get(position).Notecontent)
 
-        holder.deletenote.setOnClickListener {
+        holder.deletenote.setOnSingleClickListener{
             noteClickDeleteInterface.onDeleteIconClick(allNotes.get(position))
         }
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnSingleClickListener{
             noteClickInterface.onNoteClick(allNotes.get(position))
         }
     }
