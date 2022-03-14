@@ -77,7 +77,7 @@ class Menu : DialogFragment(){
                 if (ungoing == true){
                     ungoingtext.text = it.first().ChallengeType
 
-                    var toset1 = it.first().Point.size + 1
+                    var toset1 = it.first().Point.size
                     var toset2 = 100/(it.first().Days.toDouble())
                     var toset = toset1 * toset2
                     progresstext.text = "${toset.toInt()}%"

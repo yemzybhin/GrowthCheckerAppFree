@@ -302,7 +302,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginBottom="1dp"
-                android:text="My Rating"
+                android:text="Rating"
                 android:textColor="@color/MenuItem"
                 android:textSize="11sp"
                 android:textStyle="bold"></TextView>

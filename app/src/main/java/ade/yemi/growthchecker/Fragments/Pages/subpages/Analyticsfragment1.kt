@@ -45,6 +45,7 @@ class Analyticsfragment1 : Fragment() {
         var column2 = view.findViewById<TextView>(R.id.tv_analyticstabcolumn2)
         var column3 = view.findViewById<TextView>(R.id.tv_analyticstabcolumn3)
         var handlertextt = view.findViewById<TextView>(R.id.tv_nochartdata11)
+
         var carr = view.findViewById<CardView>(R.id.analytics1careed)
         var carr2 = view.findViewById<CardView>(R.id.cd_analytics1nmae)
         var currentimage = view.findViewById<ImageView>(R.id.iv_analyticscurrentimage)
