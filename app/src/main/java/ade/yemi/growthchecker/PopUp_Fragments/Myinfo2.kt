@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker.PopUp_Fragments
 
+import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.Data.DataStoreManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.setimage
+import ade.yemi.growthchecker.Utilities.shortvibrate
+import android.content.Intent
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -27,6 +32,7 @@ class Myinfo2 : DialogFragment() {
 
         var image = popup.findViewById<ImageView>(R.id.iv_myinfo2image)
         var changeimage = popup.findViewById<TextView>(R.id.tv_changeimage)
+        var title = popup.findViewById<TextView>(R.id.tv_myinfotitle2)
         var namee = popup.findViewById<EditText>(R.id.et_myinfoname)
         var agee = popup.findViewById<EditText>(R.id.et_myinfoage)
         var save = popup.findViewById<Button>(R.id.btn_saveMyinfodetails)
@@ -45,11 +51,16 @@ class Myinfo2 : DialogFragment() {
             var name = pushresult1.await()!!
             var age = pushresult2.await()!!
             var picnum = pushresult3.await()!!
+
+
+            title.text = "Hi, $name"
         setimage(image, picnum)
         namee.setText(name)
         agee.setText(age)
 
         save.setOnClickListener {
+            save.clicking()
+            save.shortvibrate()
             if (namee.text.isEmpty() || agee.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Kindly Enter all details", Toast.LENGTH_SHORT)
                     .show()
@@ -70,37 +81,22 @@ class Myinfo2 : DialogFragment() {
                         )
                     }
                 }
+                startActivity(Intent(requireContext(), MainActivity::class.java))
                 dismiss()
-            }
-        }
-            changeimage.setOnClickListener {
 
             }
         }
+            changeimage.setOnClickListener {
+                var dialog = ChangeImages()
+                (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
+                dismiss()
+            }
+        }
         cancel.setOnClickListener {
+            cancel.shortvibrate()
+            cancel.clicking()
             dismiss()
         }
         return popup
-    }
-    private fun setimage(imageView: ImageView, int: Int){
-        when(int){
-            1 -> imageView.setImageResource(R.drawable.a40)
-            2 -> imageView.setImageResource(R.drawable.a41)
-            3 -> imageView.setImageResource(R.drawable.a42)
-            4 -> imageView.setImageResource(R.drawable.a43)
-            5 -> imageView.setImageResource(R.drawable.a44)
-            6 -> imageView.setImageResource(R.drawable.a45)
-            7 -> imageView.setImageResource(R.drawable.a46)
-            8 -> imageView.setImageResource(R.drawable.a47)
-            9 -> imageView.setImageResource(R.drawable.a48)
-            10 -> imageView.setImageResource(R.drawable.a49)
-            11 -> imageView.setImageResource(R.drawable.a50)
-            12 -> imageView.setImageResource(R.drawable.a51)
-            13 -> imageView.setImageResource(R.drawable.a53)
-            14 -> imageView.setImageResource(R.drawable.a54)
-            15 -> imageView.setImageResource(R.drawable.a55)
-            16 -> imageView.setImageResource(R.drawable.a56)
-            else -> imageView.setImageResource(R.drawable.a40)
-        }
     }
 }

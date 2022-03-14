@@ -6,6 +6,7 @@ import ade.yemi.growthchecker.Fragments.Pages.AnalyticsPage
 import ade.yemi.growthchecker.Helpers.Graph.GenerateFloat
 import ade.yemi.growthchecker.Helpers.Graph.cumulativelast
 import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
+import ade.yemi.growthchecker.PopUp_Fragments.QuitChallenge
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -101,23 +102,14 @@ class RunningChallenge : Fragment() {
             lineChartHome.marker = markerView
         })
 
-        lifecycleScope.launch {
-            val pushresult = async {
-                context?.let { DataStoreManager.getBoolean(it, "assessmentnotification") }
-            }
-            var assessmentnotification = pushresult.await()
-            var dialog = DailyAssessment()
+
+            var dialog = QuitChallenge()
             takeassess.setOnClickListener {
                 takeassess.clicking()
                 takeassess.shortvibrate()
-                if (assessmentnotification == true){
                     (activity as MainActivity).showassessmentdialog(dialog)
-                }
-                else{
-                    Toast.makeText(requireContext(), "You have filled an assessment for today", Toast.LENGTH_LONG).show()
-                }
             }
-        }
+
 
         trackgrowth.setOnClickListener {
             trackgrowth.clicking()

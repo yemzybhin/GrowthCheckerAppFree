@@ -45,7 +45,7 @@
                 android:paddingTop="2dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="2dp"
-                android:text="Hi Amila"
+                android:text="Hi, Anonymous"
                 android:textColor="@color/MenuItem"
                 android:textSize="17sp"
                 android:textStyle="bold"></TextView>
@@ -66,7 +66,7 @@
                         android:id="@+id/iv_myinfo2image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/testimage" />
+                        android:src="@drawable/a40" />
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/tv_changeimage"
@@ -98,12 +98,15 @@
 
                 <EditText
                     android:id="@+id/et_myinfoname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:background="@drawable/edittextbg"
                     android:maxLength="10"
-                    android:text="Amila Dankariya"
-                    android:textColor="@color/MenuItem"
+                    android:text="Anonymous"
+                    android:textColor="@color/primarycolor2"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
                     android:textSize="13sp"
                     android:textStyle="bold"></EditText>
 
@@ -120,18 +123,23 @@
                     android:layout_height="wrap_content"
                     android:text="Age:"
                     android:textColor="@color/primary5"
+                    android:layout_marginTop="10dp"
                     android:textSize="10sp"
                     android:textStyle="bold|italic"></TextView>
 
                 <EditText
                     android:id="@+id/et_myinfoage"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:inputType="number"
                     android:maxLength="3"
                     android:text="0"
-                    android:textColor="@color/MenuItem"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittextbg"
+                    android:textColor="@color/primarycolor2"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
                     android:textSize="13sp"
                     android:textStyle="bold"></EditText>
 
@@ -143,6 +151,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:text="Save"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/primarycolor2"
                 android:textSize="10dp"
                 android:textStyle="bold"
@@ -169,12 +178,7 @@
             android:src="@drawable/cancel2"></ImageView>
     </androidx.cardview.widget.CardView>
 
-    <View
-        android:layout_width="20dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cd_myinfopopupcancel"></View>
+
 
 
 

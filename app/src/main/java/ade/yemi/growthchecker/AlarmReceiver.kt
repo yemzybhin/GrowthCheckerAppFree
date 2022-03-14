@@ -23,7 +23,9 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Toast.makeText(context, "Time for new assessment", Toast.LENGTH_SHORT).show()
 
-//        MainActivity().savedata(true)
+        //(context as MainActivity()).savedata(true)
+
+
         var i = Intent(context, MainActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         i.putExtra("toacess", true)

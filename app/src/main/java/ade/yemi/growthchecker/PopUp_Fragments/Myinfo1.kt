@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.setimage
 import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.widget.Button
 import android.widget.ImageView
@@ -57,9 +58,9 @@ class Myinfo1 : DialogFragment() {
             setimage(image, picnum)
             }
             edit.setOnClickListener {
-                dismiss()
                 var dialog = Myinfo2()
                 (activity as MainActivity).ShowMainpopUp(edit,dialog)
+                dismiss()
             }
 
             cancel.setOnClickListener {
@@ -70,28 +71,5 @@ class Myinfo1 : DialogFragment() {
 
         return popup
     }
-    private fun setimage(imageView: ImageView, int: Int){
-        when(int){
-            1 -> imageView.setImageResource(R.drawable.a40)
-            2 -> imageView.setImageResource(R.drawable.a41)
-            3 -> imageView.setImageResource(R.drawable.a42)
-            4 -> imageView.setImageResource(R.drawable.a43)
-            5 -> imageView.setImageResource(R.drawable.a44)
-            6 -> imageView.setImageResource(R.drawable.a45)
-            7 -> imageView.setImageResource(R.drawable.a46)
-            8 -> imageView.setImageResource(R.drawable.a47)
-            9 -> imageView.setImageResource(R.drawable.a48)
-            10 -> imageView.setImageResource(R.drawable.a49)
-            11 -> imageView.setImageResource(R.drawable.a50)
-            12 -> imageView.setImageResource(R.drawable.a51)
-            13 -> imageView.setImageResource(R.drawable.a53)
-            14 -> imageView.setImageResource(R.drawable.a54)
-            15 -> imageView.setImageResource(R.drawable.a55)
-            16 -> imageView.setImageResource(R.drawable.a56)
-            else -> imageView.setImageResource(R.drawable.a40)
-        }
-    }
-
-
 
 }

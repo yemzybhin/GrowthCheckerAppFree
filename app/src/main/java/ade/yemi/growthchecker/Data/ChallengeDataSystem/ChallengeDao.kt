@@ -12,4 +12,6 @@ interface ChallengeDao {
     fun insertChallenge(challenge: Challenge?)
     @Update
     fun updateChallenge(challenge: Challenge?)
+    @Delete
+    fun deleteChallenge(challenge: Challenge?)
 }

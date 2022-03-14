@@ -28,6 +28,11 @@ class ChallengeViewModel(app: Application): AndroidViewModel(app) {
         challengeDao?.insertChallenge(entity)
         getAllChallenges()
     }
+    fun deleteChallengeInfo(entity: Challenge){
+        val challengeDao = ChallengeDb.getAppDatabase(getApplication())?.challengeDao()
+        challengeDao?.deleteChallenge(entity)
+        getAllChallenges()
+    }
 
     fun updateChallenge (entity: Challenge){
         val challengeDao = ChallengeDb.getAppDatabase(getApplication())?.challengeDao()

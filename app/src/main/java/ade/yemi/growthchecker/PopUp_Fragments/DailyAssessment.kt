@@ -207,7 +207,7 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
@@ -270,7 +270,6 @@ class DailyAssessment : DialogFragment() {
         val intent = Intent(requireContext(), AlarmReceiver::class.java)
         pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
         alarmManager.cancel(pendingIntent)
-        Toast.makeText(requireContext(), "Alarm Successfully canceled", Toast.LENGTH_SHORT).show()
     }
 
 }

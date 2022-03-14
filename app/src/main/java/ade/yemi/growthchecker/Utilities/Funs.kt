@@ -12,6 +12,7 @@ import android.renderscript.Int2
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import java.util.*
 import kotlin.concurrent.schedule
@@ -183,4 +184,91 @@ fun setrankimage(attained: Int, attainable: Int, days: String, imageView: ImageV
         days == "200" && (rank == 4 || rank == 5) -> imageView.setImageResource(R.drawable.none5)
     }
 }
+
+class profileimages(var image: ImageView, var num: Int)
+fun setimage(imageView: ImageView, int: Int){
+    when(int){
+        1 -> imageView.setImageResource(R.drawable.a40)
+        2 -> imageView.setImageResource(R.drawable.a41)
+        3 -> imageView.setImageResource(R.drawable.a42)
+        4 -> imageView.setImageResource(R.drawable.a43)
+        5 -> imageView.setImageResource(R.drawable.a44)
+        6 -> imageView.setImageResource(R.drawable.a45)
+        7 -> imageView.setImageResource(R.drawable.a46)
+        8 -> imageView.setImageResource(R.drawable.a47)
+        9 -> imageView.setImageResource(R.drawable.a48)
+        10 -> imageView.setImageResource(R.drawable.a49)
+        11 -> imageView.setImageResource(R.drawable.a50)
+        12 -> imageView.setImageResource(R.drawable.a51)
+        13 -> imageView.setImageResource(R.drawable.a53)
+        14 -> imageView.setImageResource(R.drawable.a54)
+        15 -> imageView.setImageResource(R.drawable.a55)
+        16 -> imageView.setImageResource(R.drawable.a56)
+
+        17 -> imageView.setImageResource(R.drawable.a1)
+        18 -> imageView.setImageResource(R.drawable.a2)
+        19 -> imageView.setImageResource(R.drawable.a3)
+        20 -> imageView.setImageResource(R.drawable.a4)
+        21 -> imageView.setImageResource(R.drawable.a5)
+        22 -> imageView.setImageResource(R.drawable.a6)
+        23 -> imageView.setImageResource(R.drawable.a7)
+        24 -> imageView.setImageResource(R.drawable.a8)
+        25 -> imageView.setImageResource(R.drawable.a9)
+        26 -> imageView.setImageResource(R.drawable.a10)
+        27 -> imageView.setImageResource(R.drawable.a11)
+        28 -> imageView.setImageResource(R.drawable.a12)
+        29 -> imageView.setImageResource(R.drawable.a13)
+        30 -> imageView.setImageResource(R.drawable.a14)
+        31 -> imageView.setImageResource(R.drawable.a15)
+        32 -> imageView.setImageResource(R.drawable.a16)
+
+
+        33 -> imageView.setImageResource(R.drawable.a17)
+        34 -> imageView.setImageResource(R.drawable.a18)
+        35 -> imageView.setImageResource(R.drawable.a19)
+        36 -> imageView.setImageResource(R.drawable.a20)
+        37 -> imageView.setImageResource(R.drawable.a21)
+        38 -> imageView.setImageResource(R.drawable.a22)
+        39 -> imageView.setImageResource(R.drawable.a23)
+        40 -> imageView.setImageResource(R.drawable.a24)
+        41 -> imageView.setImageResource(R.drawable.a25)
+        42 -> imageView.setImageResource(R.drawable.a26)
+        43 -> imageView.setImageResource(R.drawable.a27)
+        44 -> imageView.setImageResource(R.drawable.a28)
+        45 -> imageView.setImageResource(R.drawable.a29)
+        46 -> imageView.setImageResource(R.drawable.a30)
+        47 -> imageView.setImageResource(R.drawable.a31)
+        48 -> imageView.setImageResource(R.drawable.a32)
+
+        49 -> imageView.setImageResource(R.drawable.a33)
+        50 -> imageView.setImageResource(R.drawable.a34)
+        51 -> imageView.setImageResource(R.drawable.a35)
+        52 -> imageView.setImageResource(R.drawable.a36)
+        53 -> imageView.setImageResource(R.drawable.a37)
+        54 -> imageView.setImageResource(R.drawable.a38)
+        55 -> imageView.setImageResource(R.drawable.a39)
+
+
+
+        else -> imageView.setImageResource(R.drawable.a40)
+    }
+}
+
+fun levelimage(OverallScore: Int, image: ImageView, comment: TextView){
+    when{
+       OverallScore < 0  -> {image.setImageResource(R.drawable.l1)
+           comment.text = "Still Moving"}
+        OverallScore >=1 && OverallScore < 200 -> {image.setImageResource(R.drawable.l2)
+            comment.text = "Amazing!!"}
+        OverallScore >=200 && OverallScore < 1000  -> {image.setImageResource(R.drawable.l3)
+            comment.text = "Superb!!!"}
+        OverallScore >=1000 && OverallScore < 5000  -> {image.setImageResource(R.drawable.l4)
+            comment.text = "Wonderful!!"}
+        OverallScore >=5000 && OverallScore < 15000  -> {image.setImageResource(R.drawable.l5)
+            comment.text = "You are a CHAMPION!!!"}
+        OverallScore >=15000 -> {image.setImageResource(R.drawable.l6)
+            comment.text = "Congratulations CHAMPION!!!"}
+    }
+}
+
 
