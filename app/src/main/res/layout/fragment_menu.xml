@@ -308,7 +308,7 @@
                 android:textStyle="bold"></TextView>
 
             <View
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:background="@color/MenuItem"></View>
