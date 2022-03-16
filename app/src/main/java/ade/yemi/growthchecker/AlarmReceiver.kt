@@ -33,7 +33,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         var pendingIntent = PendingIntent.getActivity(context, 0, i, 0)
         val builder = NotificationCompat.Builder(context!!, "AssessmentNotification")
-            .setSmallIcon(R.drawable.forteendays)
+            .setSmallIcon(R.drawable.logo)
             .setContentTitle("DAILY ASSESSMENT")
             .setContentText("It is time to take your daily assessment.")
             .setAutoCancel(true)

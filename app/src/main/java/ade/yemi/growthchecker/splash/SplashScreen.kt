@@ -20,7 +20,7 @@ class SplashScreen : AppCompatActivity() {
         initdata()
         var splashimage = findViewById<ImageView>(R.id.iv_SplashImage)
         splashimage.alpha = 0f
-        splashimage.animate().setDuration(1500).alpha(1f).withEndAction{
+        splashimage.animate().setDuration(1800).alpha(1f).withEndAction{
             if (NotFirsttime == 1)(
                     startActivity(Intent(this, MainActivity::class.java))
             )

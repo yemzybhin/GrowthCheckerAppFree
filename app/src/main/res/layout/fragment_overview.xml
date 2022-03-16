@@ -73,16 +73,11 @@ Substance abuse and behavioural addictions.
             android:textSize="15dp"
             android:textColor="@color/primarycolor2"></TextView>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="150dp"
-            android:src="@drawable/overview2"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Behavioural Addictions"
+            android:text="Substance Abuse"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
@@ -110,7 +105,35 @@ video games, Cutting, Shopping and so on."
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"
             android:layout_height="150dp"
+            android:src="@drawable/overview2"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Behavioural Addictions"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The types of addiction seen with drug use are termed substance abuse or substance dependency. It neither equates to addiction directly but rather, refers to harmful use of substances. Some substance abuse addictions are Alcohol, Tobacco, Opioids (like heroin), Prescription drugs (sedatives, hypnotics, or anxiolytics like sleeping pills and tranquilizers), Cocaine, Cannabis (marijuana), Amphetamines (like methamphetamines, known as meth), Hallucinogens, Inhalants, Phencyclidine (known as PCP or Angel dust) and Other unspecified substances."
+            android:lineSpacingExtra="6dp"
+            android:layout_margin="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/primarycolor2"></TextView>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
             android:src="@drawable/overview3"></ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></View>
     </LinearLayout>
 
 
