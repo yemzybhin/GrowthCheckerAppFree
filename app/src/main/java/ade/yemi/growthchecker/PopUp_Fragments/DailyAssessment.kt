@@ -39,7 +39,6 @@ class DailyAssessment : DialogFragment() {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var challengeViewModel: ChallengeViewModel
     private lateinit var some: Challenge
-    private var ungoingchallenge = false
 
     private var word1 = ""
     private var word2 = ""
@@ -207,7 +206,7 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))

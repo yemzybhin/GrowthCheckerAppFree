@@ -157,7 +157,7 @@ class Startchallenge : Fragment() {
             try {
                 setalarm()
                 challengeViewModel.insertChallengeInfo(challenge)
-                Toast.makeText(requireContext(), "$string Challenge Started Successfully", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "$string Challenge Started Successfully\nPlease wait for first assessment", Toast.LENGTH_LONG).show()
                 assessmentnotification = true
                 ungoing = true
                 adder1 = Cadder1.text.toString()

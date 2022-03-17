@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     tools:context=".Fragments.Pages.subpages.Overview">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,116 +22,437 @@
             android:src="@drawable/overview1">
 
         </ImageView>
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="What is an addiction?"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Addiction is a complex, chronic brain condition
-influenced by genes and the environment that
-is characterized by substance use or compulsive
-actions that continue despite harmful
-consequences. For a long time, addiction meant an
-uncontrollable habit of using alcohol or other drugs.
-More recently, the concept of addiction has
-expanded to include behaviours, such as excessive
-sexual behaviours, as well as substances, and even
-ordinary and necessary activities, such as exercise
-and eating. Addiction is both psychological and
-behavioural. Addictions are characterized by craving,
-compulsion, an inability to stop using the drug and
-lifestyle dysfunction due to drug use, or inability
-to stop the behaviour in question.
-"
-            android:lineSpacingExtra="6dp"
-            android:layout_margin="10dp"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Types"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Addictions in general are classified into two.
-Substance abuse and behavioural addictions.
-"
-            android:lineSpacingExtra="6dp"
-            android:layout_margin="10dp"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/primarycolor2"></View>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Substance Abuse"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Behavioural addictions are those not involving a
-substance. This type of addiction can be an impulse
-control disorder or an addiction identified by an
-addiction professional. Behavioural addictions are
-controversial and many don't feel they meet the
-requirement of being an official addiction. Some
-behavioural addictions are: Food (eating), Sex,
-Pornography (attaining, viewing), Masturbation,
-Using computers / the internet, Playing
-video games, Cutting, Shopping and so on."
-            android:lineSpacingExtra="6dp"
-            android:layout_margin="10dp"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
+            <TextView
+                android:id="@+id/tv_addictiontitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/productsansregular"
+                android:text="Overview"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="true"
+                android:textColor="#615788"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="150dp"
-            android:src="@drawable/overview2"></ImageView>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Behavioural Addictions"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="The types of addiction seen with drug use are termed substance abuse or substance dependency. It neither equates to addiction directly but rather, refers to harmful use of substances. Some substance abuse addictions are Alcohol, Tobacco, Opioids (like heroin), Prescription drugs (sedatives, hypnotics, or anxiolytics like sleeping pills and tranquilizers), Cocaine, Cannabis (marijuana), Amphetamines (like methamphetamines, known as meth), Hallucinogens, Inhalants, Phencyclidine (known as PCP or Angel dust) and Other unspecified substances."
-            android:lineSpacingExtra="6dp"
-            android:layout_margin="10dp"
-            android:textSize="15dp"
-            android:textColor="@color/primarycolor2"></TextView>
 
-        <ImageView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="150dp"
-            android:src="@drawable/overview3"></ImageView>
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="What is an aDDiction"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:maxLines="10000"
+                            android:text="Addiction is a complex, chronic brain condition influenced by genes and the environment that is characterized by substance use or compulsive actions that continue despite harmful consequences. \n\nFor a long time, addiction meant an uncontrollable habit of using alcohol or other drugs. \nMore recently, the concept of addiction has expanded to include behaviours, such as excessive sexual behaviours, as well as substances, and even ordinary and necessary activities, such as exercise and eating. \n\nAddiction is both psychological and behavioural. Addictions are characterized by craving, compulsion, an inability to stop using the drug and lifestyle dysfunction due to drug use, or inability to stop the behaviour in question."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="ADDiction  vs. ABuse anD TolERancE"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:maxLines="10000"
+                            android:text="Drug abuse is when you use legal or illegal substances in ways you shouldn’t. You might take more than the regular dose of pills or use someone else’s prescription. You may abuse drugs to feel good, ease stress, or avoid reality. But usually, you’re able to change your unhealthy habits or stop using altogether.\n\nAddiction is when you can’t stop. Not when it puts your health in danger. Not when it causes financial, emotional, and other problems for you or your loved ones. That urge to get and use drugs can fill up every minute of the day, even if you want to quit.\n\nAddiction also is different from physical dependence or tolerance. In cases of physical dependence, withdrawal symptoms happen when you suddenly stop a substance. Tolerance happens when a dose of a substance becomes less effective over time.\nWhen you use opioids for pain for a long time, for example, you may develop tolerance and even physical dependence. This doesn’t mean you’re addicted. In general, when narcotics are used under proper medical supervision, addiction happens in only a small percentage of people."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="EFFEct on thE BRain"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="Your brain is wired to make you want to repeat experiences that make you feel good. So you’re motivated to do them again and again.\n\nThe drugs that may be addictive target your brain’s reward system. They flood your brain with a chemical called dopamine. This triggers a feeling of intense pleasure. You keep taking the drug to chase that high.Over time, your brain gets used to the extra dopamine. So you might need to take more of the drug to get the same good feeling. And other things you enjoyed, like food and hanging out with family, may give you less pleasure.\n\nWhen you use drugs for a long time, it can cause changes in other brain chemical systems and circuits as well. They can hurt your:\n\n1.  Judgment.\n\n2.  Decision-making.\n\n3.  Memory.\n\n4.  Ability to learn.\n\n5.  Together, these brain changes can drive you to seek out and take drugs in ways that are beyond your control."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="Common siQns"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="You may have one or more of these warning signs:\n\n1.  An urge to use the drug every day, or many times a day.\n\n2.  Taking more drugs than you want to, and for longer than you thought you would.\n\n3.  Always having the drug with you, and buying it even if you can’t afford it.\n\n4.  Using drugs even if they cause you trouble at work or make you lash out at family and friends.\n\n5.  Spending more time alone.\n\n6.  Not taking care of yourself or caring how you look.\n\n7.  Stealing, lying, or doing dangerous things, like driving while high or having unsafe sex.\n\n8.  Spending most of your time getting, using, or recovering from the effects of the drug.\n\n9.  Feeling sick when you try to quit.\n"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="How it woRks"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="Before getting into the different types of addiction, it’s helpful to understand a few general elements of addiction.\n\nThe reward system:\nAddiction interferes with normal brain function, particularly in the reward system.\n\n
+
+When you do something you find enjoyable, whether that’s hanging out with your best friend, drinking a bottle of wine, or using cocaine, this reward system releases the neurotransmitter dopamine along with other chemicals.\n\n
+Contrary to popular belief, dopamine doesn’t appear to actually cause feelings of pleasure or euphoria. Instead, it seems to reinforce your brain’s association between certain things and feelings of pleasure, driving you to seek those things out again in the future.\n\n
+
+Cravings and tolerance:\n
+The desire to experience this euphoria again can trigger cravings for the substance or behavior, especially when you encounter the same cues (like a party where people are drinking, for example). These cravings often serve as the first sign of addiction.\n\n
+
+As you continue using a substance or engaging in a behavior, your brain continues to produce larger amounts of dopamine. Eventually, it recognizes that there’s plenty of dopamine in your brain already and starts producing less in response to normal triggers.\n\n
+
+There’s one problem, though Your brain’s reward system still needs the same amount of dopamine to function as it should.
+
+Before long, you need to use more of the substance to make up for what your brain isn’t releasing. This effect is called tolerance.
+
+Disinterest in other activities:\n
+As addiction develops, it’s common to lose interest in hobbies and other things you once enjoyed.\n
+
+This happens because your brain no longer produces much dopamine in response to natural triggers, like having sex or making art.\n
+
+Even when you want to stop using a substance or engaging in a behavior, you might feel like you still need them in order to feel good about anything.\n\n
+
+Loss of control:\n
+Addiction usually involves an inability to control substance use or specific behaviors. This can result in job loss, health issues, and relationship concerns, among other things.\n
+
+In response, you might decide to quit the substance or behavior, only to find that you keep falling short, despite your best efforts."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="TyPEs oF aDDictions"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="Essentially, there are majorly two types of Addictions. These are Substance abude/chemical addiction and behavioural addictions. The next paragraphs buttress these."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="SuBstancE ABusE"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="This is the man that did all these stuffs to me that day."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="BEhavioRal ADDiction"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="This is the man that did all these stuffs to me that day."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="Why BREaking is DiFFicult"></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="People continue to engage in harmful behaviors despite negative consequences because addiction changes the brain's reward system, which increases the desire for the substances or experiences. These changes in the brain also affect impulse control and judgment, which makes quitting that much more challenging.\n\nThough addiction recovery is challenging, addiction is treatable. With supportive resources and the right treatment approach, you can overcome the physical and mental challenges you face in order to recover."
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/brolinkregular"
+                            android:text="STEPs To changE"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/d1"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/d2"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/d3"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/d4"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/d5"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/d6"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="Using this app"
+                            android:textColor="@color/primarycolor2"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="30dp"
+                            android:text="Added to the other ways of breaking from the addiction in question is to track ones daily progress using this app. This creates a better sense of accountability and a better feeking of utmost achievement to the brain"
+                            android:textColor="@color/primarycolor2"></TextView>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
 
         <View
             android:layout_width="match_parent"
