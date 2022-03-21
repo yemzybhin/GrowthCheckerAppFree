@@ -17,15 +17,19 @@ import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.util.Log
+import android.view.FocusFinder
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.concurrent.schedule
 
 class TipsPage : Fragment() {
 
@@ -38,6 +42,9 @@ class TipsPage : Fragment() {
         var view = inflater.inflate(R.layout.fragment_tips_page, container, false)
         var initialimage = view.findViewById<CardView>(R.id.cd_tipsinitial)
 
+        var scrolltotop = view.findViewById<LottieAnimationView>(R.id.scrolltotopview)
+        var scrollView = view.findViewById<NestedScrollView>(R.id.tipspagescroll)
+
         var quotetext = view.findViewById<TextView>(R.id.tv_quote)
         var authourtext = view.findViewById<TextView>(R.id.tv_author)
 
@@ -48,20 +55,19 @@ class TipsPage : Fragment() {
 
         var overview = view.findViewById<CardView>(R.id.cd_overviewcard)
         var addictions = view.findViewById<CardView>(R.id.cd_addictionscard)
-        var aftermath = view.findViewById<CardView>(R.id.cd_aftermathcard)
 
         var t1 = view.findViewById<TextView>(R.id.tv_tips1)
         var t2 = view.findViewById<TextView>(R.id.tv_tips2)
-        var t3 = view.findViewById<TextView>(R.id.tv_tips3)
 
         var image1 = view.findViewById<ImageView>(R.id.iv_tips1)
         var image2 = view.findViewById<ImageView>(R.id.iv_tips2)
-        var image3 = view.findViewById<ImageView>(R.id.iv_tips3)
 
-        var cards = listOf<CardView>(overview, addictions, aftermath)
-        var images = listOf<ImageView>(image1, image2, image3)
-        var texts = listOf<TextView>(t1, t2, t3)
+        var cards = listOf<CardView>(overview, addictions)
+        var images = listOf<ImageView>(image1, image2)
+        var texts = listOf<TextView>(t1, t2)
 
+
+        scrolltotop.visibility = View.GONE
 
         var quotes = AllQuotes()
 
@@ -71,7 +77,7 @@ class TipsPage : Fragment() {
             }
             counter = pushresult1.await()!!
             quotetext.text = AllQuotes()[counter].quote
-            authourtext.text = AllQuotes()[counter].Author
+            authourtext.text ="-${AllQuotes()[counter].Author}"
 
 
             next.setOnClickListener {
@@ -81,14 +87,13 @@ class TipsPage : Fragment() {
                 if (counter > quotes.size-1){
                     counter = 0
                     quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = AllQuotes()[counter].Author
+                    authourtext.text = "-${AllQuotes()[counter].Author}"
                     savedata()
                 }else{
                     quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = AllQuotes()[counter].Author
+                    authourtext.text = "-${AllQuotes()[counter].Author}"
                     savedata()
                 }
-
             }
             back.setOnClickListener {
                 back.clicking()
@@ -123,28 +128,38 @@ class TipsPage : Fragment() {
         overview.setOnClickListener {
             overview.clicking()
             overview.shortvibrate()
-            initialimage.visibility = View.GONE
-            changecolours(cards, images, texts)
-            singlestate(overview,t1, image1 )
-            replacefragment(Overview())
+
+                initialimage.visibility = View.GONE
+                changecolours(cards, images, texts)
+                singlestate(overview,t1, image1 )
+                replacefragment(Overview())
         }
+
+        scrolltotop.setOnClickListener {
+            scrolltotop.clicking()
+            scrolltotop.shortvibrate()
+           scrollView.smoothScrollTo(0,0)
+        }
+
+
+        scrollView.viewTreeObserver.addOnScrollChangedListener {
+             var scrolly = scrollView.scrollY
+
+            if (scrolly > 300){
+                scrolltotop.visibility = View.VISIBLE
+            }else{
+                scrolltotop.visibility = View.GONE
+            }
+        }
+
 
         addictions.setOnClickListener {
             addictions.clicking()
             addictions.shortvibrate()
-            initialimage.visibility = View.GONE
-            changecolours(cards, images, texts)
-            singlestate(addictions,t2, image2 )
-            replacefragment(Addictions())
-        }
-
-        aftermath.setOnClickListener {
-            aftermath.clicking()
-            aftermath.shortvibrate()
-            initialimage.visibility = View.GONE
-            changecolours(cards, images, texts)
-            singlestate(aftermath,t3, image3 )
-            replacefragment(Aftermaths())
+                initialimage.visibility = View.GONE
+                changecolours(cards, images, texts)
+                singlestate(addictions,t2, image2 )
+                replacefragment(Addictions())
         }
 
         return view

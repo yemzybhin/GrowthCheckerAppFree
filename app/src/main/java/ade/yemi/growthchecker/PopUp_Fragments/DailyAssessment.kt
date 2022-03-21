@@ -2,6 +2,7 @@ package ade.yemi.growthchecker.PopUp_Fragments
 
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.AlarmReceiver
+import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.AnalyticsPage
 import android.os.Bundle
@@ -139,6 +140,7 @@ class DailyAssessment : DialogFragment() {
         }
 
 
+
         lifecycleScope.launch {
                 val pushresult1 = async {
                     context?.let { DataStoreManager.getString(it, "Ungoingchallengeadder1") }
@@ -192,9 +194,15 @@ class DailyAssessment : DialogFragment() {
             }
         })
 
+
+        var calendar = Calendar.getInstance()
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
             submit.setOnClickListener {
                 submit.shortvibrate()
                 submit.clicking()
+                val alarmInfo = AlarmInfo(requireContext())
                if (c1 == true && c2 == true && c3==true && c4 ==true){
                    var one = some.id
                    var two = some.ChallengeType
@@ -202,12 +210,14 @@ class DailyAssessment : DialogFragment() {
                    var four = some.Point
                    var total  = score1.text.toString().toInt() + score2.text.toString().toInt() + score3.text.toString().toInt() + score4.text.toString().toInt()
 
+
                    four.add(total.toString())
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
                            context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
+                           alarmInfo.setday(day)
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
                        }
@@ -216,6 +226,7 @@ class DailyAssessment : DialogFragment() {
                    Toast.makeText(requireContext(), "Fill all fields", Toast.LENGTH_SHORT).show()
                }
            }
+        val alarmInfo = AlarmInfo(requireContext())
         finishchal.setOnClickListener {
             finishchal.shortvibrate()
             finishchal.clicking()
@@ -234,6 +245,7 @@ class DailyAssessment : DialogFragment() {
                    context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                    context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", false) }
                    cancelalarm()
+                   alarmInfo.setongoing(false)
                    dismiss()
                    startActivity(Intent(requireContext(), MainActivity::class.java))
                     }

@@ -293,7 +293,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
-                            android:text="This is the man that did all these stuffs to me that day."
+                            android:text="The types of addiction seen with drug use are termed substance abuse or substance dependency. \nIt neither equates to addiction directly but rather, refers to harmful use of substances. \n\nSome substance abuse addictions are:\n1. Alcohol, Tobacco, Opioids (like heroin).\n\n2. Prescription drugs(sedatives, hypnotics, or anxiolytics like sleeping pills and tranquilizers).\n\n3. Cocaine, Cannabis (marijuana), Amphetamines (like methamphetamines, known as meth).\n\n4. Hallucinogens, Inhalants, Phencyclidine (known as PCP or Angel dust) and Other unspecified substances."
                             android:textColor="@color/primarycolor2"></TextView>
 
                     </LinearLayout>
@@ -323,7 +323,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
-                            android:text="This is the man that did all these stuffs to me that day."
+                            android:text="Behavioural addictions are those not involving a substance. \nThis type of addiction can be an impulse control disorder or an addiction identified by an addiction professional. \nBehavioural addictions are controversial and many don't feel they meet the requirement of being an official addiction. \n\nSome behavioural addictions are: \n1. Food (eating)\n\n2. Sex\n\n3. Pornography (attaining, viewing)\n\n4. Masturbation\n\n5. Using computers / the internet\n\n6. Playing video games\n\n7. Cutting\n\n 8. Shopping and so on"
                             android:textColor="@color/primarycolor2"></TextView>
 
                     </LinearLayout>
@@ -435,7 +435,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:layout_marginLeft="15dp"
-                            android:text="Using this app"
+                            android:text="Using this app:"
                             android:textColor="@color/primarycolor2"></TextView>
 
                         <TextView

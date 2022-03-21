@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.NoteCommunicator
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -29,11 +31,11 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         var view = inflater.inflate(R.layout.fragment_notesfragment2, container, false)
         var noteRV = view.findViewById<RecyclerView>(R.id.rv_notesrecycler)
-        var nonotes = view.findViewById<TextView>(R.id.tv_nonotes)
+        var nonotes = view.findViewById<ImageView>(R.id.nonotescheck)
+
+
         noteRV.layoutManager = LinearLayoutManager(requireContext())
 
 
@@ -43,11 +45,13 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
         viewmodal.allNotes.observe( requireActivity(), Observer {
             list ->
             list?.let {
-                if (it.size==0){
-                    nonotes.text = "No note, add new note below"
+                if (it.size != 0){
+                    nonotes.visibility = View.GONE
+
                 }else{
-                    nonotes.text = ""
+                    nonotes.visibility = View.VISIBLE
                 }
+
                     noteRvAdapter.updateList(it)
             }
         })
@@ -62,7 +66,7 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
 
     override fun onNoteClick(note: Note){
         communicator = activity as NoteCommunicator
-        communicator.passnotedetails(note.id, note.Notetitle, note.Notecontent)
+        communicator.passnotedetails(note.id, note.Notetitle, note.Notecontent,note.Notetype ,note.Noteuse )
     }
 
 }

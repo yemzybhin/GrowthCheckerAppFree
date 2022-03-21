@@ -2,6 +2,7 @@ package ade.yemi.growthchecker.Fragments.Pages
 import ade.yemi.growthchecker.Activities.Activity2
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.AlarmReceiver
+import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.DataStoreManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,8 +16,10 @@ import ade.yemi.growthchecker.Utilities.shortvibrate
 import ade.yemi.roomdatabseapp.Data.Challenge
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.app.*
+import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -43,6 +46,7 @@ class Startchallenge : Fragment() {
     private lateinit var calendar: Calendar
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
+
 
     private val Cadder1:EditText by lazy {
         requireView().findViewById(R.id.et_challengeadder1)
@@ -71,12 +75,12 @@ class Startchallenge : Fragment() {
 
         val challenge = arguments?.getString("challengeviewchallenge")
             imageset(challenge!!, image)
-
             start.setOnClickListener {
                 start.clicking()
                 start.shortvibrate()
-
+                val alarmInfo = AlarmInfo(requireContext())
                 if (checkempty(Cadder1, Cadder2, Cadder3) == true){
+                    Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_SHORT).show()
                     picker = MaterialTimePicker.Builder()
                             .setTimeFormat(TimeFormat.CLOCK_12H)
                             .setHour(12)
@@ -94,6 +98,8 @@ class Startchallenge : Fragment() {
                         calendar[Calendar.MINUTE] = picker.minute
                         calendar[Calendar.SECOND] = 0
                         calendar[Calendar.MILLISECOND] = 0
+
+                        alarmInfo.SaveAlarmInfo(picker.hour, picker.minute)
                         confirmpopup(challenge)
                     }
 //                        confirmpopup(challenge)
@@ -149,6 +155,7 @@ class Startchallenge : Fragment() {
             popup.dismiss()
         }
 
+        val alarmInfo = AlarmInfo(requireContext())
         start.setOnClickListener {
             start.clicking()
             start.shortvibrate()
@@ -158,8 +165,9 @@ class Startchallenge : Fragment() {
                 setalarm()
                 challengeViewModel.insertChallengeInfo(challenge)
                 Toast.makeText(requireContext(), "$string Challenge Started Successfully\nPlease wait for first assessment", Toast.LENGTH_LONG).show()
-                assessmentnotification = true
+                assessmentnotification = false
                 ungoing = true
+                alarmInfo.setongoing(true)
                 adder1 = Cadder1.text.toString()
                 adder2 = Cadder2.text.toString()
                 adder3 = Cadder3.text.toString()
@@ -198,9 +206,9 @@ class Startchallenge : Fragment() {
     private fun setalarm() {
         alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
         val intent = Intent(requireContext(), AlarmReceiver::class.java)
+        intent.action = "normal.alarm.setting"
 
         pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
-
         alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY, pendingIntent

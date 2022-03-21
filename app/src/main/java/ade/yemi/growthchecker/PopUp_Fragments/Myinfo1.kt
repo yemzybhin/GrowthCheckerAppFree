@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class Myinfo1 : DialogFragment() {
     private var name = "Anonymous"
-    private var age = ""
+    private var age = 0
     private var picnum = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +42,7 @@ class Myinfo1 : DialogFragment() {
                 context?.let { DataStoreManager.getString(it, "name") }
             }
             val pushresult2 = async {
-                context?.let { DataStoreManager.getString(it, "ageee") }
+                context?.let { DataStoreManager.getInt(it, "ageee") }
             }
             val pushresult3 = async {
                 context?.let { DataStoreManager.getInt(it, "picnum") }
@@ -54,7 +54,7 @@ class Myinfo1 : DialogFragment() {
 
             title.text = "Hi, $name"
             namee.text = name
-            agee.text = age
+            agee.text = age.toString()
             setimage(image, picnum)
             }
             edit.setOnClickListener {

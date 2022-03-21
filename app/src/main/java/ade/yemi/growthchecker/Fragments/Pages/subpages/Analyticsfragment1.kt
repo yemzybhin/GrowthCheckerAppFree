@@ -45,13 +45,10 @@ class Analyticsfragment1 : Fragment() {
         var column2 = view.findViewById<TextView>(R.id.tv_analyticstabcolumn2)
         var column3 = view.findViewById<TextView>(R.id.tv_analyticstabcolumn3)
         var handlertextt = view.findViewById<TextView>(R.id.tv_nochartdata11)
+        var currenttext = view.findViewById<TextView>(R.id.tv_analyticscurrentchallenge)
 
-        var carr = view.findViewById<CardView>(R.id.analytics1careed)
-        var carr2 = view.findViewById<CardView>(R.id.cd_analytics1nmae)
         var currentimage = view.findViewById<ImageView>(R.id.iv_analyticscurrentimage)
 
-        carr.zoom_in()
-        carr2.zoom_in()
 
         lifecycleScope.launch {
             val pushresult1 = async {
@@ -77,6 +74,7 @@ class Analyticsfragment1 : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
             setimage(it.first().Days, currentimage)
+            currenttext.text = it.first().ChallengeType
             var details = it.first().Point
             var sub = mutableListOf("0")
 

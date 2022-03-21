@@ -33,6 +33,7 @@ class ChangeImages : DialogFragment() {
                 context?.let { DataStoreManager.getInt(it, "picnum") }}
 
             var picnum = pushresult3.await()!!
+            popup.tv_imagenum.text = picnum.toString()
         setimage(popup.image17, picnum)}
 
         var profilelist = listOf(

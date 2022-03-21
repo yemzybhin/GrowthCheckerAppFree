@@ -3,7 +3,10 @@ package ade.yemi.growthchecker.Adapters
 import ade.yemi.growthchecker.Data.NoteData.Note
 import ade.yemi.growthchecker.Fragments.Pages.subpages.Notesfragment2
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
+import ade.yemi.growthchecker.Utilities.shortvibrate
+import ade.yemi.growthchecker.Utilities.typecolour
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +24,10 @@ class NoteRvAdapter(
         val noteTv = itemView.findViewById<TextView>(R.id.tv_notetitle)
         val notecontent = itemView.findViewById<TextView>(R.id.tv_notecontent)
         val deletenote = itemView.findViewById<CardView>(R.id.cd_deletenote)
+
+        val use = itemView.findViewById<TextView>(R.id.tv_usabilitysee)
+        val typek = itemView.findViewById<TextView>(R.id.tv_typetoput)
+        val colr = itemView.findViewById<CardView>(R.id.typecolour)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
@@ -31,11 +38,17 @@ class NoteRvAdapter(
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         holder.noteTv.setText(allNotes.get(position).Notetitle)
         holder.notecontent.setText(allNotes.get(position).Notecontent)
+        holder.typek.text = "Category: ${allNotes.get(position).Notetype}"
+        holder.use.text = "${allNotes.get(position).Noteuse}%"
+        typecolour(holder.colr, allNotes.get(position).Notetype)
 
         holder.deletenote.setOnSingleClickListener{
+            holder.deletenote.clicking()
+            holder.deletenote.shortvibrate()
             noteClickDeleteInterface.onDeleteIconClick(allNotes.get(position))
         }
         holder.itemView.setOnSingleClickListener{
+            holder.itemView.shortvibrate()
             noteClickInterface.onNoteClick(allNotes.get(position))
         }
     }

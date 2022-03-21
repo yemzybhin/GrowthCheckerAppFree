@@ -43,7 +43,7 @@ class Myinfo2 : DialogFragment() {
                 context?.let { DataStoreManager.getString(it, "name") }
             }
             val pushresult2 = async {
-                context?.let { DataStoreManager.getString(it, "ageee") }
+                context?.let { DataStoreManager.getInt(it, "ageee") }
             }
             val pushresult3 = async {
                 context?.let { DataStoreManager.getInt(it, "picnum") }
@@ -56,7 +56,7 @@ class Myinfo2 : DialogFragment() {
             title.text = "Hi, $name"
         setimage(image, picnum)
         namee.setText(name)
-        agee.setText(age)
+        agee.setText(age.toString())
 
         save.setOnClickListener {
             save.clicking()
@@ -74,10 +74,10 @@ class Myinfo2 : DialogFragment() {
                         )
                     }
                     context?.let {
-                        DataStoreManager.saveString(
+                        DataStoreManager.saveInt(
                             it,
                             "ageee",
-                            agee.text.toString()
+                            agee.text.toString().toInt()
                         )
                     }
                 }
@@ -87,6 +87,27 @@ class Myinfo2 : DialogFragment() {
             }
         }
             changeimage.setOnClickListener {
+                if (namee.text.isEmpty() || agee.text.isEmpty()) {
+                    Toast.makeText(requireContext(), "No detail entered", Toast.LENGTH_SHORT)
+                            .show()
+                } else {
+                    lifecycleScope.launch {
+                        context?.let {
+                            DataStoreManager.saveString(
+                                    it,
+                                    "name",
+                                    namee.text.toString()
+                            )
+                        }
+                        context?.let {
+                            DataStoreManager.saveInt(
+                                    it,
+                                    "ageee",
+                                    agee.text.toString().toInt()
+                            )
+                        }
+                    }
+                }
                 var dialog = ChangeImages()
                 (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
                 dismiss()

@@ -50,7 +50,7 @@ class Menu : DialogFragment(){
             val pushresult1 = async {
                 context?.let { DataStoreManager.getString(it, "name") }}
             val pushresult2 = async {
-                context?.let { DataStoreManager.getString(it, "ageee") }}
+                context?.let { DataStoreManager.getInt(it, "ageee") }}
             val pushresult3 = async {
                 context?.let { DataStoreManager.getInt(it, "picnum") }}
             val pushresult4 = async {
@@ -65,11 +65,10 @@ class Menu : DialogFragment(){
 
             when{
                 name.length < 1 -> name = "Anonymous"
-                age.isEmpty()-> age = "Age not set"
             }
             setimage(image, picnum)
             menuname.text = name
-            menuage.text = age
+            menuage.text = age.toString()
 
             viewModel = ViewModelProviders.of(this@Menu).get(ChallengeViewModel::class.java)
             viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {

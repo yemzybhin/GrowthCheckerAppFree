@@ -6,27 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.Pages.NotesPage">
 
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="none">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
             android:orientation="vertical">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fr_NotesFrag1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"></androidx.fragment.app.FragmentContainerView>
+
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fr_NotesFrag2"
                 android:layout_width="match_parent"
@@ -43,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:elevation="10dp"
-        app:cardBackgroundColor="@color/primarycolor2"
+        app:cardBackgroundColor="@color/primarycolor1"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -54,34 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="Add new note"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp"></TextView>
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/primarycolor1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="Daily Routine and Notes"
-            android:textAllCaps="true"
+            android:text="Add note"
+            android:fontFamily="@font/productsansregular"
             android:textColor="@color/primarycolor2"
-            android:textSize="16sp"
-            android:textStyle="bold"></TextView>
+            android:textSize="16sp"></TextView>
 
     </androidx.cardview.widget.CardView>
 

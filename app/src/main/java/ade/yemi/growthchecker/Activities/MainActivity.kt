@@ -292,16 +292,18 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             dialogFragment.show(supportFragmentManager, "Assessmentdialog")
     }
 
-    override fun passnotedetails(id: Int, title: String, content: String) {
+    override fun passnotedetails(id: Int, title: String, content: String, notetype: String, noteuse: Int) {
         var dialog = Popup_AddNote()
         val bundle = Bundle()
         bundle.putString("notetype", "Edit")
         bundle.putInt("id", id)
         bundle.putString("title", title)
         bundle.putString("content", content)
+        bundle.putString("notetype1", notetype)
+        bundle.putInt("noteuse", noteuse)
         dialog.arguments = bundle
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
-        dialog.show(supportFragmentManager, "Menudialog")
+        dialog.show(supportFragmentManager, "fefef")
     }
 
 
