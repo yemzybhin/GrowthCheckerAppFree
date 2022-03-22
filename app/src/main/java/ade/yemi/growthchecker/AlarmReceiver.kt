@@ -35,7 +35,6 @@ class AlarmReceiver : BroadcastReceiver() {
     private lateinit var c: Calendar
     override fun onReceive(context: Context?, intent: Intent?) {
 
-
         if (intent!!.action.equals("normal.alarm.setting")){
             Toast.makeText(context, "Time for new assessment", Toast.LENGTH_SHORT).show()
 

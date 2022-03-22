@@ -1,5 +1,8 @@
 package ade.yemi.growthchecker.Fragments.Pages
 
+import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.Adapters.getScreenShotFromView
+import ade.yemi.growthchecker.Adapters.saveMediaToStorage
 import ade.yemi.growthchecker.Data.AllQuotes
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.subpages.*
@@ -11,12 +14,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
-import ade.yemi.growthchecker.Utilities.clicking
-import ade.yemi.growthchecker.Utilities.setOnSingleClickListener
-import ade.yemi.growthchecker.Utilities.shortvibrate
+import ade.yemi.growthchecker.Utilities.*
+import ade.yemi.roomdatabseapp.Data.Challenge
+import android.app.Dialog
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.FocusFinder
 import android.widget.*
@@ -28,6 +40,10 @@ import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+import java.lang.Exception
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -51,6 +67,7 @@ class TipsPage : Fragment() {
         var back = view.findViewById<CardView>(R.id.cd_quoteback)
         var next = view.findViewById<CardView>(R.id.cd_quoteNext)
         var share = view.findViewById<CardView>(R.id.cd_sharequote)
+        var shareimae = view.findViewById<CardView>(R.id.cd_sharequoteimage)
 
 
         var overview = view.findViewById<CardView>(R.id.cd_overviewcard)
@@ -65,6 +82,7 @@ class TipsPage : Fragment() {
         var cards = listOf<CardView>(overview, addictions)
         var images = listOf<ImageView>(image1, image2)
         var texts = listOf<TextView>(t1, t2)
+
 
 
         scrolltotop.visibility = View.GONE
@@ -123,6 +141,12 @@ class TipsPage : Fragment() {
                 shareintent.putExtra(Intent.EXTRA_TEXT,word )
                 startActivity(Intent.createChooser(shareintent, "Share Quote Via"))
             }
+
+            shareimae.setOnClickListener {
+                shareimae.clicking()
+                shareimae.shortvibrate()
+                shareimage(AllQuotes()[counter].quote, AllQuotes()[counter].Author)
+            }
         }
 
         overview.setOnClickListener {
@@ -164,7 +188,78 @@ class TipsPage : Fragment() {
 
         return view
     }
+    private fun shareimage(quote1: String, author1: String){
+        var popup = Dialog(requireContext())
+        popup.setCancelable(true)
+        popup.setContentView(R.layout.sharequotee)
+        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popup.show()
 
+        var quote = popup.findViewById<TextView>(R.id.quoteshare)
+        var author = popup.findViewById<TextView>(R.id.authorshare)
+        var share = popup.findViewById<Button>(R.id.quotesharebutton)
+        var cardtoshare = popup.findViewById<CardView>(R.id.cardquotetoshare)
+        var cancel = popup.findViewById<CardView>(R.id.quotecancel)
+
+        quote.text = quote1
+        author.text = "-$author1"
+        cancel.setOnClickListener {
+            cancel.clicking()
+            cancel.shortvibrate()
+            popup.dismiss()
+        }
+
+        share.setOnClickListener {
+            share.clicking()
+            share.shortvibrate()
+            val bitmap = getScreenShotFromV(cardtoshare)
+            if (bitmap != null){
+                saveMediaToStore(bitmap)
+            }
+        }
+
+    }
+
+    private fun saveMediaToStore(bitmap: Bitmap) {
+
+        val filename = "GrowthcheckerApp-quote-${System.currentTimeMillis()}.jpg"
+        var fos: OutputStream? = null
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            MainActivity().contentResolver?.also { resolver ->
+
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                fos = imageUri?.let {
+                    resolver.openOutputStream(it)
+                }
+            }
+        }else{
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            Toast.makeText(requireContext(), "Saved successfully\nImage available after device restarts.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun getScreenShotFromV(v : View): Bitmap? {
+        var screenshot: Bitmap? = null
+        try {
+            screenshot = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(screenshot)
+            v.draw(canvas)
+        }catch (e: Exception){
+            Toast.makeText(requireContext(), "Could not save. Enable permission", Toast.LENGTH_SHORT).show()
+        }
+        return screenshot
+    }
 
     private fun changecolours(cards: List<CardView>, images: List<ImageView>, texts: List<TextView> ){
         for (i in cards){

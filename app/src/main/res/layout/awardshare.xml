@@ -351,10 +351,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" GROWTH CHECKER APP"
+                            android:text=" GROWTH CHECKER APP: "
                             android:textSize="10sp"
                             android:fontFamily="@font/productsansbold"
                             android:textColor="@color/primarycolor1"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"></TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Break Addictions"
+                            android:textSize="10sp"
+                            android:textStyle="italic"
+                            android:fontFamily="@font/productsansbold"
+                            android:textColor="@color/primary5"
                             android:layout_marginTop="2dp"
                             android:layout_gravity="center"></TextView>
 
