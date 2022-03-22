@@ -263,7 +263,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
-                            android:text="Essentially, there are majorly two types of Addictions. These are Substance abude/chemical addiction and behavioural addictions. The next paragraphs buttress these."
+                            android:text="Essentially, there are majorly two types of Addictions. These are Substance abuse/chemical addiction and behavioural addictions. The next paragraphs buttress these."
                             android:textColor="@color/primarycolor2"></TextView>
 
                     </LinearLayout>

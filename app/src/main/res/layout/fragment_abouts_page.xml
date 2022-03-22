@@ -26,21 +26,23 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:fontFamily="@font/productsansregular"
+                android:fontFamily="@font/productsansbold"
                 android:text="SUMMARY"
                 android:textColor="@color/primarycolor2"
-                android:textSize="14sp"
-                android:textStyle="bold|italic"></TextView>
+                android:textSize="16sp"
+                android:textStyle="italic"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/productsansregular"
                 android:lineSpacingExtra="4dp"
                 android:text="@string/summary"
                 android:textColor="@color/primarycolor2"
-                android:textSize="13sp"></TextView>
+                android:textSize="15sp"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,21 +50,23 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp"
-                android:fontFamily="@font/productsansregular"
+                android:fontFamily="@font/productsansbold"
                 android:text="ABOUT US"
                 android:textColor="@color/primarycolor2"
-                android:textSize="14sp"
-                android:textStyle="bold|italic"></TextView>
+                android:textSize="16sp"
+                android:textStyle="italic"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/productsansregular"
                 android:lineSpacingExtra="4dp"
                 android:text="@string/aboutus"
                 android:textColor="@color/primarycolor2"
-                android:textSize="13sp"></TextView>
+                android:textSize="15sp"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -70,11 +74,11 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp"
-                android:fontFamily="@font/productsansregular"
+                android:fontFamily="@font/productsansbold"
                 android:text="MORE APPS FROM US"
                 android:textColor="@color/primarycolor2"
-                android:textSize="14sp"
-                android:textStyle="bold|italic"></TextView>
+                android:textSize="16sp"
+                android:textStyle="italic"></TextView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -137,9 +141,7 @@
                     android:text="Rate Us"
                     android:textColor="@color/primarycolor2"
                     app:cornerRadius="20dp"></Button>
-
             </LinearLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,8 +153,6 @@
                 android:textColor="@color/primarycolor2"></TextView>
         </LinearLayout>
     </ScrollView>
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="match_parent"
@@ -162,8 +162,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,7 +172,6 @@
             android:textColor="@color/primarycolor2"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
@@ -182,8 +179,6 @@
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:background="@color/white"></View>
-
-
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

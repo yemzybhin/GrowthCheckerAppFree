@@ -107,9 +107,9 @@ class Myinfo2 : DialogFragment() {
                             )
                         }
                     }
+                    var dialog = ChangeImages()
+                    (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
                 }
-                var dialog = ChangeImages()
-                (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
                 dismiss()
             }
         }

@@ -11,7 +11,10 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.renderscript.Int2
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView

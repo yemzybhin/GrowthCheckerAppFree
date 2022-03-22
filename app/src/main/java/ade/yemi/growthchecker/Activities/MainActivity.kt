@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
 
         replacefragment(Homepage())
 
@@ -75,6 +77,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 //        var incomming = intent?.getStringExtra("assessmentnotification11")
 //        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
 
+
+
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         lifecycleScope.launch {
             val pushresult = async {
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             var ungoinchallenge = pushresult.await()
             var ungoingchallenge = ungoinchallenge
             var assessmentnotification = false
+
 
 
 
@@ -201,8 +206,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
         analyticscard.setOnSingleClickListener {
             analyticscard.shortvibrate()
-            analyticsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
+            analyticsview.visibility = View.VISIBLE
             replacefragment(AnalyticsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
             setpageclickimage(listOf(homeimage, notesimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.note2, R.drawable.achievement2, R.drawable.tips2), analyticsimage, R.drawable.analytics1)
@@ -210,8 +215,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
         achievementscard.setOnSingleClickListener {
             achievementscard.shortvibrate()
-            achievementsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
+            achievementsview.visibility = View.VISIBLE
+
             replacefragment(AchievementsPage())
             UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
             setpageclickimage(listOf(homeimage, analyticsimage, notesimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.note2, R.drawable.tips2), achievementsimage, R.drawable.achievement1)
@@ -220,8 +226,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
         notescard.setOnSingleClickListener {
             notescard.shortvibrate()
-            notesview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
+            notesview.visibility = View.VISIBLE
             replacefragment(NotesPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note1)
@@ -229,8 +235,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
         tipscard.setOnSingleClickListener {
             tipscard.shortvibrate()
-            tipsview.visibility = View.VISIBLE
             challengesscrollview.visibility = View.GONE
+            tipsview.visibility = View.VISIBLE
             replacefragment(TipsPage())
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
@@ -254,6 +260,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     internal fun replacefragment(fragment:Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
         fragmentTransaction.replace(R.id.fg_home, fragment)
         fragmentTransaction.commit()
     }
@@ -262,6 +269,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         challengesscrollview.visibility = View.GONE
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
         fragmentTransaction.replace(R.id.fg_home, fragment)
         fragmentTransaction.commit()
         UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
@@ -271,6 +279,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         challengesscrollview.visibility = View.GONE
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
         fragmentTransaction.replace(R.id.fg_home, fragment)
         fragmentTransaction.commit()
         UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
@@ -304,29 +313,5 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         dialog.arguments = bundle
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
         dialog.show(supportFragmentManager, "fefef")
-    }
-
-
-//    private fun showMenupopup( ){
-//        var popup = Dialog(this)
-//        popup.setCancelable(true)
-//        popup.setContentView(R.layout.fragment_menu)
-//        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        popup.show()
-//
-//        var cancel = popup.findViewById<CardView>(R.id.cd_homemenucancel)
-//        cancel.setOnClickListener {
-//            cancel.clicking()
-//            cancel.shortvibrate()
-//            Timer().schedule(100) {
-//            }
-//            popup.dismiss()
-//        }
-//    }
-
-     fun savedata(boolean: Boolean){
-        lifecycleScope.launch {
-            DataStoreManager.saveBoolean(this@MainActivity, "assessmentnotification", boolean)
-        }
     }
 }

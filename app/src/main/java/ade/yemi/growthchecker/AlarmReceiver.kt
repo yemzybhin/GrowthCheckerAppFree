@@ -69,7 +69,7 @@ class AlarmReceiver : BroadcastReceiver() {
             var CurrentDay = c.get(Calendar.DAY_OF_MONTH)
 
             if (ongoing == true && day != CurrentDay) {
-                Toast.makeText(context, "Recent ass: $day Today:$CurrentDay false", Toast.LENGTH_SHORT).show()
+          //      Toast.makeText(context, "Recent ass: $day Today:$CurrentDay false", Toast.LENGTH_SHORT).show()
                 calendar = Calendar.getInstance()
                 calendar[Calendar.HOUR_OF_DAY] = hour
                 calendar[Calendar.MINUTE] = minute
@@ -86,7 +86,7 @@ class AlarmReceiver : BroadcastReceiver() {
                         AlarmManager.INTERVAL_DAY, pendingIntent)
             }
             else{
-                Toast.makeText(context, "Recent ass: $day Today:$CurrentDay true", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Recent ass: $day Today:$CurrentDay true", Toast.LENGTH_SHORT).show()
             }
         }
     }

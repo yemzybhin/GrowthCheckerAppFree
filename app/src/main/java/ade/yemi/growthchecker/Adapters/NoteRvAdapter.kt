@@ -38,7 +38,7 @@ class NoteRvAdapter(
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         holder.noteTv.setText(allNotes.get(position).Notetitle)
         holder.notecontent.setText(allNotes.get(position).Notecontent)
-        holder.typek.text = "Category: ${allNotes.get(position).Notetype}"
+        holder.typek.text = "Category: \n${allNotes.get(position).Notetype}"
         holder.use.text = "${allNotes.get(position).Noteuse}%"
         typecolour(holder.colr, allNotes.get(position).Notetype)
 

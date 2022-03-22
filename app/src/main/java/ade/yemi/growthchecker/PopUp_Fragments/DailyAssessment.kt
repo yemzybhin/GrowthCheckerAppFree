@@ -215,7 +215,7 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            alarmInfo.setday(day)
                            dismiss()

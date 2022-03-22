@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12dp"
-                    android:text="Change Image"
+                    android:text="Change Avatar"
                     android:layout_gravity="center"
                     android:textStyle="italic|bold"
                     android:textColor="@color/primary5"></TextView>
