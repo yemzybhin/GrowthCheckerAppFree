@@ -38,14 +38,11 @@ class AlarmReceiver : BroadcastReceiver() {
         if (intent!!.action.equals("normal.alarm.setting")){
             Toast.makeText(context, "Time for new assessment", Toast.LENGTH_SHORT).show()
 
-
             var i = Intent(context, MainActivity::class.java)
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             i.putExtra("toacess", true)
             intent.putExtra("firstopen", true)
             context?.startActivity(i)
-
-
 
             var j = Intent(context, MainActivity::class.java)
             var pendingIntent = PendingIntent.getActivity(context, 0, j, 0)

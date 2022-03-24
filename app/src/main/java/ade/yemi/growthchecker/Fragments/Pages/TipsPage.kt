@@ -127,9 +127,7 @@ class TipsPage : Fragment() {
                     authourtext.text = "-${AllQuotes()[counter].author}"
                     savedata()
                 }
-
             }
-
             share.setOnClickListener {
                 share.clicking()
                 share.shortvibrate()
@@ -141,31 +139,25 @@ class TipsPage : Fragment() {
                 shareintent.putExtra(Intent.EXTRA_TEXT,word )
                 startActivity(Intent.createChooser(shareintent, "Share Quote Via"))
             }
-
             shareimae.setOnClickListener {
                 shareimae.clicking()
                 shareimae.shortvibrate()
                 shareimage(AllQuotes()[counter].quote, AllQuotes()[counter].author)
             }
         }
-
         overview.setOnClickListener {
             overview.clicking()
             overview.shortvibrate()
-
                 initialimage.visibility = View.GONE
                 changecolours(cards, images, texts)
                 singlestate(overview,t1, image1 )
                 replacefragment(Overview())
         }
-
         scrolltotop.setOnClickListener {
             scrolltotop.clicking()
             scrolltotop.shortvibrate()
            scrollView.smoothScrollTo(0,0)
         }
-
-
         scrollView.viewTreeObserver.addOnScrollChangedListener {
              var scrolly = scrollView.scrollY
 
@@ -175,8 +167,6 @@ class TipsPage : Fragment() {
                 scrolltotop.visibility = View.GONE
             }
         }
-
-
         addictions.setOnClickListener {
             addictions.clicking()
             addictions.shortvibrate()
@@ -185,7 +175,6 @@ class TipsPage : Fragment() {
                 singlestate(addictions,t2, image2 )
                 replacefragment(Addictions())
         }
-
         return view
     }
     private fun shareimage(quote1: String, author1: String){
@@ -194,13 +183,11 @@ class TipsPage : Fragment() {
         popup.setContentView(R.layout.sharequotee)
         popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         popup.show()
-
         var quote = popup.findViewById<TextView>(R.id.quoteshare)
         var author = popup.findViewById<TextView>(R.id.authorshare)
         var share = popup.findViewById<Button>(R.id.quotesharebutton)
         var cardtoshare = popup.findViewById<CardView>(R.id.cardquotetoshare)
         var cancel = popup.findViewById<CardView>(R.id.quotecancel)
-
         quote.text = "\"$quote1\""
         author.text = "-$author1"
         cancel.setOnClickListener {
@@ -208,7 +195,6 @@ class TipsPage : Fragment() {
             cancel.shortvibrate()
             popup.dismiss()
         }
-
         share.setOnClickListener {
             share.clicking()
             share.shortvibrate()
@@ -219,15 +205,11 @@ class TipsPage : Fragment() {
         }
 
     }
-
     private fun saveMediaToStore(bitmap: Bitmap) {
-
         val filename = "GrowthcheckerApp-quote-${System.currentTimeMillis()}.jpg"
         var fos: OutputStream? = null
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             MainActivity().contentResolver?.also { resolver ->
-
                 val contentValues = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
                     put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
@@ -248,7 +230,6 @@ class TipsPage : Fragment() {
             Toast.makeText(requireContext(), "Saved successfully\nImage available after device restarts.", Toast.LENGTH_LONG).show()
         }
     }
-
     private fun getScreenShotFromV(v : View): Bitmap? {
         var screenshot: Bitmap? = null
         try {
@@ -256,11 +237,10 @@ class TipsPage : Fragment() {
             val canvas = Canvas(screenshot)
             v.draw(canvas)
         }catch (e: Exception){
-            Toast.makeText(requireContext(), "Could not save. Enable permission", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Could not save. Enable storage permission", Toast.LENGTH_SHORT).show()
         }
         return screenshot
     }
-
     private fun changecolours(cards: List<CardView>, images: List<ImageView>, texts: List<TextView> ){
         for (i in cards){
             i.setCardBackgroundColor(resources.getColor(R.color.white))
@@ -272,21 +252,17 @@ class TipsPage : Fragment() {
             i.setTextColor(ContextCompat.getColor(requireContext(), R.color.primarycolor2))
         }
     }
-
     private fun singlestate(card: CardView, text:TextView, image: ImageView){
         card.setCardBackgroundColor(resources.getColor(R.color.primarycolor2))
         text.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
         image.setImageResource(R.drawable.arrow6)
     }
-
-
     private fun replacefragment(fragment: Fragment){
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fr_tipspagefrag, fragment)
             fragmentTransaction.commit()
     }
-
     private fun savedata(){
         lifecycleScope.launch {
             context?.let { DataStoreManager.saveInt(it, "currentquote", counter) }

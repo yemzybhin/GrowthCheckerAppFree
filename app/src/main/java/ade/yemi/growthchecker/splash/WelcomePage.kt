@@ -4,6 +4,8 @@ import ade.yemi.growthchecker.Adapters.WelcomeAdapter
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.R
+import ade.yemi.growthchecker.Utilities.clicking
+import ade.yemi.growthchecker.Utilities.shortvibrate
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -44,6 +46,7 @@ class WelcomePage : AppCompatActivity() {
         intent.putExtra("firstopen", true)
         statusBarTransparent()
         btn_next.setOnClickListener {
+            btn_next.shortvibrate()
             val currentpage: Int = viewpager.currentItem + 1
             if (currentpage < layouts.size){
                 viewpager.currentItem = currentpage
@@ -56,6 +59,7 @@ class WelcomePage : AppCompatActivity() {
             }
         }
         btn_skip.setOnClickListener {
+            btn_skip.shortvibrate()
             NotFirsttime2 = 1
             savedata()
             startActivity(intent)

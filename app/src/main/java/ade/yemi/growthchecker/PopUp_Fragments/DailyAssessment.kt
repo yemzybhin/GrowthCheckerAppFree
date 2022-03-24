@@ -171,19 +171,16 @@ class DailyAssessment : DialogFragment() {
 
             challengeimage(days, imae)
             challengeteext.text = challnegtype
-
             partiday.text = "Day ${it.first().Point.size + 1}"
             var toset1 = it.first().Point.size + 1
             var toset2 = 100/(it.first().Days.toDouble())
             var toset = toset1 * toset2
             progresspercent.text = "${toset.toInt()}%"
-
             val mParams = viewcol.layoutParams as FrameLayout.LayoutParams
             mParams.apply {
                 width = (toset * 1.34).toInt()
                 height *= 1
             }
-
             viewcol.layoutParams = mParams
             if (  (point.size + 1 ) >= days.toInt()  ){
                 submit.visibility = View.GONE
@@ -193,13 +190,9 @@ class DailyAssessment : DialogFragment() {
                 finishchal.visibility = View.GONE
             }
         })
-
-
         var calendar = Calendar.getInstance()
         var day = calendar.get(Calendar.DAY_OF_MONTH)
-
-
-            submit.setOnClickListener {
+        submit.setOnClickListener {
                 submit.shortvibrate()
                 submit.clicking()
                 val alarmInfo = AlarmInfo(requireContext())
@@ -215,7 +208,7 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", true) }
+                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            alarmInfo.setday(day)
                            dismiss()

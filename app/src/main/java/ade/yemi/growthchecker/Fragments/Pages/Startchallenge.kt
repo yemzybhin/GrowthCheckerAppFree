@@ -76,11 +76,11 @@ class Startchallenge : Fragment() {
         val challenge = arguments?.getString("challengeviewchallenge")
             imageset(challenge!!, image)
             start.setOnClickListener {
-                start.clicking()
+                Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_SHORT).show()
                 start.shortvibrate()
                 val alarmInfo = AlarmInfo(requireContext())
                 if (checkempty(Cadder1, Cadder2, Cadder3) == true){
-                    Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_SHORT).show()
+
                     picker = MaterialTimePicker.Builder()
                             .setTimeFormat(TimeFormat.CLOCK_12H)
                             .setHour(12)
