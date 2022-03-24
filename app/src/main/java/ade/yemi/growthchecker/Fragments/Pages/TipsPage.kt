@@ -94,8 +94,8 @@ class TipsPage : Fragment() {
                 context?.let { DataStoreManager.getInt(it, "currentquote") }
             }
             counter = pushresult1.await()!!
-            quotetext.text = AllQuotes()[counter].quote
-            authourtext.text ="-${AllQuotes()[counter].Author}"
+            quotetext.text = "\"${AllQuotes()[counter].quote}\""
+            authourtext.text ="-${AllQuotes()[counter].author}"
 
 
             next.setOnClickListener {
@@ -104,12 +104,12 @@ class TipsPage : Fragment() {
                 counter++
                 if (counter > quotes.size-1){
                     counter = 0
-                    quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = "-${AllQuotes()[counter].Author}"
+                    quotetext.text = "\"${AllQuotes()[counter].quote}\""
+                    authourtext.text = "-${AllQuotes()[counter].author}"
                     savedata()
                 }else{
-                    quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = "-${AllQuotes()[counter].Author}"
+                    quotetext.text = "\"${AllQuotes()[counter].quote}\""
+                    authourtext.text = "-${AllQuotes()[counter].author}"
                     savedata()
                 }
             }
@@ -119,12 +119,12 @@ class TipsPage : Fragment() {
                 counter--
                 if (counter < 0){
                     counter = quotes.size-1
-                    quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = AllQuotes()[counter].Author
+                    quotetext.text = "\"${AllQuotes()[counter].quote}\""
+                    authourtext.text = "-${AllQuotes()[counter].author}"
                     savedata()
                 }else{
-                    quotetext.text = AllQuotes()[counter].quote
-                    authourtext.text = AllQuotes()[counter].Author
+                    quotetext.text = "\"${AllQuotes()[counter].quote}\""
+                    authourtext.text = "-${AllQuotes()[counter].author}"
                     savedata()
                 }
 
@@ -145,7 +145,7 @@ class TipsPage : Fragment() {
             shareimae.setOnClickListener {
                 shareimae.clicking()
                 shareimae.shortvibrate()
-                shareimage(AllQuotes()[counter].quote, AllQuotes()[counter].Author)
+                shareimage(AllQuotes()[counter].quote, AllQuotes()[counter].author)
             }
         }
 
@@ -201,7 +201,7 @@ class TipsPage : Fragment() {
         var cardtoshare = popup.findViewById<CardView>(R.id.cardquotetoshare)
         var cancel = popup.findViewById<CardView>(R.id.quotecancel)
 
-        quote.text = quote1
+        quote.text = "\"$quote1\""
         author.text = "-$author1"
         cancel.setOnClickListener {
             cancel.clicking()

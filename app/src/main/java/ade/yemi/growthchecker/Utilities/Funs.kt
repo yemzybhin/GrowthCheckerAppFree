@@ -68,9 +68,10 @@ fun thecomments(int: Int): Commenntings{
     var solution = ""
     var encourage = ""
     when{
-        int < -100 -> {state = "Your cumulative point is slightly too negative"
-                        solution = "Is there a noticeable cause or reason for this? If so, put down this cause on notes at the notes page. Constantly check your notes for better reference on what to do and what to avoid."
-                        encourage = "There are always setbacks, no one is perfect. Addictions can always be broken though regardless of how deep one is into it. Don't mind the state of the graph and your cumulative points, you can still raise your points and ultimately get fulfilled"}
+        int < -100 -> {
+            state = "Your cumulative point is slightly too negative"
+            solution = "Is there a noticeable cause or reason for this? If so, put down this cause on notes at the notes page. Constantly check your notes for better reference on what to do and what to avoid."
+            encourage = "There are always setbacks, no one is perfect. Addictions can always be broken though regardless of how deep one is into it. Don't mind the state of the graph and your cumulative points, you can still raise your points and ultimately get fulfilled"}
         int < 0 && int >= -100 -> { state= "Your cumulative point is negative"
             solution = "Have you noticed any cause as to why your cumulative is negative, it would be a good idea to jot it down. Keep your notes at the notes page. Also check and update your notes for easy reference"
             encourage = "It might seem like addictions are hard to break. It all balls down to our state of mind. You can break free from anything, you are in control. Don't be discouraged. Keep trying to get your points higher by avoiding the addiction"
@@ -81,19 +82,29 @@ fun thecomments(int: Int): Commenntings{
             encourage = "You can still raise your points. See this as a start of the journey. Limitations only exist in the mind, it's our choice to make them our realities or not"
         }
         int > 0 && int < 100 -> {
-            state = "Your cumulative point is positive"
+            state = "Your cumulative point is slightly positive"
             solution = "Are there new activities you are doing that prevent you from indulging in addictions?. Well those activities are paying off. KUDOS!!! Also, make sure you update your notes at the notes page to keep yourself in check"
             encourage = "You are on a good path. Yet there's room for improvement and proper addiction breaking"
         }
-        int >= 100 && int < 300 -> {
-            state = "Amazing!! Your cumulative is very positive"
+        int >= 100 && int < 500 -> {
+            state = "Amazing!! Your cumulative is positive"
             solution = "Are there by any means, helpful activities you have been engaging in which has resulted to this positive response?! Kindly put these down at the notes page for easy reference. KUDOS!!"
             encourage = "Limitations only occur in the mind, in reality there is nothing that cannot be achieved. You have done well. Getting better is also a priority, there is room for improvement"
         }
-        int >= 300 ->{
-            state = "Very impressive!! Your cumulative is far positive "
+        int >= 500 && int < 1000 ->{
+            state = "Very impressive!! Your cumulative is very positive "
             solution = "Definitely!! You are at the best point of addiction breaking now. Are there helpful activities you do that enable you stick to doing what is deemed right? Kindly put these down at the notes page for easy reference"
             encourage = "Absolutely impressive"
+        }
+        int >= 1000 && int < 2000 ->{
+            state = "Congratulations!! Your cumulative is by far positive. It is great seeing you break free. Great one shooting for the stars!"
+            solution = "You have done well reaching this stage. You deserve every necessary accolade. What were some of the sacrifices you made at ensuring you got to this stage? Kindly put these down at the notes page for easy reference"
+            encourage = "You are far above any limitation. You have disciplined yourself to do what is right. Well done!!!"
+        }
+        int >= 2000 ->{
+            state = "Addictions can sometimes be very hard to break, yet the strong at heart make it seem possible. Your very positive cumulative point shows you have broken your addiction. Congratulations!!"
+            solution = "Journey of a thousand miles starts with a step. It is a great one seeing that your first step at taking this challenge yielded positive a result. You have done extremely well and all accolades to you for breaking loose. Were there some helpful steps you took to help build this streak? Kindly put these down at the notes page for easy reference"
+            encourage = "Richness of mind is not about material possessions, but how discipline one is to stick to a course of action. You have proven to be a disciplined individual. Your rich mind has brought you this far. Congratulations!!!"
         }
 
     }

@@ -42,6 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
             var i = Intent(context, MainActivity::class.java)
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             i.putExtra("toacess", true)
+            intent.putExtra("firstopen", true)
             context?.startActivity(i)
 
 

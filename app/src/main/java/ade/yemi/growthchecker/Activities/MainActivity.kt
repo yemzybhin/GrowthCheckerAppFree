@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker.Activities
 
+import ade.yemi.growthchecker.Data.AllQuotes
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
 import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
@@ -7,12 +8,23 @@ import ade.yemi.growthchecker.PopUp_Fragments.Menu
 import ade.yemi.growthchecker.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.*
+import android.app.Dialog
+import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.*
+import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
@@ -20,11 +32,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+import java.lang.Exception
 import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity(), NoteCommunicator{
     private var ne = ""
+    private var counterr = 0
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -87,6 +104,10 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             val pushresult1 = async {
                 DataStoreManager.getBoolean( this@MainActivity , "assessmentnotification")
             }
+            val pushresult2 = async {
+                DataStoreManager.getInt( this@MainActivity , "currentquote")
+            }
+            var counterr = pushresult2.await()
             var ungoinchallenge = pushresult.await()
             var ungoingchallenge = ungoinchallenge
             var assessmentnotification = false
@@ -95,6 +116,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 
 
             var tome = intent?.getBooleanExtra("toacess", false)
+            var incoming = intent?.getBooleanExtra("firstopen", false)
             if (tome == true){
                 assessmentnotification = true
             }else{
@@ -241,6 +263,11 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
             setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
         }
+
+            if (incoming == true){
+                dailyquote(counterr)
+            }
+
     }
     }
 
@@ -252,7 +279,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
         dialogFragment.show(supportFragmentManager, "$dialogFragment popup")
     }
-
     override fun onBackPressed() {
         finishAffinity()
         finish()
@@ -295,12 +321,10 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
         setimage.setImageResource(image)
     }
-
     internal fun showassessmentdialog(dialogFragment: DialogFragment){
             dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialogFragment.show(supportFragmentManager, "Assessmentdialog")
     }
-
     override fun passnotedetails(id: Int, title: String, content: String, notetype: String, noteuse: Int) {
         var dialog = Popup_AddNote()
         val bundle = Bundle()
@@ -313,5 +337,97 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         dialog.arguments = bundle
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
         dialog.show(supportFragmentManager, "fefef")
+    }
+    private fun dailyquote(counter: Int){
+        var popup = Dialog(this)
+        popup.setCancelable(true)
+        popup.setContentView(R.layout.sharequotee)
+        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popup.show()
+
+        var quote = popup.findViewById<TextView>(R.id.quoteshare)
+        var author = popup.findViewById<TextView>(R.id.authorshare)
+        var share = popup.findViewById<Button>(R.id.quotesharebutton)
+        var cardtoshare = popup.findViewById<CardView>(R.id.cardquotetoshare)
+        var cancel = popup.findViewById<CardView>(R.id.quotecancel)
+
+        var quotes = AllQuotes()
+        var count = counter + 1
+
+
+        if (count > quotes.size-1){
+            count = 0
+            quote.text = "\"${AllQuotes()[count].quote}\""
+            author.text = "-${AllQuotes()[count].author}"
+            savedata(count+1)
+        }else{
+            quote.text = "\"${AllQuotes()[count].quote}\""
+            author.text = "-${AllQuotes()[count].author}"
+            if (count > quotes.size -1){
+                savedata(0)
+            }else{
+                savedata(count)
+            }
+
+        }
+        cancel.setOnClickListener {
+            cancel.clicking()
+            cancel.shortvibrate()
+            popup.dismiss()
+        }
+
+        share.setOnClickListener {
+            share.clicking()
+            share.shortvibrate()
+            val bitmap = getScreenShotFromV(cardtoshare)
+            if (bitmap != null){
+                saveMediaToStore(bitmap)
+            }
+        }
+
+    }
+    private fun saveMediaToStore(bitmap: Bitmap) {
+
+        val filename = "GrowthcheckerApp-quote-${System.currentTimeMillis()}.jpg"
+        var fos: OutputStream? = null
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            MainActivity().contentResolver?.also { resolver ->
+
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                }
+                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                fos = imageUri?.let {
+                    resolver.openOutputStream(it)
+                }
+            }
+        }else{
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+            val image = File(imagesDir, filename)
+            fos = FileOutputStream(image)
+        }
+        fos?.use {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+            Toast.makeText(this, "Saved successfully\nImage available after device restarts.", Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun getScreenShotFromV(v : View): Bitmap? {
+        var screenshot: Bitmap? = null
+        try {
+            screenshot = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(screenshot)
+            v.draw(canvas)
+        }catch (e: Exception){
+            Toast.makeText(this, "Could not save. Enable storage permission", Toast.LENGTH_SHORT).show()
+        }
+        return screenshot
+    }
+    private fun savedata(counter: Int){
+        lifecycleScope.launch {
+            DataStoreManager.saveInt(this@MainActivity, "currentquote", counter)
+        }
     }
 }

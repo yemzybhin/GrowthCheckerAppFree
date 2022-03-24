@@ -40,6 +40,8 @@ class WelcomePage : AppCompatActivity() {
         var viewpager= findViewById<ViewPager>(R.id.viewPager)
 
         initdata()
+        var intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("firstopen", true)
         statusBarTransparent()
         btn_next.setOnClickListener {
             val currentpage: Int = viewpager.currentItem + 1
@@ -49,14 +51,14 @@ class WelcomePage : AppCompatActivity() {
             else{
                 NotFirsttime2 = 1
                 savedata()
-                startActivity(Intent(this, MainActivity :: class.java))
+                startActivity(intent)
                 finish()
             }
         }
         btn_skip.setOnClickListener {
             NotFirsttime2 = 1
             savedata()
-            startActivity(Intent(this, MainActivity :: class.java))
+            startActivity(intent)
             finish()
         }
         layouts = intArrayOf(R.layout.slide_1, R.layout.slide_2, R.layout.slide_3, R.layout.slide_4)
