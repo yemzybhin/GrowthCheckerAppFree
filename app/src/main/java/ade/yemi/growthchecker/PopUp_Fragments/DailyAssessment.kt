@@ -89,7 +89,6 @@ class DailyAssessment : DialogFragment() {
             delay(150)
             dismiss()
         }
-
         text1.setOnClickListener {
             updateclick(text1, text2)
             c1 = true
@@ -211,6 +210,7 @@ class DailyAssessment : DialogFragment() {
                            context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            alarmInfo.setday(day)
+                           alarmInfo.setassess(false)
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
                        }
@@ -239,6 +239,7 @@ class DailyAssessment : DialogFragment() {
                    context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", false) }
                    cancelalarm()
                    alarmInfo.setongoing(false)
+                 alarmInfo.setassess(false)
                    dismiss()
                    startActivity(Intent(requireContext(), MainActivity::class.java))
                     }

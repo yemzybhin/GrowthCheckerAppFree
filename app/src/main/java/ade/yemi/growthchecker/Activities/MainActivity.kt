@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker.Activities
 
+import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.AllQuotes
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.*
@@ -101,28 +102,19 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             val pushresult = async {
                 DataStoreManager.getBoolean( this@MainActivity , "challengeungoing")
             }
-            val pushresult1 = async {
-                DataStoreManager.getBoolean( this@MainActivity , "assessmentnotification")
-            }
             val pushresult2 = async {
                 DataStoreManager.getInt( this@MainActivity , "currentquote")
             }
+
             var counterr = pushresult2.await()
             var ungoinchallenge = pushresult.await()
             var ungoingchallenge = ungoinchallenge
-            var assessmentnotification = false
 
+            var alarmInfo = AlarmInfo(this@MainActivity)
+            var tome = alarmInfo.getassess()
 
-
-
-            var tome = intent?.getBooleanExtra("toacess", false)
             var incoming = intent?.getBooleanExtra("firstopen", false)
-            if (tome == true){
-                assessmentnotification = true
-            }else{
-                assessmentnotification = pushresult1.await()
-            }
-            DataStoreManager.saveBoolean(this@MainActivity, "assessmentnotification", assessmentnotification)
+
 
             if (ungoingchallenge == true){
                 challengesscrollview.visibility = View.GONE
@@ -130,7 +122,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                 challengesscrollview.visibility = View.VISIBLE
             }
 
-            if (assessmentnotification == true && ungoingchallenge == true){
+            if (tome == true && ungoingchallenge == true){
                 notificationbutton.visibility = View.VISIBLE
                 notificationbutton.animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.notification)
             }else{
@@ -154,7 +146,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             }
 
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
-        fourteen.setOnClickListener {
+        fourteen.setOnSingleClickListener {
 
             fourteen.clicking()
             fourteen.shortvibrate()
@@ -165,7 +157,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                    startActivity(Intent(challengeintent))
                }
         }
-        thirty.setOnClickListener {
+        thirty.setOnSingleClickListener {
                 thirty.clicking()
                 thirty.shortvibrate()
                 Timer().schedule(100) {
@@ -175,7 +167,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             challengeintent.putExtra("challengeviewChallenge", "challenge30")
             startActivity(Intent(challengeintent))
         }
-        sixty.setOnClickListener {
+        sixty.setOnSingleClickListener {
             sixty.clicking()
                sixty.shortvibrate()
                 Timer().schedule(100) {
@@ -185,7 +177,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
-        hundred.setOnClickListener {
+        hundred.setOnSingleClickListener {
                 hundred.clicking()
                 hundred.shortvibrate()
                 Timer().schedule(100) {
@@ -195,7 +187,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
-        twohundred.setOnClickListener {
+        twohundred.setOnSingleClickListener {
                 twohundred.clicking()
                 twohundred.shortvibrate()
                 Timer().schedule(100) {

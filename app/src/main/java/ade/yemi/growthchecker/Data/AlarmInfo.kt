@@ -34,6 +34,17 @@ class AlarmInfo {
     fun gethour(): Int{
         return sharef!!.getInt("hour", 0)
     }
+
+    fun setassess(assess: Boolean){
+        var editor = sharef!!.edit()
+        editor.putBoolean("assess", assess)
+        editor.commit()
+    }
+
+    fun getassess(): Boolean{
+        return sharef!!.getBoolean("assess", false)
+    }
+
     fun getday(): Int{
         return sharef!!.getInt("day", 0)
     }
