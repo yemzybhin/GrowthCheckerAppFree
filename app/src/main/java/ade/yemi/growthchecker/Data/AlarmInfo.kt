@@ -23,8 +23,6 @@ class AlarmInfo {
         editor.putInt("day", day)
         editor.commit()
     }
-
-
     fun setongoing(ongoing: Boolean){
         var editor = sharef!!.edit()
         editor.putBoolean("ongoing", ongoing)
