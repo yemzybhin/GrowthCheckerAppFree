@@ -148,7 +148,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Save Image"
+                android:text="Share Image"
                 android:textColor="@color/primarycolor2"
                 android:textSize="10dp"
                 android:textStyle="bold"

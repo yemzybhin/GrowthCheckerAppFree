@@ -213,7 +213,6 @@ class Startchallenge : Fragment() {
                 AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
                 AlarmManager.INTERVAL_DAY, pendingIntent
         )
-        Toast.makeText(requireContext(), "Alarm set successfully", Toast.LENGTH_SHORT).show()
 
     }
 

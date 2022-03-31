@@ -2,31 +2,15 @@ package ade.yemi.growthchecker
 
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.Data.AlarmInfo
-import ade.yemi.growthchecker.Data.DataStoreManager
-import ade.yemi.growthchecker.PopUp_Fragments.DailyAssessment
-import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.app.AlarmManager
-import android.app.Notification
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.BitmapFactory
-import android.os.SystemClock
-import android.util.Log
 import android.widget.Toast
-import android.window.SplashScreen
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import java.time.Period
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class AlarmReceiver : BroadcastReceiver() {
     private lateinit var alarmManager: AlarmManager
@@ -63,7 +47,6 @@ class AlarmReceiver : BroadcastReceiver() {
             var CurrentDay = c.get(Calendar.DAY_OF_MONTH)
 
             if (ongoing == true && day != CurrentDay) {
-          //      Toast.makeText(context, "Recent ass: $day Today:$CurrentDay false", Toast.LENGTH_SHORT).show()
                 calendar = Calendar.getInstance()
                 calendar[Calendar.HOUR_OF_DAY] = hour
                 calendar[Calendar.MINUTE] = minute

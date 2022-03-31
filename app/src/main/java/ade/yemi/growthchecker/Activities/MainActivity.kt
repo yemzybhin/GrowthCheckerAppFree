@@ -10,38 +10,26 @@ import ade.yemi.growthchecker.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.*
 import android.app.Dialog
-import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.*
-import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
-import java.lang.Exception
 import java.util.*
 import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity(), NoteCommunicator{
-    private var ne = ""
     private var counterr = 0
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
@@ -67,9 +55,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-
         replacefragment(Homepage())
 
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
@@ -371,51 +356,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         share.setOnClickListener {
             share.clicking()
             share.shortvibrate()
-            val bitmap = getScreenShotFromV(cardtoshare)
-            if (bitmap != null){
-                saveMediaToStore(bitmap)
-            }
+            toshare(this, cardtoshare)
         }
 
-    }
-    private fun saveMediaToStore(bitmap: Bitmap) {
-
-        val filename = "GrowthcheckerApp-quote-${System.currentTimeMillis()}.jpg"
-        var fos: OutputStream? = null
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            MainActivity().contentResolver?.also { resolver ->
-
-                val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-                }
-                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-                fos = imageUri?.let {
-                    resolver.openOutputStream(it)
-                }
-            }
-        }else{
-            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            val image = File(imagesDir, filename)
-            fos = FileOutputStream(image)
-        }
-        fos?.use {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-            Toast.makeText(this, "Saved successfully\nImage available after device restarts.", Toast.LENGTH_LONG).show()
-        }
-    }
-    private fun getScreenShotFromV(v : View): Bitmap? {
-        var screenshot: Bitmap? = null
-        try {
-            screenshot = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(screenshot)
-            v.draw(canvas)
-        }catch (e: Exception){
-            Toast.makeText(this, "Could not save. Enable storage permission", Toast.LENGTH_SHORT).show()
-        }
-        return screenshot
     }
     private fun savedata(counter: Int){
         lifecycleScope.launch {

@@ -1,13 +1,8 @@
 package ade.yemi.growthchecker.Fragments.Pages
 
-import ade.yemi.growthchecker.Activities.MainActivity
-import ade.yemi.growthchecker.Adapters.getScreenShotFromView
-import ade.yemi.growthchecker.Adapters.saveMediaToStorage
 import ade.yemi.growthchecker.Data.AllQuotes
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.subpages.*
-import ade.yemi.growthchecker.Fragments.Pages.subpages.checks.analytic1check
-import ade.yemi.growthchecker.Fragments.Pages.subpages.checks.analytic2check
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,37 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.*
-import ade.yemi.roomdatabseapp.Data.Challenge
 import android.app.Dialog
-import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
-import android.view.FocusFinder
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
-import java.lang.Exception
-import java.util.*
-import kotlin.concurrent.schedule
 
 class TipsPage : Fragment() {
 
@@ -198,48 +174,8 @@ class TipsPage : Fragment() {
         share.setOnClickListener {
             share.clicking()
             share.shortvibrate()
-            val bitmap = getScreenShotFromV(cardtoshare)
-            if (bitmap != null){
-                saveMediaToStore(bitmap)
-            }
+            toshare(requireContext(), cardtoshare)
         }
-
-    }
-    private fun saveMediaToStore(bitmap: Bitmap) {
-        val filename = "GrowthcheckerApp-quote-${System.currentTimeMillis()}.jpg"
-        var fos: OutputStream? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            MainActivity().contentResolver?.also { resolver ->
-                val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-                }
-                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-                fos = imageUri?.let {
-                    resolver.openOutputStream(it)
-                }
-            }
-        }else{
-            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            val image = File(imagesDir, filename)
-            fos = FileOutputStream(image)
-        }
-        fos?.use {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-            Toast.makeText(requireContext(), "Saved successfully\nImage available after device restarts.", Toast.LENGTH_LONG).show()
-        }
-    }
-    private fun getScreenShotFromV(v : View): Bitmap? {
-        var screenshot: Bitmap? = null
-        try {
-            screenshot = Bitmap.createBitmap(v.measuredWidth, v.measuredHeight, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(screenshot)
-            v.draw(canvas)
-        }catch (e: Exception){
-            Toast.makeText(requireContext(), "Could not save. Enable storage permission", Toast.LENGTH_SHORT).show()
-        }
-        return screenshot
     }
     private fun changecolours(cards: List<CardView>, images: List<ImageView>, texts: List<TextView> ){
         for (i in cards){

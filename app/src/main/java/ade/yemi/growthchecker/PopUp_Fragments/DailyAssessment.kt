@@ -207,10 +207,9 @@ class DailyAssessment : DialogFragment() {
                    challengeViewModel.updateChallenge(Challenge(one, two, three, four))
                        lifecycleScope.launch {
                            //change back to false
-                           context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            alarmInfo.setday(day)
-                           alarmInfo.setassess(false)
+                           alarmInfo.setassess(true)
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
                        }
@@ -234,8 +233,6 @@ class DailyAssessment : DialogFragment() {
              try {
                  challengeViewModel.updateChallenge(Challenge(one, two, three, four))
              lifecycleScope.launch {
-        //change back to false
-                   context?.let { DataStoreManager.saveBoolean(it, "assessmentnotification", false) }
                    context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", false) }
                    cancelalarm()
                    alarmInfo.setongoing(false)
