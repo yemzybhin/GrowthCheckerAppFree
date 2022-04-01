@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/white"
                     android:foreground="@drawable/profilestroke"
                     app:cardCornerRadius="50dp">
 

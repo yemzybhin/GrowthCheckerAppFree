@@ -90,6 +90,7 @@
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
                                 app:cardCornerRadius="20dp"
+                                app:cardBackgroundColor="@color/white"
                                 android:layout_marginTop="2dp">
                             </androidx.cardview.widget.CardView>
                             <TextView
@@ -113,6 +114,7 @@
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
                                 app:cardCornerRadius="20dp"
+                                app:cardBackgroundColor="@color/white"
                                 android:layout_marginTop="2dp">
                             </androidx.cardview.widget.CardView>
                             <TextView
@@ -136,6 +138,7 @@
                                 android:layout_width="10dp"
                                 android:layout_height="10dp"
                                 app:cardCornerRadius="20dp"
+                                app:cardBackgroundColor="@color/white"
                                 android:layout_marginTop="2dp">
                             </androidx.cardview.widget.CardView>
                             <TextView
@@ -187,6 +190,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="18dp">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -249,6 +253,7 @@
                                     android:layout_margin="5dp"
                                     android:gravity="center"
                                     android:text="Days"
+                                    android:textColor="@color/textsub"
                                     android:textSize="10sp"
                                     android:textStyle="bold"></TextView>
 
@@ -263,6 +268,7 @@
                                     android:layout_margin="5dp"
                                     android:gravity="center"
                                     android:text="Points"
+                                    android:textColor="@color/textsub"
                                     android:textSize="10sp"
                                     android:textStyle="bold"></TextView>
 
@@ -277,6 +283,7 @@
                                     android:layout_margin="5dp"
                                     android:gravity="center"
                                     android:text="Cumulative"
+                                    android:textColor="@color/textsub"
                                     android:textSize="10sp"
                                     android:textStyle="bold"></TextView>
 
@@ -308,6 +315,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
                                     android:gravity="center"
+                                    android:textColor="@color/textsub"
                                     android:text="..."
                                     android:textSize="10sp"></TextView>
 
@@ -322,6 +330,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
                                     android:gravity="center"
+                                    android:textColor="@color/textsub"
                                     android:text="..."
                                     android:textSize="10sp"></TextView>
 
@@ -336,6 +345,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
                                     android:gravity="center"
+                                    android:textColor="@color/textsub"
                                     android:text="..."
                                     android:textSize="10sp"></TextView>
 

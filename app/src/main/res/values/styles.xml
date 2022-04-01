@@ -12,6 +12,7 @@
 
     <style name="TimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
         <item name="colorPrimary">@color/black</item>
+        <item name="backgroundTint">@color/white</item>
         <item name="fontFamily">@font/productsansregular</item>
         <item name="materialTimePickerTitleStyle">@style/TextAppearance.AppCompat</item>
         <item name="materialClockStyle">@style/TimePicker.Clock</item>

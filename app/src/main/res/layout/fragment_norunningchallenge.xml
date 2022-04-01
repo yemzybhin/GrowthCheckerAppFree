@@ -11,7 +11,7 @@
         android:id="@+id/cd_norunning_startchallenge"
         android:layout_margin="10dp"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         app:cardElevation="5dp"
         app:cardCornerRadius="40dp">
@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_margin="7sp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
         android:id="@+id/cd_norunning_viewbadges"
         android:layout_margin="10dp"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         app:cardElevation="5dp"
         app:cardCornerRadius="40dp">
@@ -58,13 +59,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_margin="7sp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VIEW"
                 android:textSize="13sp"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"></TextView>
             <TextView
@@ -72,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="BADGES"
                 android:textSize="13sp"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"></TextView>
             <ImageView

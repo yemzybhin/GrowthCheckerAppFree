@@ -102,7 +102,6 @@ class Startchallenge : Fragment() {
                         alarmInfo.SaveAlarmInfo(picker.hour, picker.minute)
                         confirmpopup(challenge)
                     }
-//                        confirmpopup(challenge)
                 }else{
                     Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
                 }

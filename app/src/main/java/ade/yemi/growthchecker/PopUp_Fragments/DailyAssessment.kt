@@ -4,9 +4,7 @@ import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.AlarmReceiver
 import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.DataStoreManager
-import ade.yemi.growthchecker.Fragments.Pages.AnalyticsPage
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +18,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Color
-import android.view.TextureView
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -33,7 +28,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.concurrent.schedule
 
 class DailyAssessment : DialogFragment() {
     private lateinit var alarmManager: AlarmManager
@@ -209,7 +203,7 @@ class DailyAssessment : DialogFragment() {
                            //change back to false
                            context?.let { DataStoreManager.saveBoolean(it, "challengeungoing", true) }
                            alarmInfo.setday(day)
-                           alarmInfo.setassess(true)
+                           alarmInfo.setassess(false)
                            dismiss()
                            startActivity(Intent(requireContext(), MainActivity::class.java))
                        }

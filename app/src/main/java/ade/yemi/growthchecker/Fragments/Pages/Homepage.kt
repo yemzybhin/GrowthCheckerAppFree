@@ -33,6 +33,8 @@ class Homepage : Fragment() {
     lateinit var viewModel: ChallengeViewModel
     private var picnum = 0
     private var username = ""
+    private var challengeungoin = false
+    private var challengeungoing = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,8 +52,8 @@ class Homepage : Fragment() {
                 context?.let { DataStoreManager.getString(it, "name") }
             }
 
-            var challengeungoin = pushresult.await()!!
-            var challengeungoing = challengeungoin
+            challengeungoin = pushresult.await()!!
+            challengeungoing = challengeungoin
             if (challengeungoing == false){
                 replacefragment(norunningchallenge())
             }else{

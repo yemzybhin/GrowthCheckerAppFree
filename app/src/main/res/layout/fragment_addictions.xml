@@ -182,6 +182,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView12"
+                app:cardBackgroundColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -202,6 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -214,6 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/textsub"
                         android:fontFamily="@font/brolinkregular"
                         android:text="Symptoms"></TextView>
 
@@ -233,6 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -245,6 +249,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/textsub"
                         android:fontFamily="@font/brolinkregular"
                         android:text="CaUses"></TextView>
 
@@ -264,6 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -276,6 +282,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/textsub"
                         android:fontFamily="@font/brolinkregular"
                         android:text="EFFEcts"></TextView>
 
@@ -295,6 +302,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -307,6 +315,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/textsub"
                         android:fontFamily="@font/brolinkregular"
                         android:text="SomE DailY ActivitiEs"></TextView>
 

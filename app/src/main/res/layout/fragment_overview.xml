@@ -63,6 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -76,6 +77,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/brolinkregular"
+                            android:textColor="@color/textsub"
                             android:text="What is an aDDiction"></TextView>
 
                         <TextView
@@ -95,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -107,6 +110,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="ADDiction  vs. ABuse anD TolERancE"></TextView>
 
@@ -127,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -139,6 +144,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="EFFEct on thE BRain"></TextView>
 
@@ -158,6 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -170,6 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="Common siQns"></TextView>
 
@@ -188,6 +196,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="20dp">
 
@@ -201,6 +210,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="How it woRks"></TextView>
 
@@ -243,6 +253,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="20dp">
 
@@ -256,6 +267,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="TyPEs oF aDDictions"></TextView>
 
@@ -273,6 +285,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="20dp">
 
@@ -286,6 +299,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="SuBstancE ABusE"></TextView>
 
@@ -303,6 +317,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="20dp">
 
@@ -316,6 +331,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="BEhavioRal ADDiction"></TextView>
 
@@ -333,6 +349,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="20dp">
 
@@ -346,6 +363,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="Why BREaking is DiFFicult"></TextView>
 
@@ -364,6 +382,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -376,6 +395,7 @@ In response, you might decide to quit the substance or behavior, only to find th
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
+                            android:textColor="@color/textsub"
                             android:fontFamily="@font/brolinkregular"
                             android:text="STEPs To changE"></TextView>
 

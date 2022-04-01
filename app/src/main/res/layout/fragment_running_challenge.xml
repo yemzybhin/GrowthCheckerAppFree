@@ -35,6 +35,7 @@
                         android:id="@+id/cd_takeassessmentRunning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/white"
                         android:layout_gravity="center"
                         app:cardElevation="0dp">
 
@@ -78,6 +79,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cd_trackgrowthRunning"
                         android:layout_width="wrap_content"
+                        app:cardBackgroundColor="@color/white"
                         android:layout_height="wrap_content"
                         app:cardElevation="0dp">
 
@@ -128,6 +130,7 @@
         android:id="@+id/cd_ungoingpagecontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:cardCornerRadius="20dp">
@@ -138,6 +141,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
                 app:cardElevation="0dp">
 
 
@@ -314,6 +318,7 @@
         android:id="@+id/cd_ungoingpagereport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
         android:layout_margin="10dp"
         app:cardCornerRadius="20dp">
 

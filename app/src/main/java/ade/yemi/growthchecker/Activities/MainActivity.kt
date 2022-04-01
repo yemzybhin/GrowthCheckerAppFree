@@ -31,6 +31,7 @@ import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity(), NoteCommunicator{
     private var counterr = 0
+    private var ungoinchallenge = false
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
     }
@@ -91,8 +92,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                 DataStoreManager.getInt( this@MainActivity , "currentquote")
             }
 
-            var counterr = pushresult2.await()
-            var ungoinchallenge = pushresult.await()
+            counterr = pushresult2.await()
+            ungoinchallenge = pushresult.await()
             var ungoingchallenge = ungoinchallenge
 
             var alarmInfo = AlarmInfo(this@MainActivity)
@@ -132,11 +133,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
         fourteen.setOnSingleClickListener {
-
             fourteen.clicking()
             fourteen.shortvibrate()
                Timer().schedule(100) {
-
                    challengeintent.putExtra("challengeviewChallenge", "challenge14")
                    challengeintent.putExtra("ActivityToset", "challengeview")
                    startActivity(Intent(challengeintent))

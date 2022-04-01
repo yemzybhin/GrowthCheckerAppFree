@@ -49,21 +49,6 @@ class AchievementsPage : Fragment() {
             }
             ungoing = pushresult.await()!!
             viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
-//          when{
-//                    ungoing == false && ArrayList(it) != null -> recyclerViewAdapter.setListData(ArrayList(it))
-//                    ungoing == false && ArrayList(it) == null -> {rv_recyclerrr.visibility == View.GONE
-//                                                                  handler.visibility == View.VISIBLE}
-//                    ungoing == true && ArrayList(it) != null -> {var tolater = ArrayList(it)
-//                                                                 tolater.removeFirst()
-//                                                                  recyclerViewAdapter.setListData(tolater)}
-//                    ungoing == true && ArrayList(it).size == 1 -> {rv_recyclerrr.visibility == View.GONE
-//                                                                   handler.visibility == View.VISIBLE}
-//                    else -> {
-//                        rv_recyclerrr.visibility == View.GONE
-//                        handler.visibility == View.VISIBLE
-//                    }
-//                }
-//                recyclerViewAdapter.notifyDataSetChanged()
 
                 if (ungoing == false){
                     var touse = ArrayList(it)
@@ -88,8 +73,6 @@ class AchievementsPage : Fragment() {
                 }
             })
         }
-
-
         return view
     }
 }

@@ -74,6 +74,7 @@
                                         android:layout_marginRight="10dp"
                                         android:layout_marginBottom="5dp"
                                         android:layout_marginTop="20dp"
+                                        app:cardBackgroundColor="@color/white"
                                         app:cardCornerRadius="30dp"
                                         app:cardElevation="2dp">
 
@@ -339,6 +340,7 @@
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="20dp"
                             android:layout_gravity="center"
+                            app:cardBackgroundColor="@color/white"
                             android:layout_margin="5dp">
                             <ImageView
                                 android:layout_width="12dp"
@@ -381,6 +383,7 @@
                 android:id="@+id/ashareimage"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:backgroundTint="@color/white"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:text="Share Image"

@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 
 class AnalyticsPage : Fragment() {
     lateinit var viewModel: ChallengeViewModel
+    private var ungoing = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,7 @@ class AnalyticsPage : Fragment() {
             val pushresult1 = async {
                 context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
             }
-            var ungoing = pushresult1.await()!!
+            ungoing = pushresult1.await()!!
             if (ungoing == true){
                 replacefragment1(Analyticsfragment1())
             }else{
