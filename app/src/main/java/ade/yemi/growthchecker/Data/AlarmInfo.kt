@@ -28,6 +28,14 @@ class AlarmInfo {
         editor.putBoolean("ongoing", ongoing)
         editor.commit()
     }
+    fun setQuoteIndex(index: Int){
+        var editor = sharef!!.edit()
+        editor.putInt("index", index)
+        editor.commit()
+    }
+    fun getQuoteIndex(): Int{
+        return sharef!!.getInt("index", 0)
+    }
 
     fun gethour(): Int{
         return sharef!!.getInt("hour", 0)

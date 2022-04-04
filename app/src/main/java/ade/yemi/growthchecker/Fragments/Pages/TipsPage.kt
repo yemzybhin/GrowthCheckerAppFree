@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker.Fragments.Pages
 
+import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.AllQuotes
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Fragments.Pages.subpages.*
@@ -64,6 +65,7 @@ class TipsPage : Fragment() {
         scrolltotop.visibility = View.GONE
 
         var quotes = AllQuotes()
+        var alarmInfo = AlarmInfo(requireContext())
 
         lifecycleScope.launch {
             val pushresult1 = async {
@@ -82,10 +84,12 @@ class TipsPage : Fragment() {
                     counter = 0
                     quotetext.text = "\"${AllQuotes()[counter].quote}\""
                     authourtext.text = "-${AllQuotes()[counter].author}"
+                    alarmInfo.setQuoteIndex(counter)
                     savedata()
                 }else{
                     quotetext.text = "\"${AllQuotes()[counter].quote}\""
                     authourtext.text = "-${AllQuotes()[counter].author}"
+                    alarmInfo.setQuoteIndex(counter)
                     savedata()
                 }
             }

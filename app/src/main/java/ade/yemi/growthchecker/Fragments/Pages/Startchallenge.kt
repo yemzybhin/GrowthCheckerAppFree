@@ -100,6 +100,7 @@ class Startchallenge : Fragment() {
                         calendar[Calendar.MILLISECOND] = 0
 
                         alarmInfo.SaveAlarmInfo(picker.hour, picker.minute)
+                       // Toast.makeText(requireContext(), "${picker.hour}", Toast.LENGTH_SHORT).show()
                         confirmpopup(challenge)
                     }
                 }else{
@@ -213,8 +214,8 @@ class Startchallenge : Fragment() {
                 AlarmManager.INTERVAL_DAY, pendingIntent
         )
 
-    }
 
+    }
 
     private fun createnotificationchannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){

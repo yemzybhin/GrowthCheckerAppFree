@@ -10,6 +10,8 @@ import ade.yemi.growthchecker.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.*
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replacefragment(Homepage())
+
 
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
 
@@ -331,18 +334,22 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var count = counter + 1
 
 
+        var alarmInfo = AlarmInfo(this)
         if (count > quotes.size-1){
             count = 0
             quote.text = "\"${AllQuotes()[count].quote}\""
             author.text = "-${AllQuotes()[count].author}"
             savedata(count+1)
+            alarmInfo.setQuoteIndex(count + 1)
         }else{
             quote.text = "\"${AllQuotes()[count].quote}\""
             author.text = "-${AllQuotes()[count].author}"
             if (count > quotes.size -1){
                 savedata(0)
+                alarmInfo.setQuoteIndex(0)
             }else{
                 savedata(count)
+                alarmInfo.setQuoteIndex(count)
             }
 
         }
@@ -364,4 +371,5 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             DataStoreManager.saveInt(this@MainActivity, "currentquote", counter)
         }
     }
+
 }

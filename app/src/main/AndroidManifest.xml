@@ -48,6 +48,7 @@
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             <action android:name="normal.alarm.setting"></action>
+            <action android:name="normal.alarm.encourage"></action>
             <category android:name="android.intent.category.DEFAULT"></category>
         </intent-filter>
         </receiver>

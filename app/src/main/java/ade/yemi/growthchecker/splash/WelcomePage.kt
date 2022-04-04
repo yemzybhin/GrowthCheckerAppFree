@@ -3,9 +3,14 @@ package ade.yemi.growthchecker.splash
 import ade.yemi.growthchecker.Adapters.WelcomeAdapter
 import ade.yemi.growthchecker.Data.DataStoreManager
 import ade.yemi.growthchecker.Activities.MainActivity
+import ade.yemi.growthchecker.AlarmReceiver
 import ade.yemi.growthchecker.R
 import ade.yemi.growthchecker.Utilities.clicking
 import ade.yemi.growthchecker.Utilities.shortvibrate
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -21,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.util.*
 
 class WelcomePage : AppCompatActivity() {
 
@@ -40,6 +46,8 @@ class WelcomePage : AppCompatActivity() {
         var btn_next: Button = findViewById(R.id.btn_viewpagernext)
         var btn_skip: Button = findViewById(R.id.btn_viewpagerskip)
         var viewpager= findViewById<ViewPager>(R.id.viewPager)
+        createnotificationchannel()
+
 
         initdata()
         var intent = Intent(this, MainActivity::class.java)
@@ -54,6 +62,7 @@ class WelcomePage : AppCompatActivity() {
             else{
                 NotFirsttime2 = 1
                 savedata()
+                setEncouragement()
                 startActivity(intent)
                 finish()
             }
@@ -61,6 +70,7 @@ class WelcomePage : AppCompatActivity() {
         btn_skip.setOnClickListener {
             btn_skip.shortvibrate()
             NotFirsttime2 = 1
+            setEncouragement()
             savedata()
             startActivity(intent)
             finish()
@@ -73,7 +83,6 @@ class WelcomePage : AppCompatActivity() {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
-
             override fun onPageSelected(position: Int) {
                 if (position == layouts.size - 1){
                     btn_next.text = "Start"
@@ -84,7 +93,6 @@ class WelcomePage : AppCompatActivity() {
                 }
                 setDots(position)
             }
-
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -102,7 +110,6 @@ class WelcomePage : AppCompatActivity() {
             window.statusBarColor = Color.TRANSPARENT
         }
     }
-
     private fun setDots(page : Int){
         dotsLayout= findViewById<LinearLayout>(R.id.dotsLayout)
         dotsLayout.removeAllViews()
@@ -134,5 +141,45 @@ class WelcomePage : AppCompatActivity() {
         lifecycleScope.launch {
             DataStoreManager.saveInt(this@WelcomePage, "WelcomePageCheck", NotFirsttime2)
         }
+    }
+    private fun createnotificationchannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name: CharSequence = "Encourage Notification"
+            val description = "Encourage Channel"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("Encouragement", name, importance)
+            channel.description = description
+            val notificationManager = this.getSystemService(
+                    NotificationManager::class.java
+            )
+            notificationManager?.createNotificationChannel(channel)
+
+            val name1: CharSequence = "Quote Notification"
+            val description1 = "Quote Channel"
+            val importance1 = NotificationManager.IMPORTANCE_HIGH
+            val channel1 = NotificationChannel("Quote", name1, importance1)
+            channel.description = description1
+            val notificationManager1 = this.getSystemService(
+                    NotificationManager::class.java
+            )
+            notificationManager1?.createNotificationChannel(channel1)
+        }
+    }
+    private fun setEncouragement() {
+        var alarmManager1 = this.getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        intent.action = "normal.alarm.encourage"
+        var calendar1 = Calendar.getInstance()
+        calendar1[Calendar.HOUR_OF_DAY] = 8
+        calendar1[Calendar.MINUTE] = 0
+        calendar1[Calendar.SECOND] = 0
+        calendar1[Calendar.MILLISECOND] = 0
+
+        var pendingIntent1 = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager1.setRepeating(
+                AlarmManager.RTC_WAKEUP, calendar1.timeInMillis,
+                AlarmManager.INTERVAL_DAY, pendingIntent1
+        )
+
     }
 }
