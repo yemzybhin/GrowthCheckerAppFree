@@ -3,7 +3,7 @@ package ade.yemi.growthchecker
 import ade.yemi.growthchecker.Activities.MainActivity
 import ade.yemi.growthchecker.Data.AlarmInfo
 import ade.yemi.growthchecker.Data.AllQuotes
-import ade.yemi.growthchecker.Data.Quotes
+import ade.yemi.growthchecker.splash.SplashScreen
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -96,12 +96,12 @@ class AlarmReceiver : BroadcastReceiver() {
             if (quoteindex > allquote.size - 1){
                 quoteindex = 0
             }else{
-                quoteindex = alarmInfo.getQuoteIndex()
+                quoteindex = alarmInfo.getQuoteIndex() + 1
             }
-            var quote = allquote[quoteindex].quote
 
+            var quote = allquote[quoteindex].quote
             if(ongoing == true && day != CurrentDay){
-                var j = Intent(context, MainActivity::class.java)
+                var j = Intent(context, SplashScreen::class.java)
                 var pendingIntent1 = PendingIntent.getActivity(context, 0, j, 0)
                 val builder = NotificationCompat.Builder(context!!, "Encouragement")
                         .setSmallIcon(R.drawable.logo)
@@ -114,7 +114,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 val notificationManager = NotificationManagerCompat.from(context)
                 notificationManager.notify(124, builder.build())
             }
-            var p = Intent(context, MainActivity::class.java)
+            var p = Intent(context, SplashScreen::class.java)
             var pendingIntent2 = PendingIntent.getActivity(context, 0, p, 0)
             val builder = NotificationCompat.Builder(context!!, "Quote")
                     .setSmallIcon(R.drawable.logo)
