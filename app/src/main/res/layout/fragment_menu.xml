@@ -154,6 +154,26 @@
                 android:textSize="11sp"
                 android:textStyle="bold"></TextView>
         </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cd_premiumapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:backgroundTint="#00F5F6FC"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="20dp"
+                android:text="Premium Version"
+                android:textColor="@color/MenuItem"
+                android:textSize="11sp"
+                android:textStyle="bold"></TextView>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="wrap_content"

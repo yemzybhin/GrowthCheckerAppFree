@@ -12,6 +12,7 @@ import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.*
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.widget.*
 import androidx.cardview.widget.CardView
@@ -44,6 +45,7 @@ class Menu : DialogFragment(){
         var progresstext = view.findViewById<TextView>(R.id.menu_percent)
         var progressview = view.findViewById<View>(R.id.menu_percentshow)
         var baseview = view.findViewById<View>(R.id.baseprogressview)
+        var premiumapp = view.findViewById<CardView>(R.id.cd_premiumapp)
 
 
         var intent = Intent(requireContext(), Activity2::class.java)
@@ -146,10 +148,17 @@ class Menu : DialogFragment(){
                 dismiss()
             }, 0)
         }
+            premiumapp.setOnSingleClickListener {
+                premiumapp.clicking()
+                premiumapp.shortvibrate()
+                var playstorelink = "https://play.google.com/store/apps/details?id=ade.yemi.growthchecker"
+                val uriUri = Uri.parse(playstorelink)
+                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUri)
+                view.context.startActivity(launchBrowser)
+            }
         cancel.setOnSingleClickListener {
             cancel.shortvibrate()
             dismiss() }
-
         }
         return view
     }
