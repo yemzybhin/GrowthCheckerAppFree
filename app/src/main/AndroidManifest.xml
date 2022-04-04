@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ade.yemi.growthchecker">
+    package="ade.yemi.growthchecker_free">
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
