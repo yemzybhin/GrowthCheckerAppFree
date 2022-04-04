@@ -13,7 +13,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.GrowthChecker">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5707587358865559~1161480763"/>
 
 
         <provider
@@ -25,13 +30,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".Activities.Activity2"></activity>
+        <activity android:name=".Activities.Activity2"
+            android:hardwareAccelerated="true" ></activity>
         <activity
             android:name=".splash.WelcomePage"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="false" />
 
         <activity android:name=".splash.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:hardwareAccelerated="false" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,7 +47,8 @@
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true" >
 
         </activity>
 

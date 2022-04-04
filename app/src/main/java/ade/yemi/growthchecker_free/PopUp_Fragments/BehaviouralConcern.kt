@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.PopUp_Fragments
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Data.DataStoreManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,9 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_behavioural_concern.view.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -47,6 +51,12 @@ class BehaviouralConcern : DialogFragment() {
             view.cd_myaddictionpopupcancel22.shortvibrate()
             dismiss()
         }
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = view.findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+        (activity as MainActivity).cancelload()
 
         return view
     }

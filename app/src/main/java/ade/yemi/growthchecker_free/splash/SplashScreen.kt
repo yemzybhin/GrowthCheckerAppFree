@@ -2,6 +2,7 @@ package ade.yemi.growthchecker_free.splash
 
 import ade.yemi.growthchecker_free.Data.DataStoreManager
 import ade.yemi.growthchecker_free.Activities.MainActivity
+import ade.yemi.growthchecker_free.Fragments.Pages.*
 import ade.yemi.growthchecker_free.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +13,12 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class SplashScreen : AppCompatActivity() {
-
     private var NotFirsttime = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         initdata()
+
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("firstopen", true)
         var splashimage = findViewById<ImageView>(R.id.iv_SplashImage)
@@ -40,11 +41,6 @@ class SplashScreen : AppCompatActivity() {
             }
 
             NotFirsttime = pushresult.await()
-        }
-    }
-    private fun savedata(){
-        lifecycleScope.launch {
-            DataStoreManager.saveInt(this@SplashScreen, "WelcomePageCheck", NotFirsttime)
         }
     }
 }

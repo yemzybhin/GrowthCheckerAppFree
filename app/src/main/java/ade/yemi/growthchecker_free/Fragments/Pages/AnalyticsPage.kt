@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Data.DataStoreManager
 import ade.yemi.growthchecker_free.Fragments.Pages.subpages.Analyticsfragment1
 import ade.yemi.growthchecker_free.Fragments.Pages.subpages.Analyticsfragment2
@@ -15,6 +16,9 @@ import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -27,7 +31,6 @@ class AnalyticsPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view =  inflater.inflate(R.layout.fragment_analytics_page, container, false)
-
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
         lifecycleScope.launch {
@@ -48,6 +51,12 @@ class AnalyticsPage : Fragment() {
         }
         }
         })
+        MobileAds.initialize(requireContext()) {}
+        var mAdView = view.findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        (activity as MainActivity).cancelload()
         return view
     }
     private fun replacefragment1(fragment:Fragment) {

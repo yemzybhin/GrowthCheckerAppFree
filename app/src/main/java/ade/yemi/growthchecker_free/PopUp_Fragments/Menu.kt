@@ -3,6 +3,7 @@ package ade.yemi.growthchecker_free.PopUp_Fragments
 import ade.yemi.growthchecker_free.Activities.Activity2
 import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Fragments.Pages.AnalyticsPage
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.*
 import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.content.Intent
+import android.os.Handler
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -115,25 +117,34 @@ class Menu : DialogFragment(){
 
 
         myinfo.setOnSingleClickListener {
+            (activity as MainActivity).loading()
 
-            delay(200)
-            dismiss()
-            var dialog = Myinfo1()
-            (activity as MainActivity).ShowMainpopUp(myinfo,dialog)
-
+            Handler().postDelayed({
+                dismiss()
+                var dialog = Myinfo1()
+                (activity as MainActivity).ShowMainpopUp(myinfo,dialog)
+            }, 0)
         }
         addiction.setOnSingleClickListener {
-            var dialog = BehaviouralConcern()
-            dismiss()
-            (activity as MainActivity).ShowMainpopUp(addiction,dialog)
+            (activity as MainActivity).loading()
+            Handler().postDelayed({
+                dismiss()
+                var dialog = BehaviouralConcern()
+
+                (activity as MainActivity).ShowMainpopUp(addiction,dialog)
+            }, 0)
+
         }
 
         abouts.setOnSingleClickListener {
             abouts.clicking()
             abouts.shortvibrate()
-            intent.putExtra("ActivityToset", "Aboutspage")
-            startActivity(intent)
-            dismiss()
+            (activity as MainActivity).loading()
+            Handler().postDelayed({
+                intent.putExtra("ActivityToset", "Aboutspage")
+                startActivity(intent)
+                dismiss()
+            }, 0)
         }
         cancel.setOnSingleClickListener {
             cancel.shortvibrate()

@@ -15,10 +15,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.awardlayout.view.*
 import kotlin.collections.ArrayList
 
+
 class Awardadapter (): RecyclerView.Adapter<Awardadapter.MyViewHolder>() {
+
 
     var items  = ArrayList<Challenge>()
 
@@ -81,6 +86,13 @@ fun showMenupopup(context: Context,data: Challenge){
         popup.setContentView(R.layout.awardshare)
         popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         popup.show()
+
+
+    var mAdView : AdView
+    MobileAds.initialize(context) {}
+    mAdView = popup.findViewById<AdView>(R.id.adView)
+    val adRequest = AdRequest.Builder().build()
+    mAdView.loadAd(adRequest)
 
     var challengeimage = popup.findViewById<ImageView>(R.id.aimage1)
     var challengetype = popup.findViewById<TextView>(R.id.achallengetype)

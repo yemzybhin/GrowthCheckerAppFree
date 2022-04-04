@@ -150,10 +150,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="70dp"
+                android:layout_marginBottom="120dp"
                 android:layout_marginRight="20dp"
                 android:text="By Adeyemi Oduyungbo"
                 android:textColor="@color/primarycolor2"></TextView>
+
+
+
+
         </LinearLayout>
     </ScrollView>
     <androidx.cardview.widget.CardView

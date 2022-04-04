@@ -10,6 +10,7 @@
 
 
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cd_fragholder"
         android:layout_width="match_parent"
@@ -591,6 +592,7 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

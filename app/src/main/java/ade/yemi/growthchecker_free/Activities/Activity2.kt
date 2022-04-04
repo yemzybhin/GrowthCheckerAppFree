@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -24,6 +27,11 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
         replacefragment(intent.getStringExtra("ActivityToset")!!)
 
 
+        MobileAds.initialize(this) {}
+        var mAdView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         cancl.setOnClickListener {
             cancl.clicking()
             cancl.shortvibrate()
@@ -33,6 +41,9 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
             }
         }
 
+    }
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     private fun replacefragment(string: String) {

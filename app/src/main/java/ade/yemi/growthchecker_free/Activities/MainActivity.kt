@@ -24,6 +24,11 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.airbnb.lottie.LottieAnimationView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.loading_popuup.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
@@ -34,6 +39,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     private var ungoinchallenge = false
     private val challengesscrollview: CardView by lazy {
         findViewById(R.id.cd_homechallangeswidget)
+    }
+    private  val load:Dialog by lazy {
+        Dialog(this)
     }
     private val homeview: View by lazy {
         findViewById(R.id.v_home)
@@ -53,10 +61,12 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     private val notificationbutton: CardView by lazy {
         findViewById(R.id.cd_assessmentnotification)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         replacefragment(Homepage())
+        loading()
 
 
         var menubutton = findViewById<CardView>(R.id.cd_homemenu)
@@ -82,8 +92,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 //        var incomming = intent?.getStringExtra("assessmentnotification11")
 //        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
 
-
-
         UpdateOnclickElement(listOf(analyticsview, achievementsview, notesview, tipsview))
         lifecycleScope.launch {
             val pushresult = async {
@@ -102,21 +110,17 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 
             var incoming = intent?.getBooleanExtra("firstopen", false)
 
-
             if (ungoingchallenge == true){
                 challengesscrollview.visibility = View.GONE
             }else{
                 challengesscrollview.visibility = View.VISIBLE
             }
-
             if (tome == true && ungoingchallenge == true){
                 notificationbutton.visibility = View.VISIBLE
                 notificationbutton.animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.notification)
             }else{
                 notificationbutton.visibility = View.GONE
             }
-
-
         var dialog = Menu()
         menubutton.setOnSingleClickListener {
             menubutton.clicking()
@@ -131,7 +135,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                 notificationbutton.shortvibrate()
                 showassessmentdialog(dialog2)
             }
-
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
         fourteen.setOnSingleClickListener {
             fourteen.clicking()
@@ -183,6 +186,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             startActivity(Intent(challengeintent))
         }
 
+
         homecard.setOnSingleClickListener {
             homecard.shortvibrate()
             homeview.visibility = View.VISIBLE
@@ -201,49 +205,68 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             tipsimage.setImageResource(R.drawable.tips2)
 
             setpageclickimage(listOf(notesimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.note2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), homeimage, R.drawable.home1)
-
         }
         analyticscard.setOnSingleClickListener {
             analyticscard.shortvibrate()
-            challengesscrollview.visibility = View.GONE
-            analyticsview.visibility = View.VISIBLE
-            replacefragment(AnalyticsPage())
-            UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
-            setpageclickimage(listOf(homeimage, notesimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.note2, R.drawable.achievement2, R.drawable.tips2), analyticsimage, R.drawable.analytics1)
+            loading()
+
+            Handler().postDelayed({
+                challengesscrollview.visibility = View.GONE
+                analyticsview.visibility = View.VISIBLE
+                replacefragment(AnalyticsPage())
+                UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
+                setpageclickimage(listOf(homeimage, notesimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.note2, R.drawable.achievement2, R.drawable.tips2), analyticsimage, R.drawable.analytics1)
+
+            }, 0)
 
         }
         achievementscard.setOnSingleClickListener {
             achievementscard.shortvibrate()
-            challengesscrollview.visibility = View.GONE
-            achievementsview.visibility = View.VISIBLE
+            loading()
 
-            replacefragment(AchievementsPage())
-            UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
-            setpageclickimage(listOf(homeimage, analyticsimage, notesimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.note2, R.drawable.tips2), achievementsimage, R.drawable.achievement1)
+            Handler().postDelayed({
+                challengesscrollview.visibility = View.GONE
+                achievementsview.visibility = View.VISIBLE
 
+                replacefragment(AchievementsPage())
+                UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
+                setpageclickimage(listOf(homeimage, analyticsimage, notesimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.note2, R.drawable.tips2), achievementsimage, R.drawable.achievement1)
 
-        }
+            }, 0)
+           }
         notescard.setOnSingleClickListener {
             notescard.shortvibrate()
-            challengesscrollview.visibility = View.GONE
-            notesview.visibility = View.VISIBLE
-            replacefragment(NotesPage())
-            UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
-            setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note1)
+            loading()
+            Handler().postDelayed({
+                challengesscrollview.visibility = View.GONE
+                notesview.visibility = View.VISIBLE
+                replacefragment(NotesPage())
+                UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
+                setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note1)
 
-        }
+            }, 0)
+          }
         tipscard.setOnSingleClickListener {
             tipscard.shortvibrate()
-            challengesscrollview.visibility = View.GONE
-            tipsview.visibility = View.VISIBLE
-            replacefragment(TipsPage())
-            UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
-            setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
-        }
+            loading()
+            Handler().postDelayed({
+                challengesscrollview.visibility = View.GONE
+                tipsview.visibility = View.VISIBLE
+                replacefragment(TipsPage())
+                UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
+                setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
+
+            }, 0)
+       }
+
 
             if (incoming == true){
                 dailyquote(counterr)
             }
+            Handler().postDelayed({
+            cancelload()
+             }, 50)
+
 
     }
     }
@@ -268,24 +291,32 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         fragmentTransaction.commit()
     }
     internal fun ChangeToAchivement(fragment: Fragment){
-        achievementsview.visibility = View.VISIBLE
-        challengesscrollview.visibility = View.GONE
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-        fragmentTransaction.replace(R.id.fg_home, fragment)
-        fragmentTransaction.commit()
-        UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
+        loading()
+        Handler().postDelayed({
+            achievementsview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            fragmentTransaction.replace(R.id.fg_home, fragment)
+            fragmentTransaction.commit()
+            UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
+        }, 0)
+
     }
     internal fun ChangeToAnalytics(fragment: Fragment){
-        analyticsview.visibility = View.VISIBLE
-        challengesscrollview.visibility = View.GONE
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-        fragmentTransaction.replace(R.id.fg_home, fragment)
-        fragmentTransaction.commit()
-        UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
+        loading()
+        Handler().postDelayed({
+            analyticsview.visibility = View.VISIBLE
+            challengesscrollview.visibility = View.GONE
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            fragmentTransaction.replace(R.id.fg_home, fragment)
+            fragmentTransaction.commit()
+            UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
+        }, 0)
+
     }
     private fun UpdateOnclickElement(views: List<View>){
         for (i in views){
@@ -349,7 +380,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                 savedata(count)
                 alarmInfo.setQuoteIndex(count)
             }
-
         }
         cancel.setOnClickListener {
             cancel.clicking()
@@ -362,12 +392,19 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             share.shortvibrate()
             toshare(this, cardtoshare)
         }
-
+    }
+    internal fun loading(){
+        load.setCancelable(false)
+        load.setContentView(R.layout.loading_popuup)
+        load.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        load.show()
+    }
+    internal fun cancelload(){
+        load.dismiss()
     }
     private fun savedata(counter: Int){
         lifecycleScope.launch {
             DataStoreManager.saveInt(this@MainActivity, "currentquote", counter)
         }
     }
-
 }

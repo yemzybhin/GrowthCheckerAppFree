@@ -17,6 +17,9 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_popup__add_note.*
 import kotlinx.android.synthetic.main.fragment_popup__add_note.view.*
 
@@ -131,7 +134,11 @@ class Popup_AddNote : DialogFragment() {
             dismiss()
         }
 
-
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         return view
     }

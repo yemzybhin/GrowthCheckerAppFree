@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Adapters.Awardadapter
 import ade.yemi.growthchecker_free.Data.DataStoreManager
 import android.os.Bundle
@@ -15,6 +16,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.ArrayList
@@ -38,6 +42,11 @@ class AchievementsPage : Fragment() {
             recyclerViewAdapter = Awardadapter()
             adapter = recyclerViewAdapter
         }
+
+        MobileAds.initialize(requireContext()) {}
+        var mAdView = view.findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
 
@@ -71,6 +80,7 @@ class AchievementsPage : Fragment() {
                 }
             })
         }
+        (activity as MainActivity).cancelload()
         return view
     }
 }

@@ -11,7 +11,8 @@
         android:id="@+id/cd_challengestartnext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/primarycolor2"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -480,5 +481,6 @@
 
 
     </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

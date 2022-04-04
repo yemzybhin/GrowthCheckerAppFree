@@ -10,12 +10,16 @@ import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.clicking
 import ade.yemi.growthchecker_free.Utilities.setimage
 import ade.yemi.growthchecker_free.Utilities.shortvibrate
+import android.os.Handler
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -28,6 +32,12 @@ class Myinfo1 : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
      var popup = inflater.inflate(R.layout.fragment_myinfo1, container, false)
+
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = popup.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         var cancel = popup.findViewById<CardView>(R.id.cd_myinfopopupcancel1)
         var title = popup.findViewById<TextView>(R.id.tv_myinfotitle)
@@ -57,9 +67,15 @@ class Myinfo1 : DialogFragment() {
             setimage(image, picnum)
             }
             edit.setOnClickListener {
-                var dialog = Myinfo2()
-                (activity as MainActivity).ShowMainpopUp(edit,dialog)
-                dismiss()
+                (activity as MainActivity).loading()
+
+                Handler().postDelayed({
+                    dismiss()
+                    var dialog = Myinfo2()
+                    (activity as MainActivity).ShowMainpopUp(edit,dialog)
+
+                }, 0)
+
             }
 
             cancel.setOnClickListener {
@@ -68,6 +84,7 @@ class Myinfo1 : DialogFragment() {
                 dismiss()
             }
 
+        (activity as MainActivity).cancelload()
         return popup
     }
 

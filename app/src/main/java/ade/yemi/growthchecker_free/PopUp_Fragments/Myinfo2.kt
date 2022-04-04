@@ -11,10 +11,14 @@ import ade.yemi.growthchecker_free.Utilities.clicking
 import ade.yemi.growthchecker_free.Utilities.setimage
 import ade.yemi.growthchecker_free.Utilities.shortvibrate
 import android.content.Intent
+import android.os.Handler
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -86,30 +90,38 @@ class Myinfo2 : DialogFragment() {
             }
         }
             changeimage.setOnClickListener {
+
                 if (namee.text.isEmpty() || agee.text.isEmpty()) {
                     Toast.makeText(requireContext(), "No detail entered", Toast.LENGTH_SHORT)
                             .show()
                 } else {
-                    lifecycleScope.launch {
-                        context?.let {
-                            DataStoreManager.saveString(
+                    (activity as MainActivity).loading()
+
+                    Handler().postDelayed({
+                        lifecycleScope.launch {
+                            context?.let {
+                                DataStoreManager.saveString(
                                     it,
                                     "name",
                                     namee.text.toString()
-                            )
-                        }
-                        context?.let {
-                            DataStoreManager.saveInt(
+                                )
+                            }
+                            context?.let {
+                                DataStoreManager.saveInt(
                                     it,
                                     "ageee",
                                     agee.text.toString().toInt()
-                            )
+                                )
+                            }
                         }
-                    }
-                    var dialog = ChangeImages()
-                    (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
+                        dismiss()
+                        var dialog = ChangeImages()
+
+                        (activity as MainActivity).ShowMainpopUp(changeimage,dialog)
+
+                    }, 0)
                 }
-                dismiss()
+
             }
         }
         cancel.setOnClickListener {
@@ -117,6 +129,13 @@ class Myinfo2 : DialogFragment() {
             cancel.clicking()
             dismiss()
         }
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = popup.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        (activity as MainActivity).cancelload()
         return popup
     }
 }

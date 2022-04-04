@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
-
 android {
     compileSdkVersion 31
     defaultConfig {
@@ -77,5 +76,8 @@ dependencies {
 
     //progressbar animation
     implementation 'com.airbnb.android:lottie:3.0.7'
+
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
 
 }

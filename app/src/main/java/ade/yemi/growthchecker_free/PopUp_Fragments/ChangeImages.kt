@@ -15,6 +15,9 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_change_images.view.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -91,10 +94,6 @@ class ChangeImages : DialogFragment() {
                 profileimages(popup.image54, R.drawable.a37),
                 profileimages(popup.image55, R.drawable.a38),
                 profileimages(popup.image56, R.drawable.a39), )
-
-
-
-
         for (i in profilelist){
             i.image.setOnClickListener {
                 i.image.clicking()
@@ -103,110 +102,12 @@ class ChangeImages : DialogFragment() {
                 popup.image17.setImageResource(i.num)
             }
         }
-
-//        popup.image1.setOnClickListener {
-//            popup.image1.clicking()
-//            popup.image1.shortvibrate()
-//            popup.tv_imagenum.setText("1")
-//            popup.image17.setImageResource(R.drawable.a40)
-//        }
-//        popup.image2.setOnClickListener {
-//            popup.image2.clicking()
-//            popup.image2.shortvibrate()
-//            popup.tv_imagenum.setText("2")
-//            popup.image17.setImageResource(R.drawable.a41)
-//        }
-//        popup.image3.setOnClickListener {
-//            popup.image3.clicking()
-//            popup.image3.shortvibrate()
-//            popup.tv_imagenum.setText("3")
-//            popup.image17.setImageResource(R.drawable.a42)
-//        }
-//        popup.image4.setOnClickListener {
-//            popup.image4.clicking()
-//            popup.image4.shortvibrate()
-//            popup.tv_imagenum.setText("4")
-//            popup.image17.setImageResource(R.drawable.a43)
-//        }
-//        popup.image5.setOnClickListener {
-//            popup.image5.clicking()
-//            popup.image5.shortvibrate()
-//            popup.tv_imagenum.setText("5")
-//            popup.image17.setImageResource(R.drawable.a44)
-//        }
-//        popup.image6.setOnClickListener {
-//            popup.image6.clicking()
-//            popup.image6.shortvibrate()
-//            popup.tv_imagenum.setText("6")
-//            popup.image17.setImageResource(R.drawable.a45)
-//        }
-//        popup.image7.setOnClickListener {
-//            popup.image7.clicking()
-//            popup.image7.shortvibrate()
-//            popup.tv_imagenum.setText("7")
-//            popup.image17.setImageResource(R.drawable.a46)
-//        }
-//        popup.image8.setOnClickListener {
-//            popup.image8.clicking()
-//            popup.image8.shortvibrate()
-//            popup.tv_imagenum.setText("8")
-//            popup.image17.setImageResource(R.drawable.a47)
-//        }
-//        popup.image9.setOnClickListener {
-//            popup.image9.clicking()
-//            popup.image9.shortvibrate()
-//            popup.tv_imagenum.setText("9")
-//            popup.image17.setImageResource(R.drawable.a48)
-//        }
-//        popup.image10.setOnClickListener {
-//            popup.image10.clicking()
-//            popup.image10.shortvibrate()
-//            popup.tv_imagenum.setText("10")
-//            popup.image17.setImageResource(R.drawable.a49)
-//        }
-//        popup.image11.setOnClickListener {
-//            popup.image11.clicking()
-//            popup.image11.shortvibrate()
-//            popup.tv_imagenum.setText("11")
-//            popup.image17.setImageResource(R.drawable.a50)
-//        }
-//        popup.image12.setOnClickListener {
-//            popup.image12.clicking()
-//            popup.image12.shortvibrate()
-//            popup.tv_imagenum.setText("12")
-//            popup.image17.setImageResource(R.drawable.a51)
-//        }
-//        popup.image13.setOnClickListener {
-//            popup.image13.clicking()
-//            popup.image13.shortvibrate()
-//            popup.tv_imagenum.setText("13")
-//            popup.image17.setImageResource(R.drawable.a53)
-//        }
-//        popup.image14.setOnClickListener {
-//            popup.image14.clicking()
-//            popup.image14.shortvibrate()
-//            popup.tv_imagenum.setText("14")
-//            popup.image17.setImageResource(R.drawable.a54)
-//        }
-//        popup.image15.setOnClickListener {
-//            popup.image15.clicking()
-//            popup.image15.shortvibrate()
-//            popup.tv_imagenum.setText("15")
-//            popup.image17.setImageResource(R.drawable.a55)
-//        }
-//        popup.image16.setOnClickListener {
-//            popup.image16.clicking()
-//            popup.image16.shortvibrate()
-//            popup.tv_imagenum.setText("16")
-//            popup.image17.setImageResource(R.drawable.a56)
-//        }
-
         popup.btn_saveimage.setOnClickListener {
             popup.btn_saveimage.clicking()
             popup.btn_saveimage.shortvibrate()
 
             if (popup.tv_imagenum.text == "0"){
-                Toast.makeText(requireContext(), "Choose An Image", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Choose An Image", Toast.LENGTH_SHORT).show()
             }else{
                 var saveimagenum = popup.tv_imagenum.text.toString().toInt()
                 lifecycleScope.launch {
@@ -218,16 +119,20 @@ class ChangeImages : DialogFragment() {
             startActivity(Intent(requireContext(), MainActivity::class.java))
 
         }
-
-
         popup.cd_myinfopopupcancel.setOnClickListener {
             popup.cd_myinfopopupcancel.clicking()
             popup.shortvibrate()
             dismiss()
         }
 
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = popup.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
 
+        (activity as MainActivity).cancelload()
 
         return popup
     }

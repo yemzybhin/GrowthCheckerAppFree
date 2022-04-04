@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Data.AlarmInfo
 import ade.yemi.growthchecker_free.Data.AllQuotes
 import ade.yemi.growthchecker_free.Data.DataStoreManager
@@ -21,6 +22,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import com.airbnb.lottie.LottieAnimationView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -61,6 +65,12 @@ class TipsPage : Fragment() {
         var texts = listOf<TextView>(t1, t2)
 
 
+
+        var mAdView : AdView
+        MobileAds.initialize(context) {}
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         scrolltotop.visibility = View.GONE
 
@@ -155,6 +165,7 @@ class TipsPage : Fragment() {
                 singlestate(addictions,t2, image2 )
                 replacefragment(Addictions())
         }
+        (activity as MainActivity).cancelload()
         return view
     }
     private fun shareimage(quote1: String, author1: String){
@@ -163,6 +174,8 @@ class TipsPage : Fragment() {
         popup.setContentView(R.layout.sharequotee)
         popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         popup.show()
+
+
         var quote = popup.findViewById<TextView>(R.id.quoteshare)
         var author = popup.findViewById<TextView>(R.id.authorshare)
         var share = popup.findViewById<Button>(R.id.quotesharebutton)
@@ -180,6 +193,7 @@ class TipsPage : Fragment() {
             share.shortvibrate()
             toshare(requireContext(), cardtoshare)
         }
+
     }
     private fun changecolours(cards: List<CardView>, images: List<ImageView>, texts: List<TextView> ){
         for (i in cards){

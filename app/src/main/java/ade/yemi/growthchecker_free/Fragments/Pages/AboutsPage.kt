@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Adapters.MoreAppsAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,6 +20,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,10 +42,10 @@ class AboutsPage : Fragment() {
         var rateus = view.findViewById<Button>(R.id.btn_rateus)
         loader.visibility = View.VISIBLE
         retry.visibility = View.GONE
+
+
         manager = LinearLayoutManager(requireContext())
-
         getdata(loader, retry, recyclerView)
-
         retry.setOnClickListener {
             retry.clicking()
             retry.shortvibrate()
@@ -55,8 +59,10 @@ class AboutsPage : Fragment() {
             val launchBrowser = Intent(Intent.ACTION_VIEW, uriUri)
             startActivity(launchBrowser)
         }
+//        (activity as MainActivity).cancelload()
         return view
     }
+
     private fun getdata(loader:LottieAnimationView, retry: TextView, recyclerView: RecyclerView){
         var rf = Retrofit.Builder()
             .baseUrl(RetrofitInterface.BASE_URL)

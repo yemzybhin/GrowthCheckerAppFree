@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Fragments.Pages.subpages.Notesfragment2
 import ade.yemi.growthchecker_free.PopUp_Fragments.Popup_AddNote
 import android.os.Bundle
@@ -33,6 +34,7 @@ class NotesPage : Fragment() {
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
             dialog.show(childFragmentManager, "huig")
         }
+        (activity as MainActivity).cancelload()
         return view
     }
     private fun replacefragment(int: Int, fragment:Fragment) {
