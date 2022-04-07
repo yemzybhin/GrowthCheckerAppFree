@@ -91,7 +91,6 @@ class Menu : DialogFragment(){
                         height *= 1
                     }
                     progressview.layoutParams = mParams
-
                 }else{
                     ungoingtext.text = "No Ungoing Challenge"
                     progressview.visibility = View.GONE
@@ -112,15 +111,8 @@ class Menu : DialogFragment(){
                     view.menu_comment.text = "No comment yet!"
                 }
             })
-
-
-
-
-
-
         myinfo.setOnSingleClickListener {
             (activity as MainActivity).loading()
-
             Handler().postDelayed({
                 dismiss()
                 var dialog = Myinfo1()
@@ -132,12 +124,9 @@ class Menu : DialogFragment(){
             Handler().postDelayed({
                 dismiss()
                 var dialog = BehaviouralConcern()
-
                 (activity as MainActivity).ShowMainpopUp(addiction,dialog)
             }, 0)
-
         }
-
         abouts.setOnSingleClickListener {
             abouts.clicking()
             abouts.shortvibrate()
@@ -162,11 +151,4 @@ class Menu : DialogFragment(){
         }
         return view
     }
-
-    private fun savedata(){
-        lifecycleScope.launch {
-            context?.let { DataStoreManager.saveInt(it, "WelcomePageCheck", 0) }
-        }
-    }
-
 }

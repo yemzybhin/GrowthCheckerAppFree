@@ -131,9 +131,13 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
             var dialog2 = DailyAssessment()
             notificationbutton.setOnSingleClickListener{
-                notificationbutton.visibility = View.GONE
-                notificationbutton.shortvibrate()
-                showassessmentdialog(dialog2)
+
+                loading()
+                Handler().postDelayed({
+                    notificationbutton.visibility = View.GONE
+                    notificationbutton.shortvibrate()
+                    showassessmentdialog(dialog2)
+                }, 0)
             }
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
         fourteen.setOnSingleClickListener {

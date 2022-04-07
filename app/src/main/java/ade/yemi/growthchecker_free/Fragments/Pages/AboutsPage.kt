@@ -55,11 +55,11 @@ class AboutsPage : Fragment() {
         rateus.setOnClickListener {
             rateus.clicking()
             rateus.shortvibrate()
-            val uriUri = Uri.parse("https://play.google.com/store/apps/details?id=ade.yemi.growthchecker")
+            val uriUri = Uri.parse("https://play.google.com/store/apps/details?id=ade.yemi.growthchecker_free")
             val launchBrowser = Intent(Intent.ACTION_VIEW, uriUri)
             startActivity(launchBrowser)
         }
-//        (activity as MainActivity).cancelload()
+        //(activity as MainActivity).cancelload()
         return view
     }
 

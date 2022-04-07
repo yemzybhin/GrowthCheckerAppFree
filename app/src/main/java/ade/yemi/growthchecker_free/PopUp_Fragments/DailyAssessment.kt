@@ -25,6 +25,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.*
@@ -241,6 +244,13 @@ class DailyAssessment : DialogFragment() {
                 Toast.makeText(requireContext(), "Fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
+        var mAdView : AdView
+        MobileAds.initialize(requireContext()) {}
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        (activity as MainActivity).cancelload()
 
         return view
     }
