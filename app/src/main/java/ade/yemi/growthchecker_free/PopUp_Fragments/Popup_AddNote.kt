@@ -134,12 +134,6 @@ class Popup_AddNote : DialogFragment() {
             dismiss()
         }
 
-        var mAdView : AdView
-        MobileAds.initialize(requireContext()) {}
-        mAdView = view.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
         return view
     }
 

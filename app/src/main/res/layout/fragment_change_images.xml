@@ -778,19 +778,6 @@
             android:layout_margin="20dp"
             android:src="@drawable/cancel2"></ImageView>
     </androidx.cardview.widget.CardView>
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:adSize="BANNER"
-        app:adUnitId="@string/AdUnit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,11 +33,6 @@ class Myinfo1 : DialogFragment() {
     ): View? {
      var popup = inflater.inflate(R.layout.fragment_myinfo1, container, false)
 
-        var mAdView : AdView
-        MobileAds.initialize(requireContext()) {}
-        mAdView = popup.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         var cancel = popup.findViewById<CardView>(R.id.cd_myinfopopupcancel1)
         var title = popup.findViewById<TextView>(R.id.tv_myinfotitle)

@@ -51,10 +51,6 @@ class AnalyticsPage : Fragment() {
         }
         }
         })
-        MobileAds.initialize(requireContext()) {}
-        var mAdView = view.findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         (activity as MainActivity).cancelload()
         return view

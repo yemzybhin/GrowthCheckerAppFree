@@ -43,10 +43,7 @@ class AchievementsPage : Fragment() {
             adapter = recyclerViewAdapter
         }
 
-        MobileAds.initialize(requireContext()) {}
-        var mAdView = view.findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+
 
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
 

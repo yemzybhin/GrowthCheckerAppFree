@@ -25,7 +25,6 @@ class OnSingleClickListener(private val block: () -> Unit) : View.OnClickListene
             return
         }
         lastClickTime = SystemClock.elapsedRealtime()
-
         block()
     }
 }

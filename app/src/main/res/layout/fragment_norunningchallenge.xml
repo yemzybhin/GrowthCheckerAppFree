@@ -25,23 +25,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VIEW CONCLUDED"
-                android:textSize="13sp"
+                android:text="VIEW CONCLUDED CHALLENGES"
+                android:textSize="11sp"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CHALLENGES"
-                android:textSize="13sp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:textColor="@color/primarycolor2"
-                android:textStyle="bold"></TextView>
+
             <ImageView
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_margin="10dp"
                 android:src="@drawable/arrow"></ImageView>
         </LinearLayout>
@@ -64,22 +56,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VIEW"
-                android:textSize="13sp"
-                android:gravity="center"
-                android:textColor="@color/primarycolor2"
-                android:textStyle="bold"></TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BADGES"
-                android:textSize="13sp"
+                android:text="VIEW BADGES"
+                android:textSize="11sp"
                 android:gravity="center"
                 android:textColor="@color/primarycolor2"
                 android:textStyle="bold"></TextView>
             <ImageView
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="20dp"
                 android:layout_margin="10dp"
                 android:src="@drawable/arrow"></ImageView>
         </LinearLayout>

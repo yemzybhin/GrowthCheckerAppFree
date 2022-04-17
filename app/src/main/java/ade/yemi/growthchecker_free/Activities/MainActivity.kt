@@ -89,6 +89,11 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
+        MobileAds.initialize(this) {}
+        var mAdView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
 //        var incomming = intent?.getStringExtra("assessmentnotification11")
 //        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
 

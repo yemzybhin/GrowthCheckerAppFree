@@ -186,6 +186,9 @@ class DailyAssessment : DialogFragment() {
                 finishchal.visibility = View.GONE
             }
         })
+
+
+
         var calendar = Calendar.getInstance()
         var day = calendar.get(Calendar.DAY_OF_MONTH)
         submit.setOnClickListener {
@@ -244,11 +247,6 @@ class DailyAssessment : DialogFragment() {
                 Toast.makeText(requireContext(), "Fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
-        var mAdView : AdView
-        MobileAds.initialize(requireContext()) {}
-        mAdView = view.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         (activity as MainActivity).cancelload()
 

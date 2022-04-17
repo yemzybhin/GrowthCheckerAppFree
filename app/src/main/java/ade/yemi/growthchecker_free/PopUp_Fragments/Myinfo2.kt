@@ -129,11 +129,6 @@ class Myinfo2 : DialogFragment() {
             cancel.clicking()
             dismiss()
         }
-        var mAdView : AdView
-        MobileAds.initialize(requireContext()) {}
-        mAdView = popup.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         (activity as MainActivity).cancelload()
         return popup

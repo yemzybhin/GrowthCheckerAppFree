@@ -65,13 +65,6 @@ class TipsPage : Fragment() {
         var texts = listOf<TextView>(t1, t2)
 
 
-
-        var mAdView : AdView
-        MobileAds.initialize(context) {}
-        mAdView = view.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
         scrolltotop.visibility = View.GONE
 
         var quotes = AllQuotes()
