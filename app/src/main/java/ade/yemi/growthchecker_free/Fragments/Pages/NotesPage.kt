@@ -16,15 +16,12 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 
 
-class NotesPage : Fragment() {
+class NotesPage : BaseViewStubFragment() {
     private var dialog = Popup_AddNote()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view : View,
         savedInstanceState: Bundle?
-    ): View? {
-
-        var view = inflater.inflate(R.layout.fragment_notes_page, container, false)
+    ) {
         var addnew = view.findViewById<CardView>(R.id.cd_addnewnote)
         replacefragment(R.id.fr_NotesFrag2, Notesfragment2())
 
@@ -35,8 +32,12 @@ class NotesPage : Fragment() {
             dialog.show(childFragmentManager, "huig")
         }
         (activity as MainActivity).cancelload()
-        return view
     }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_notes_page
+    }
+
     private fun replacefragment(int: Int, fragment:Fragment) {
 //        supportFragmentManager.beginTransaction().replace(R.id.fragmentcontainer, fragment).commit()
         val fragmentManager = childFragmentManager

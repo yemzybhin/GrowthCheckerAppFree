@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker_free.Fragments.Pages.subpages
 import ade.yemi.growthchecker_free.Adapters.Listadapter
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,16 +18,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
-class Analyticsfragment2 : Fragment() {
+class Analyticsfragment2 : BaseViewStubFragment() {
     lateinit var recyclerViewAdapter: Listadapter
     lateinit var viewModel: ChallengeViewModel
     private var ungoing = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_analyticsfragment2, container, false)
+    ) {
         var rv_recyclerr = view.findViewById<RecyclerView>(R.id.rv_recycler)
 
 //        rv_recyclerr.isNestedScrollingEnabled = false
@@ -46,20 +46,23 @@ class Analyticsfragment2 : Fragment() {
             ungoing = pushresult.await()!!
 
 
-        viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
-            if (ungoing == false){
-                var touse = ArrayList(it)
-                recyclerViewAdapter.setListData(touse)
-                recyclerViewAdapter.notifyDataSetChanged()
-            }else{
-                var touse = ArrayList(it)
-                touse.removeFirst()
-                recyclerViewAdapter.setListData(touse)
-                recyclerViewAdapter.notifyDataSetChanged()
-            }
-        })
+            viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
+                if (ungoing == false){
+                    var touse = ArrayList(it)
+                    recyclerViewAdapter.setListData(touse)
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }else{
+                    var touse = ArrayList(it)
+                    touse.removeFirst()
+                    recyclerViewAdapter.setListData(touse)
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }
+            })
         }
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_analyticsfragment2
     }
 
 }

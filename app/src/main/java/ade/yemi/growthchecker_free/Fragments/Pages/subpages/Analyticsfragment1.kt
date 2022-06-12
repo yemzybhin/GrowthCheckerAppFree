@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker_free.Fragments.Pages.subpages
 
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import ade.yemi.growthchecker_free.Helpers.Graph.GenerateFloat
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,14 +25,15 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
-class Analyticsfragment1 : Fragment() {
+class Analyticsfragment1 : BaseViewStubFragment() {
     private var adder1 = ""
     private var adder2 = ""
     private var adder3 = ""
     lateinit var viewModel: ChallengeViewModel
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_analyticsfragment1, container, false)
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         var adderview1 = view.findViewById<TextView>(R.id.tv_analytics1adder1)
         var adderview2 = view.findViewById<TextView>(R.id.tv_analytics1adder2)
         var adderview3 = view.findViewById<TextView>(R.id.tv_analytics1adder3)
@@ -109,8 +111,10 @@ class Analyticsfragment1 : Fragment() {
             val markerView = CustomMarker(requireContext(), R.layout.marker_view)
             lc_graphforanalytics1.marker = markerView
         })
+    }
 
-        return view
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_analyticsfragment1
     }
 
     private fun setimage(string: String, imageView: ImageView){

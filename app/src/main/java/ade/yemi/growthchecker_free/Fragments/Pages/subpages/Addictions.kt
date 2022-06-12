@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Fragments.Pages.subpages
 
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,10 +17,11 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_addictions.view.*
 
-class Addictions : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        var view =  inflater.inflate(R.layout.fragment_addictions, container, false)
+class Addictions : BaseViewStubFragment() {
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         var title = view.findViewById<TextView>(R.id.tv_addictiontitle)
         var overview = view.findViewById<TextView>(R.id.tv_overview)
         var symptoms = view.findViewById<TextView>(R.id.tv_symptoms)
@@ -60,6 +62,9 @@ class Addictions : Fragment() {
                 progressimage.setImageResource(progressimagelist[i])
             }
         }
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_addictions
     }
 }

@@ -60,4 +60,13 @@ class AlarmInfo {
     fun getongoing(): Boolean{
         return sharef!!.getBoolean("ongoing", false)
     }
+
+    fun setPoint(int: Int){
+        var editor = sharef!!.edit()
+        editor.putInt("points", int)
+        editor.commit()
+    }
+    fun getPoint(): Int{
+        return sharef!!.getInt("points", 0)
+    }
 }

@@ -28,15 +28,12 @@ import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class TipsPage : Fragment() {
-
+class TipsPage : BaseViewStubFragment() {
     private var counter = 0
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view : View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_tips_page, container, false)
+    ) {
         var initialimage = view.findViewById<CardView>(R.id.cd_tipsinitial)
 
         var scrolltotop = view.findViewById<LottieAnimationView>(R.id.scrolltotopview)
@@ -131,18 +128,18 @@ class TipsPage : Fragment() {
         overview.setOnClickListener {
             overview.clicking()
             overview.shortvibrate()
-                initialimage.visibility = View.GONE
-                changecolours(cards, images, texts)
-                singlestate(overview,t1, image1 )
-                replacefragment(Overview())
+            initialimage.visibility = View.GONE
+            changecolours(cards, images, texts)
+            singlestate(overview,t1, image1 )
+            replacefragment(Overview())
         }
         scrolltotop.setOnClickListener {
             scrolltotop.clicking()
             scrolltotop.shortvibrate()
-           scrollView.smoothScrollTo(0,0)
+            scrollView.smoothScrollTo(0,0)
         }
         scrollView.viewTreeObserver.addOnScrollChangedListener {
-             var scrolly = scrollView.scrollY
+            var scrolly = scrollView.scrollY
 
             if (scrolly > 300){
                 scrolltotop.visibility = View.VISIBLE
@@ -153,14 +150,18 @@ class TipsPage : Fragment() {
         addictions.setOnClickListener {
             addictions.clicking()
             addictions.shortvibrate()
-                initialimage.visibility = View.GONE
-                changecolours(cards, images, texts)
-                singlestate(addictions,t2, image2 )
-                replacefragment(Addictions())
+            initialimage.visibility = View.GONE
+            changecolours(cards, images, texts)
+            singlestate(addictions,t2, image2 )
+            replacefragment(Addictions())
         }
         (activity as MainActivity).cancelload()
-        return view
     }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_tips_page
+    }
+
     private fun shareimage(quote1: String, author1: String){
         var popup = Dialog(requireContext())
         popup.setCancelable(true)

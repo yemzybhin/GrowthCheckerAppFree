@@ -22,39 +22,42 @@ import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class AnalyticsPage : Fragment() {
+class AnalyticsPage : BaseViewStubFragment() {
     lateinit var viewModel: ChallengeViewModel
     private var ungoing = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        inflatedView: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view =  inflater.inflate(R.layout.fragment_analytics_page, container, false)
+    ) {
         viewModel = ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         viewModel.getAllChallengesObservers().observe(requireActivity(), Observer {
-        lifecycleScope.launch {
-            val pushresult1 = async {
-                context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
+            lifecycleScope.launch {
+                val pushresult1 = async {
+                    context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
+                }
+                ungoing = pushresult1.await()!!
+                if (ungoing == true){
+                    replacefragment1(Analyticsfragment1())
+                }else{
+                    replacefragment1(analytic1check())
+                }
+                when{
+                    it.size == 0 -> replacefragment2(analytic2check())
+                    it.size == 1 && ungoing == true -> replacefragment2(analytic2check())
+                    it.size == 1 && ungoing == false -> replacefragment2(Analyticsfragment2())
+                    else -> replacefragment2(Analyticsfragment2())
+                }
             }
-            ungoing = pushresult1.await()!!
-            if (ungoing == true){
-                replacefragment1(Analyticsfragment1())
-            }else{
-                replacefragment1(analytic1check())
-            }
-            when{
-            it.size == 0 -> replacefragment2(analytic2check())
-            it.size == 1 && ungoing == true -> replacefragment2(analytic2check())
-            it.size == 1 && ungoing == false -> replacefragment2(Analyticsfragment2())
-            else -> replacefragment2(Analyticsfragment2())
-        }
-        }
         })
 
         (activity as MainActivity).cancelload()
-        return view
     }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_analytics_page
+    }
+
     private fun replacefragment1(fragment:Fragment) {
         val fragmentManager = childFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

@@ -2,6 +2,7 @@ package ade.yemi.growthchecker_free.Fragments.Pages.subpages
 
 import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Fragments.Pages.AnalyticsPage
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import ade.yemi.growthchecker_free.Helpers.Graph.GenerateFloat
 import ade.yemi.growthchecker_free.Helpers.Graph.cumulativelast
 import ade.yemi.growthchecker_free.PopUp_Fragments.QuitChallenge
@@ -25,14 +26,12 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 
-class RunningChallenge : Fragment() {
+class RunningChallenge : BaseViewStubFragment() {
     lateinit var viewModel: ChallengeViewModel
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_running_challenge, container, false)
-
+    ) {
         var scrollview = view.findViewById<HorizontalScrollView>(R.id.HS_ungoingpage)
         var cardcontainer = view.findViewById<CardView>(R.id.cd_ungoingpagecontainer)
         var reportcontainer = view.findViewById<CardView>(R.id.cd_ungoingpagereport)
@@ -94,12 +93,12 @@ class RunningChallenge : Fragment() {
         })
 
 
-            var dialog = QuitChallenge()
-            takeassess.setOnClickListener {
-                takeassess.clicking()
-                takeassess.shortvibrate()
-                    (activity as MainActivity).showassessmentdialog(dialog)
-            }
+        var dialog = QuitChallenge()
+        takeassess.setOnClickListener {
+            takeassess.clicking()
+            takeassess.shortvibrate()
+            (activity as MainActivity).showassessmentdialog(dialog)
+        }
 
 
         trackgrowth.setOnClickListener {
@@ -107,7 +106,10 @@ class RunningChallenge : Fragment() {
             trackgrowth.shortvibrate()
             (activity as MainActivity).ChangeToAnalytics(AnalyticsPage())
         }
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_running_challenge
     }
 
     private fun challengeimage(string: String, imageView: ImageView){

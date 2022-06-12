@@ -21,17 +21,17 @@ import kotlinx.android.synthetic.main.fragment_homepage.view.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class Homepage : Fragment() {
+class Homepage : BaseViewStubFragment() {
     lateinit var viewModel: ChallengeViewModel
     private var picnum = 0
     private var username = ""
     private var challengeungoin = false
     private var challengeungoing = false
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_homepage, container, false)
+    ) {
         var image = view.findViewById<ImageView>(R.id.iv_homeimage)
         lifecycleScope.launch {
             val pushresult = async {
@@ -49,8 +49,8 @@ class Homepage : Fragment() {
             if (challengeungoing == false){
                 replacefragment(norunningchallenge())
             }else{
-            replacefragment(RunningChallenge())
-        }
+                replacefragment(RunningChallenge())
+            }
             picnum = pushresult1.await()!!
             username = pushresult2.await()!!
             setimage(image, picnum)
@@ -72,9 +72,12 @@ class Homepage : Fragment() {
                     view.tv_homelevelcomment.text = "No comment yet!"
                 }
             })
+        }
+
     }
 
-        return view
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_homepage
     }
 
     private fun replacefragment(fragment:Fragment) {

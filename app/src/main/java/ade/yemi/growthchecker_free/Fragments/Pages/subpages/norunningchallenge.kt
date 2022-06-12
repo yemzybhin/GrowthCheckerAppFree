@@ -3,6 +3,7 @@ package ade.yemi.growthchecker_free.Fragments.Pages.subpages
 import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Fragments.Pages.AchievementsPage
 import ade.yemi.growthchecker_free.Fragments.Pages.AnalyticsPage
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +15,11 @@ import ade.yemi.growthchecker_free.Utilities.shortvibrate
 import ade.yemi.growthchecker_free.Utilities.zoom_in
 import androidx.cardview.widget.CardView
 
-class norunningchallenge : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+class norunningchallenge : BaseViewStubFragment() {
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_norunningchallenge, container, false)
+    ) {
         var card1 = view.findViewById<CardView>(R.id.cd_norunning_startchallenge)
         var card2 = view.findViewById<CardView>(R.id.cd_norunning_viewbadges)
         card1.zoom_in()
@@ -35,7 +35,10 @@ class norunningchallenge : Fragment() {
             card2.clicking()
             (activity as MainActivity).ChangeToAchivement(AchievementsPage())
         }
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+       return R.layout.fragment_norunningchallenge
     }
 
 }

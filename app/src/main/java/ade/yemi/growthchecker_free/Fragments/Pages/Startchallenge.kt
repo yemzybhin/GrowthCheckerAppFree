@@ -32,7 +32,7 @@ import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.launch
 import java.util.*
 
-class Startchallenge : Fragment() {
+class Startchallenge : BaseViewStubFragment() {
     private lateinit var picker: MaterialTimePicker
     private lateinit var calendar: Calendar
     private lateinit var alarmManager: AlarmManager
@@ -55,50 +55,52 @@ class Startchallenge : Fragment() {
     private var adder1 = ""
     private var adder2 = ""
     private var adder3 = ""
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view : View,
         savedInstanceState: Bundle?
-    ): View? {
-       var view = inflater.inflate(R.layout.fragment_startchallenge, container, false)
+    ) {
         var start = view.findViewById<CardView>(R.id.cd_challengestartstart)
         var image = view.findViewById<ImageView>(R.id.iv_startpageimage)
         createnotificationchannel()
 
         val challenge = arguments?.getString("challengeviewchallenge")
-            imageset(challenge!!, image)
-            start.setOnClickListener {
-                Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_SHORT).show()
-                start.shortvibrate()
-                val alarmInfo = AlarmInfo(requireContext())
-                if (checkempty(Cadder1, Cadder2, Cadder3) == true){
+        imageset(challenge!!, image)
+        start.setOnClickListener {
+            Toast.makeText(requireContext(), "Please Wait", Toast.LENGTH_SHORT).show()
+            start.shortvibrate()
+            val alarmInfo = AlarmInfo(requireContext())
+            if (checkempty(Cadder1, Cadder2, Cadder3) == true){
 
-                    picker = MaterialTimePicker.Builder()
-                            .setTimeFormat(TimeFormat.CLOCK_12H)
-                            .setHour(12)
-                            .setMinute(0)
-                            .setTitleText("Select Time For Daily Assessment")
-                            .setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD)
-                            .setTheme(R.style.TimePicker)
-                            .build()
+                picker = MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setHour(12)
+                    .setMinute(0)
+                    .setTitleText("Select Time For Daily Assessment")
+                    .setInputMode(MaterialTimePicker.INPUT_MODE_KEYBOARD)
+                    .setTheme(R.style.TimePicker)
+                    .build()
 
-                    picker.show(childFragmentManager, "AssessmentNotification")
+                picker.show(childFragmentManager, "AssessmentNotification")
 
-                    picker.addOnPositiveButtonClickListener {
-                        calendar = Calendar.getInstance()
-                        calendar[Calendar.HOUR_OF_DAY] = picker.hour
-                        calendar[Calendar.MINUTE] = picker.minute
-                        calendar[Calendar.SECOND] = 0
-                        calendar[Calendar.MILLISECOND] = 0
+                picker.addOnPositiveButtonClickListener {
+                    calendar = Calendar.getInstance()
+                    calendar[Calendar.HOUR_OF_DAY] = picker.hour
+                    calendar[Calendar.MINUTE] = picker.minute
+                    calendar[Calendar.SECOND] = 0
+                    calendar[Calendar.MILLISECOND] = 0
 
-                        alarmInfo.SaveAlarmInfo(picker.hour, picker.minute)
-                       // Toast.makeText(requireContext(), "${picker.hour}", Toast.LENGTH_SHORT).show()
-                        confirmpopup(challenge)
-                    }
-                }else{
-                    Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
+                    alarmInfo.SaveAlarmInfo(picker.hour, picker.minute)
+                    // Toast.makeText(requireContext(), "${picker.hour}", Toast.LENGTH_SHORT).show()
+                    confirmpopup(challenge)
                 }
+            }else{
+                Toast.makeText(requireContext(), "Kindly fill all fields", Toast.LENGTH_SHORT).show()
             }
-        return view
+        }
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+       return R.layout.fragment_startchallenge
     }
 
     private fun challengedetails(string: String): Challenge{

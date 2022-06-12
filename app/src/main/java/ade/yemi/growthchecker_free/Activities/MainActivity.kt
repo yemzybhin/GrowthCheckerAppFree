@@ -3,6 +3,7 @@ package ade.yemi.growthchecker_free.Activities
 import ade.yemi.growthchecker_free.Data.AlarmInfo
 import ade.yemi.growthchecker_free.Data.AllQuotes
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.*
 import ade.yemi.growthchecker_free.PopUp_Fragments.DailyAssessment
 import ade.yemi.growthchecker_free.PopUp_Fragments.Menu
@@ -20,6 +21,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -83,16 +85,15 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var hundred = findViewById<CardView>(R.id.cd_100days)
         var twohundred = findViewById<CardView>(R.id.cd_200days)
 
+        var pointcount = findViewById<TextView>(R.id.pointcount)
+
         var homeimage= findViewById<ImageView>(R.id.iv_home)
         var analyticsimage = findViewById<ImageView>(R.id.iv_analytics)
         var achievementsimage = findViewById<ImageView>(R.id.iv_achievements)
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
-        MobileAds.initialize(this) {}
-        var mAdView = findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        pointcount.text = "${Preferencestuff(this).getPoint()} Points"
 
 //        var incomming = intent?.getStringExtra("assessmentnotification11")
 //        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
@@ -134,15 +135,8 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             dialog.show(supportFragmentManager, "Menudialog")
 
         }
-            var dialog2 = DailyAssessment()
             notificationbutton.setOnSingleClickListener{
-
-                loading()
-                Handler().postDelayed({
-                    notificationbutton.visibility = View.GONE
-                    notificationbutton.shortvibrate()
-                    showassessmentdialog(dialog2)
-                }, 0)
+               checkpoint("Daily Assessment", 20)
             }
         var challengeintent = Intent(this@MainActivity, Activity2::class.java)
         fourteen.setOnSingleClickListener {
@@ -194,10 +188,10 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             challengeintent.putExtra("ActivityToset", "challengeview")
             startActivity(Intent(challengeintent))
         }
-
-
-        homecard.setOnSingleClickListener {
+        homecard.setOnClickListener {
             homecard.shortvibrate()
+
+            //checkpoint()
             homeview.visibility = View.VISIBLE
 
             if (ungoingchallenge == true){
@@ -212,60 +206,41 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             achievementsimage.setImageResource(R.drawable.achievement2)
             notesimage.setImageResource(R.drawable.note2)
             tipsimage.setImageResource(R.drawable.tips2)
-
             setpageclickimage(listOf(notesimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.note2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), homeimage, R.drawable.home1)
         }
-        analyticscard.setOnSingleClickListener {
+        analyticscard.setOnClickListener {
             analyticscard.shortvibrate()
-            loading()
-
-            Handler().postDelayed({
                 challengesscrollview.visibility = View.GONE
                 analyticsview.visibility = View.VISIBLE
                 replacefragment(AnalyticsPage())
                 UpdateOnclickElement(listOf(homeview, achievementsview, notesview, tipsview))
                 setpageclickimage(listOf(homeimage, notesimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.note2, R.drawable.achievement2, R.drawable.tips2), analyticsimage, R.drawable.analytics1)
 
-            }, 0)
-
         }
-        achievementscard.setOnSingleClickListener {
+        achievementscard.setOnClickListener {
             achievementscard.shortvibrate()
-            loading()
-
-            Handler().postDelayed({
                 challengesscrollview.visibility = View.GONE
                 achievementsview.visibility = View.VISIBLE
 
                 replacefragment(AchievementsPage())
                 UpdateOnclickElement(listOf(homeview, analyticsview, notesview, tipsview))
                 setpageclickimage(listOf(homeimage, analyticsimage, notesimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.note2, R.drawable.tips2), achievementsimage, R.drawable.achievement1)
-
-            }, 0)
            }
-        notescard.setOnSingleClickListener {
+        notescard.setOnClickListener {
             notescard.shortvibrate()
-            loading()
-            Handler().postDelayed({
                 challengesscrollview.visibility = View.GONE
                 notesview.visibility = View.VISIBLE
                 replacefragment(NotesPage())
                 UpdateOnclickElement(listOf(homeview, achievementsview, analyticsview, tipsview))
                 setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, tipsimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.tips2), notesimage, R.drawable.note1)
-
-            }, 0)
           }
-        tipscard.setOnSingleClickListener {
+        tipscard.setOnClickListener {
             tipscard.shortvibrate()
-            loading()
-            Handler().postDelayed({
                 challengesscrollview.visibility = View.GONE
                 tipsview.visibility = View.VISIBLE
                 replacefragment(TipsPage())
                 UpdateOnclickElement(listOf(homeview, achievementsview, notesview, analyticsview))
                 setpageclickimage(listOf(homeimage, analyticsimage, achievementsimage, notesimage), listOf(R.drawable.home2, R.drawable.analytics2, R.drawable.achievement2, R.drawable.note2), tipsimage, R.drawable.tips1)
-
-            }, 0)
        }
 
 
@@ -280,6 +255,71 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
     }
     }
 
+    private fun checkpoint(destination: String, requiredpoints : Int){
+        var view = Dialog(this)
+        view.setCancelable(true)
+        view.setContentView(R.layout.pointschecker)
+        view.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        view.show()
+
+        var title = view.findViewById<TextView>(R.id.title)
+        var points = view.findViewById<TextView>(R.id.points)
+        var comment = view.findViewById<TextView>(R.id.comment)
+        var proceed = view.findViewById<TextView>(R.id.approval)
+
+
+        var prefereceStuffs = Preferencestuff(this)
+        var currentpoints = prefereceStuffs.getPoint()
+
+        title.text = "${destination.toUpperCase()} REQUIRE $requiredpoints Points"
+        points.text = "$currentpoints Tokens"
+
+        if (currentpoints >= requiredpoints){
+            comment.text = "You have enough Points"
+            proceed.text = "PROCEED"
+            proceed.setBackgroundResource(R.drawable.stroke12)
+        }else{
+            comment.text = "You do not have enough Tokens"
+            proceed.text = "GET FREE Tokens"
+            proceed.setBackgroundResource(R.drawable.stroke11)
+        }
+
+        proceed.setOnClickListener {
+            proceed.clicking()
+            if (currentpoints >= requiredpoints){
+                prefereceStuffs.setPoint(currentpoints - requiredpoints)
+                Toast.makeText(this, "$requiredpoints Tokens Removed", Toast.LENGTH_SHORT).show()
+                when(destination){
+                    "Daily Assessment" -> {
+                        Handler().postDelayed({
+                            notificationbutton.visibility = View.GONE
+                            notificationbutton.shortvibrate()
+                            showassessmentdialog(DailyAssessment())
+                        }, 0)
+                    }
+                    "SAVED QUESTIONS" -> {
+
+                    }
+                    "PAST QUESTIONS" -> {
+
+                    }
+                    "LIFE CHANGER" -> {
+
+                    }
+
+                }
+            }else{
+                Handler().postDelayed({
+                    var intent = Intent(this, Activity2::class.java)
+                    intent.putExtra("ActivityToset", "Aboutspage")
+                    startActivity(intent)
+                }, 0)
+                loading()
+            }
+
+        }
+
+    }
     internal fun ShowMainpopUp(view: View, dialogFragment: DialogFragment){
         view.clicking()
         view.shortvibrate()

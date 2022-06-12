@@ -13,16 +13,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 
-class challengeview : Fragment() {
+class challengeview : BaseViewStubFragment() {
     private lateinit var communicator: challengecommunicator
     private var point = 0
     private var days = 0
     private var stage = 0
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_challengeview, container, false)
-
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         var image = view.findViewById<ImageView>(R.id.iv_challengestart)
         var next = view.findViewById<CardView>(R.id.cd_challengestartnext)
         var t0 = view.findViewById<TextView>(R.id.tv_challengestart0)
@@ -33,34 +32,38 @@ class challengeview : Fragment() {
         var t5 = view.findViewById<TextView>(R.id.tv_challengestart5)
         var t6 = view.findViewById<TextView>(R.id.tv_challengestart6)
 
-            val data = arguments?.getString("challengeviewChallenge")
-            valuess(data!!, image)
+        val data = arguments?.getString("challengeviewChallenge")
+        valuess(data!!, image)
 
-            next.setOnClickListener {
-                next.clicking()
-                next.shortvibrate()
-                communicator = activity as challengecommunicator
-                communicator.passchallengedetails(data)
-            }
+        next.setOnClickListener {
+            next.clicking()
+            next.shortvibrate()
+            communicator = activity as challengecommunicator
+            communicator.passchallengedetails(data)
+        }
 
 
-            var text0 = "$days Days Challenge"
-            var text1 = "Stage $stage challenge."
-            var text2 = "$point points."
-            var text3 = "This challenge lasts for $days days. Challenge has 3 positive point adders and one negative point adder."
-            var text4 = "There are three ( 3 ) positive points adders in this challenge. First adder is the most significant with 10 positive points, second is the next most significant with 7 positive points, while the third is the least significant with 5 positive points.  Based on significance,3 daily tasks to stop addiction are chosen.  They are arranged in their order of significance.  Each corresponding to the aforementioned positive point adders.  Performing any or all of these tasks lead to the addition of corresponding points to total previously harnessed points."
-            var text5 = "For this challenge, a daily indulgence in the behavioural concern leads to the removal of a total of 50 points. The negative adder reduces total points so much, hence should be avoided on a daily basis."
-            var text6 = "On a daily basis till the end of the challenge, notifications are sent at the end of the day to assess the activities of the day as a determinant of the points to be added for the respective day. Skipped days will be required to fill just in cases of missed assessment."
+        var text0 = "$days Days Challenge"
+        var text1 = "Stage $stage challenge."
+        var text2 = "$point points."
+        var text3 = "This challenge lasts for $days days. Challenge has 3 positive point adders and one negative point adder."
+        var text4 = "There are three ( 3 ) positive points adders in this challenge. First adder is the most significant with 10 positive points, second is the next most significant with 7 positive points, while the third is the least significant with 5 positive points.  Based on significance,3 daily tasks to stop addiction are chosen.  They are arranged in their order of significance.  Each corresponding to the aforementioned positive point adders.  Performing any or all of these tasks lead to the addition of corresponding points to total previously harnessed points."
+        var text5 = "For this challenge, a daily indulgence in the behavioural concern leads to the removal of a total of 50 points. The negative adder reduces total points so much, hence should be avoided on a daily basis."
+        var text6 = "On a daily basis till the end of the challenge, notifications are sent at the end of the day to assess the activities of the day as a determinant of the points to be added for the respective day. Skipped days will be required to fill just in cases of missed assessment."
 
-            t0.text = text0
-            t1.text = text1
-            t2.text = text2
-            t3.text = text3
-            t4.text = text4
-            t5.text = text5
-            t6.text = text6
-        return view
+        t0.text = text0
+        t1.text = text1
+        t2.text = text2
+        t3.text = text3
+        t4.text = text4
+        t5.text = text5
+        t6.text = text6
     }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_challengeview
+    }
+
     private fun valuess(valx: String, ige: ImageView){
         when (valx) {
             "challenge14" -> {

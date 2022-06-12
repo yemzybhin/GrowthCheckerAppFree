@@ -1,6 +1,7 @@
 package ade.yemi.moreapps.Network
 
 import ade.yemi.moreapps.models.AllAppDetails
+import ade.yemi.moreapps.models.AppContent
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -12,6 +13,15 @@ interface  RetrofitInterface{
 
     companion object{
         const val BASE_URL = "https://facts-guru.herokuapp.com"
+    }
+
+}
+interface  RetrofitInterface1{
+    @get:GET("jsonholder/yeminitionads.json")
+    val post: Call<AppContent?>?
+
+    companion object{
+        const val BASE_URL = "https://yemzybhin.github.io"
     }
 
 }

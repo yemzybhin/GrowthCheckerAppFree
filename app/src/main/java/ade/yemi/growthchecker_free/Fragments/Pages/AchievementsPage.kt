@@ -23,15 +23,14 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
-class AchievementsPage : Fragment() {
+class AchievementsPage : BaseViewStubFragment() {
     lateinit var recyclerViewAdapter: Awardadapter
     lateinit var viewModel: ChallengeViewModel
     private var ungoing = false
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_achievements_page, container, false)
+    ) {
         var rv_recyclerrr = view.findViewById<RecyclerView>(R.id.rc_achievements)
         var handlerf = view.findViewById<CardView>(R.id.cardView333)
         handlerf.visibility = View.GONE
@@ -78,6 +77,9 @@ class AchievementsPage : Fragment() {
             })
         }
         (activity as MainActivity).cancelload()
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_achievements_page
     }
 }

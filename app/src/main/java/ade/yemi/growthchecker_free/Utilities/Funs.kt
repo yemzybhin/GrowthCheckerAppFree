@@ -32,7 +32,14 @@ class OnSingleClickListener(private val block: () -> Unit) : View.OnClickListene
 fun View.setOnSingleClickListener(block: () -> Unit) {
     setOnClickListener(OnSingleClickListener(block))
 }
-
+fun String.CheckEmpty(): Boolean{
+    var text1 = this.replace(" ", "")
+    if (text1.isEmpty()){
+        return true
+    }else{
+        return false
+    }
+}
 fun View.zoom_in(){
     val animation = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
     this.startAnimation(animation)

@@ -5,6 +5,7 @@ import ade.yemi.growthchecker_free.Adapters.NoteClickInterface
 import ade.yemi.growthchecker_free.Adapters.NoteRvAdapter
 import ade.yemi.growthchecker_free.Data.NoteData.Note
 import ade.yemi.growthchecker_free.Data.NoteData.NoteViewmodel
+import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,17 +20,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface {
+class Notesfragment2 : BaseViewStubFragment(), NoteClickDeleteInterface, NoteClickInterface {
 
 
     private lateinit var communicator: NoteCommunicator
     lateinit var viewmodal: NoteViewmodel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateViewAfterViewStubInflated(
+        view: View,
         savedInstanceState: Bundle?
-    ): View? {
-        var view = inflater.inflate(R.layout.fragment_notesfragment2, container, false)
+    ) {
         var noteRV = view.findViewById<RecyclerView>(R.id.rv_notesrecycler)
         var nonotes = view.findViewById<ImageView>(R.id.nonotescheck)
 
@@ -41,7 +40,7 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
         noteRV.adapter = noteRvAdapter
         viewmodal = ViewModelProviders.of(this).get(NoteViewmodel::class.java)
         viewmodal.allNotes.observe( requireActivity(), Observer {
-            list ->
+                list ->
             list?.let {
                 if (it.size != 0){
                     nonotes.visibility = View.GONE
@@ -50,11 +49,14 @@ class Notesfragment2 : Fragment(), NoteClickDeleteInterface, NoteClickInterface 
                     nonotes.visibility = View.VISIBLE
                 }
 
-                    noteRvAdapter.updateList(it)
+                noteRvAdapter.updateList(it)
             }
         })
 
-        return view
+    }
+
+    override fun getViewStubLayoutResource(): Int {
+        return R.layout.fragment_notesfragment2
     }
 
     override fun onDeleteIconClick(note: Note) {

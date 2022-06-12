@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Activities
 
+import ade.yemi.growthchecker_free.Fragments.AllAds
 import ade.yemi.growthchecker_free.Fragments.Pages.AboutsPage
 import ade.yemi.growthchecker_free.Fragments.Pages.Startchallenge
 import ade.yemi.growthchecker_free.Fragments.Pages.challengeview
@@ -7,7 +8,10 @@ import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.challengecommunicator
 import ade.yemi.growthchecker_free.Utilities.clicking
 import ade.yemi.growthchecker_free.Utilities.shortvibrate
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.cardview.widget.CardView
@@ -27,11 +31,6 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
         replacefragment(intent.getStringExtra("ActivityToset")!!)
 
 
-        MobileAds.initialize(this) {}
-        var mAdView = findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
         cancl.setOnClickListener {
             cancl.clicking()
             cancl.shortvibrate()
@@ -46,11 +45,19 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
         startActivity(Intent(this, MainActivity::class.java))
     }
 
-    private fun replacefragment(string: String) {
+    fun loading(){
+        var load = Dialog(this)
+        load.setCancelable(false)
+        load.setContentView(R.layout.loading_popuup)
+        load.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        load.show()
+    }
+    internal fun replacefragment(string: String) {
         var fragment = Fragment()
         when(string){
             "challengeview" -> fragment = challengeview()
             "Aboutspage" -> fragment = AboutsPage()
+            "AllAds" -> fragment = AllAds()
         }
         var bundle = Bundle()
         fragment.arguments = bundle
