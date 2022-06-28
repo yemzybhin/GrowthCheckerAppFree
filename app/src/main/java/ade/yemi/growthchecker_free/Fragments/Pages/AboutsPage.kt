@@ -136,7 +136,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     val animation = AnimationUtils.loadAnimation(context, R.anim.adstagnant)
                     loadad.startAnimation(animation)
                     showRewardedVideo(adprogress, loadad)
-                    loadad.text = "Load Ad: +20 Points"
+                    loadad.text = "Load Ad: +20 Tokens"
                 }
                 else->{
 
@@ -400,7 +400,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 var prefereceStuffs = Preferencestuff(requireContext())
                 var newpoints = prefereceStuffs.getPoint() + 20
                 prefereceStuffs.setPoint(newpoints)
-                Toast.makeText(requireContext(), "20 Points Added", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "20 Tokens Added", Toast.LENGTH_LONG).show()
             })
         }
     }
@@ -478,7 +478,6 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     }
                 }
             }
-
             override fun onFailure(call: Call<AppContent?>, t: Throwable) {
                 adspace.visibility = View.GONE
             }

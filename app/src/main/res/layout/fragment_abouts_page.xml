@@ -42,7 +42,7 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/productsansregular"
                 android:lineSpacingExtra="4dp"
-                android:text="By watching Ad videos, you earn more points. Click the button below to view videos."
+                android:text="By watching Ad videos, you earn more tokens. Click the button below to view videos."
                 android:textColor="@color/primary3"
                 android:textSize="15sp"></TextView>
             <ImageView
@@ -67,7 +67,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:fontFamily="@font/productsansbold"
-                android:text="EARN POINTS WITH CUSTOMIZED ADS"
+                android:text="EARN TOKENS WITH CUSTOMIZED ADS"
                 android:textColor="@color/primarycolor2"
                 android:textSize="16sp"
                 android:textStyle="italic"></TextView>
@@ -80,7 +80,7 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/productsansregular"
                 android:lineSpacingExtra="4dp"
-                android:text="By watching customized Ad videos, you earn more points. Click the button below to view videos."
+                android:text="By watching customized Ad videos, you earn more tokens. Click the button below to view videos."
                 android:textColor="@color/primary3"
                 android:textSize="15sp"></TextView>
             <Button
@@ -100,7 +100,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
                 android:fontFamily="@font/productsansbold"
-                android:text="BUY POINTS"
+                android:text="BUY TOKENS"
                 android:textColor="@color/primarycolor2"
                 android:textSize="16sp"
                 android:textStyle="italic"></TextView>
@@ -112,7 +112,7 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/productsansregular"
                 android:lineSpacingExtra="4dp"
-                android:text="Instead of watching ads for points, you can also buy points. Buy 300 study points for 55 naira. Click the buy button to authenticate purchase."
+                android:text="Instead of watching ads for tokens, you can also buy tokens. Buy 300 study tokens for 55 naira. Click the buy button to authenticate purchase."
                 android:textColor="@color/primary3"
                 android:textSize="15sp"></TextView>
 
@@ -137,7 +137,7 @@
                     android:layout_marginRight="10dp"
                     android:fontFamily="@font/productsansbolditalic"
                     android:gravity="center"
-                    android:text="300 Points : 55 Naira"
+                    android:text="300 Tokens : 55 Naira"
                     android:textColor="@color/primarycolor2"
                     android:textSize="18sp"></TextView>
 

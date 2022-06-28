@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/productsansbold"
             android:gravity="center"
-            android:text="CBT TEST REQUIRES 20 POINTS"
+            android:text="CBT TEST REQUIRES 20 TOKENS"
             android:textColor="@color/primarycolor2"
             android:layout_gravity="center"
             android:textSize="16sp"></TextView>
@@ -36,7 +36,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/productsansbold"
             android:gravity="center"
-            android:text="Current Points"
+            android:text="Current Tokens"
             android:textColor="@color/primarycolor2"
             android:textSize="14sp"></TextView>
 
@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/productsansbold"
-            android:text="You do not have enough points"
+            android:text="You do not have enough tokens"
             android:gravity="center"
             android:textColor="@color/primarycolor2"
             android:textSize="16sp"></TextView>

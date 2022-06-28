@@ -26,10 +26,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.airbnb.lottie.LottieAnimationView
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.loading_popuup.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -93,7 +89,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
 
-        pointcount.text = "${Preferencestuff(this).getPoint()} Points"
+        pointcount.text = "${Preferencestuff(this).getPoint()} Tokens"
 
 //        var incomming = intent?.getStringExtra("assessmentnotification11")
 //        Toast.makeText(this@MainActivity, "$incomming This is it", Toast.LENGTH_LONG).show()
@@ -271,11 +267,11 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var prefereceStuffs = Preferencestuff(this)
         var currentpoints = prefereceStuffs.getPoint()
 
-        title.text = "${destination.toUpperCase()} REQUIRE $requiredpoints Points"
+        title.text = "${destination.toUpperCase()} REQUIRES $requiredpoints Tokens"
         points.text = "$currentpoints Tokens"
 
         if (currentpoints >= requiredpoints){
-            comment.text = "You have enough Points"
+            comment.text = "You have enough Tokens"
             proceed.text = "PROCEED"
             proceed.setBackgroundResource(R.drawable.stroke12)
         }else{

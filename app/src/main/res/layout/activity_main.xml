@@ -215,7 +215,7 @@
                     android:background="@drawable/getpoint"
                     android:fontFamily="@font/productsansregular"
                     android:padding="15dp"
-                    android:text="300 Points"
+                    android:text="300 Tokens"
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     android:textStyle="bold"

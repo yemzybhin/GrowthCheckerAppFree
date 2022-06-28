@@ -33,7 +33,7 @@
                     android:layout_margin="10dp"
                     android:layout_gravity="center"
                     android:textColor="@color/primary3"
-                    android:text="To earn more points, visit AD links and watch Ad videos."></TextView>
+                    android:text="To earn more tokens, visit AD links and watch Ad videos."></TextView>
 
             </LinearLayout>
 
