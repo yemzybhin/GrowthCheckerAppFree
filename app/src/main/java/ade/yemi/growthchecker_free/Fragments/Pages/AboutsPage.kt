@@ -42,7 +42,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-const val AD_UNIT_ID = "ca-app-pub-2144911759176506~5003122422"
+const val AD_UNIT_ID = "ca-app-pub-2144911759176506/2376959082"
 
 class AboutsPage : Fragment() , PurchasesUpdatedListener {
     private var billingClient: BillingClient? = null
