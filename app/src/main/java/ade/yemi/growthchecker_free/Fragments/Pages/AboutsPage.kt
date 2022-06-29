@@ -53,7 +53,6 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
 
     private var mIsLoading = false
     private var mRewardedAd: RewardedAd? = null
-
     private var adcheck = false
 
     override fun onCreateView(
