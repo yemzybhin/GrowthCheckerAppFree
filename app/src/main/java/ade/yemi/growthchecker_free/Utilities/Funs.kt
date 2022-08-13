@@ -1,6 +1,8 @@
 package ade.yemi.growthchecker_free.Utilities
 
 import ade.yemi.growthchecker_free.R
+import ade.yemi.moreapps.models.AllAppDetails
+import ade.yemi.moreapps.models.AppContent
 import ade.yemi.roomdatabseapp.Data.Challenge
 import android.content.Context
 import android.graphics.Color
@@ -13,6 +15,8 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -363,4 +367,30 @@ fun typecolour(cardView: CardView, string: String){
     }
 }
 
+fun AdToJsonString(appContent : AppContent) : String{
+    val gson = Gson()
+    val json = gson.toJson(appContent)
+    return json
+}
 
+fun generateAds(context: Context, jsonString : String) : AppContent {
+    val jsonFileString = jsonString
+    val gson = Gson()
+    val listQuestionType = object : TypeToken<AppContent>() {}.type
+    var Question1models: AppContent = gson.fromJson(jsonFileString, listQuestionType)
+    return Question1models
+}
+
+fun AppToJsonString(appDetails: AllAppDetails) : String{
+    val gson = Gson()
+    val json = gson.toJson(appDetails)
+    return json
+}
+
+fun generateApps(context: Context, jsonString : String) : AllAppDetails {
+    val jsonFileString = jsonString
+    val gson = Gson()
+    val listQuestionType = object : TypeToken<AllAppDetails>() {}.type
+    var Question1models: AllAppDetails = gson.fromJson(jsonFileString, listQuestionType)
+    return Question1models
+}

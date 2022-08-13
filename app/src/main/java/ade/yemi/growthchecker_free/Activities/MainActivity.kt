@@ -1,5 +1,6 @@
 package ade.yemi.growthchecker_free.Activities
 
+import ade.yemi.growthchecker_free.BuildConfig
 import ade.yemi.growthchecker_free.Data.AlarmInfo
 import ade.yemi.growthchecker_free.Data.AllQuotes
 import ade.yemi.growthchecker_free.Data.DataStoreManager
@@ -10,18 +11,18 @@ import ade.yemi.growthchecker_free.PopUp_Fragments.Menu
 import ade.yemi.growthchecker_free.PopUp_Fragments.Popup_AddNote
 import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.*
+import ade.yemi.moreapps.Network.RetrofitInterface
+import ade.yemi.moreapps.Network.RetrofitInterface1
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -29,6 +30,11 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.loading_popuup.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -88,6 +94,11 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         var achievementsimage = findViewById<ImageView>(R.id.iv_achievements)
         var notesimage= findViewById<ImageView>(R.id.iv_notes)
         var tipsimage = findViewById<ImageView>(R.id.iv_tips)
+
+        var updatelayout = findViewById<LinearLayout>(R.id.updatelayout)
+        var updatebutton = findViewById<Button>(R.id.updatebutton)
+        var cancelupdate = findViewById<CardView>(R.id.cancelupdate)
+        updatelayout.visibility = View.GONE
 
         pointcount.text = "${Preferencestuff(this).getPoint()} Tokens"
 
@@ -246,6 +257,9 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
             Handler().postDelayed({
             cancelload()
              }, 50)
+            Handler().postDelayed({
+                getversion(updatelayout, updatebutton, cancelupdate)
+            }, 2000)
 
 
     }
@@ -451,5 +465,43 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         lifecycleScope.launch {
             DataStoreManager.saveInt(this@MainActivity, "currentquote", counter)
         }
+    }
+    private fun getversion(updatelayout : LinearLayout, updatebutton : Button, cancelupdate : CardView){
+        var rf = Retrofit.Builder()
+                .baseUrl(RetrofitInterface1.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        var API = rf.create(RetrofitInterface::class.java)
+        var call =API.versioncheck
+        call?.enqueue(object : Callback<Map<String, String>?> {
+            override fun onResponse(call: Call<Map<String, String>?>, response: Response<Map<String, String>?>) {
+                var versions: Map<String, String>? = response.body() as Map<String, String>
+                var UpdateVersion = versions!!["Growth Checker App"]
+
+                var versioncode = BuildConfig.VERSION_NAME
+                //Toast.makeText(this@MainActivity, "$UpdateVersion and version code $versioncode", Toast.LENGTH_SHORT).show()
+
+                var animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.adscale)
+                if (UpdateVersion != versioncode){
+                    updatelayout.visibility = View.VISIBLE
+                    updatelayout.startAnimation(animation)
+                }
+                cancelupdate.setOnClickListener {
+                    cancelupdate.clicking()
+                    updatelayout.clearAnimation()
+                    updatelayout.visibility = View.GONE
+                }
+                updatebutton.setOnClickListener {
+                    updatebutton.clicking()
+                    updatelayout.clearAnimation()
+                    updatelayout.visibility = View.GONE
+                    val uriUri = Uri.parse("https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+                    val launchBrowser = Intent(Intent.ACTION_VIEW, uriUri)
+                    startActivity(launchBrowser)
+                }
+            }
+            override fun onFailure(call: Call<Map<String, String>?>, t: Throwable) {
+            }
+        })
     }
 }

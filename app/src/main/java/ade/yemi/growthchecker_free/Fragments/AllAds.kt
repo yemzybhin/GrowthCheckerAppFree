@@ -4,6 +4,7 @@ import ade.yemi.growthchecker_free.Adapters.AllAdsAdapter
 import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import ade.yemi.growthchecker_free.R
+import ade.yemi.growthchecker_free.Utilities.generateAds
 import ade.yemi.moreapps.Network.RetrofitInterface1
 import ade.yemi.moreapps.models.AppContent
 import android.os.Bundle
@@ -41,26 +42,44 @@ class AllAds : BaseViewStubFragment(){
         var call =API.post
         call?.enqueue(object : Callback<AppContent?> {
             override fun onResponse(
-                call: Call<AppContent?>,
-                response: Response<AppContent?>
+                    call: Call<AppContent?>,
+                    response: Response<AppContent?>
             ) {
                 var appContent: AppContent? = response.body() as AppContent
                 var adslist = appContent?.ads
+
                 recyclerView.apply {
                     myAdapter = AllAdsAdapter(adslist!!)
                     layoutManager = manager
                     adapter = myAdapter
                 }
                 if (adslist!!.size != 0){
-                    var totalads = adslist!!.size * 1
+                    var totalads = adslist!!.size * 2
                     var prefereceStuffs = Preferencestuff(requireContext())
                     prefereceStuffs.setPoint(prefereceStuffs.getPoint() + totalads)
-                    Toast.makeText(requireContext(), "Ads loaded, you have gotten 1 Extra Point For Each AD", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Ads loaded, you have gotten 2 Extra Points For Each AD", Toast.LENGTH_LONG).show()
                 }
                 progressBar.visibility = View.GONE
             }
             override fun onFailure(call: Call<AppContent?>, t: Throwable) {
-                Toast.makeText(requireContext(), "Could not load Ads. Check connection", Toast.LENGTH_SHORT).show()
+                var touse = Preferencestuff(requireContext()).getLocalAds()
+                if (touse != ""){
+                    var appContent = generateAds(requireContext(), touse!!)
+                    var adslist = appContent?.ads
+
+                    recyclerView.apply {
+                        myAdapter = AllAdsAdapter(adslist!!)
+                        layoutManager = manager
+                        adapter = myAdapter
+                    }
+                    if (adslist!!.size != 0){
+                        var totalads = adslist!!.size * 1
+                        var prefereceStuffs = Preferencestuff(requireContext())
+                        prefereceStuffs.setPoint(prefereceStuffs.getPoint() + totalads)
+                        Toast.makeText(requireContext(), "Ads loaded, you have gotten 2 Extra Points For Each AD", Toast.LENGTH_LONG).show()
+                    }
+                    progressBar.visibility = View.GONE
+                }
             }
         })
     }

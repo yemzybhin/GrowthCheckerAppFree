@@ -8,6 +8,8 @@ import retrofit2.http.GET
 //private const val BASE_URL = "https://facts-guru.herokuapp.com/api/v1/apps/get"
 
 interface  RetrofitInterface{
+    @get:GET("jsonholder/versionupdate.json")
+    val versioncheck : Call<Map<String, String>?>
     @get:GET("api/v1/apps/get")
     val post: Call<AllAppDetails?>?
 
