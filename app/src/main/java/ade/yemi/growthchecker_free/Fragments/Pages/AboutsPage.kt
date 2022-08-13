@@ -215,7 +215,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                             prefereceStuffs.setPoint(newpoints)
                             Toast.makeText(
                                 requireContext(),
-                                "20 Points Added, 50 Coins Added",
+                                "20 Points Added",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -272,7 +272,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 var prefereceStuffs = Preferencestuff(requireContext())
                 var newpoints = prefereceStuffs.getPoint() + 20
                 prefereceStuffs.setPoint(newpoints)
-                Toast.makeText(requireContext(), "20 Points Added, 50 Coins Added", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "20 Points Added", Toast.LENGTH_LONG).show()
             }
 
             override fun onRewardedVideoClosed() {
@@ -490,7 +490,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 var prefereceStuffs = Preferencestuff(requireContext())
                 var newpoints = prefereceStuffs.getPoint() + 20
                 prefereceStuffs.setPoint(newpoints)
-                Toast.makeText(requireContext(), "20 Points Added, 50 Coins Added", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "20 Points Added", Toast.LENGTH_LONG).show()
             })
         }
     }
