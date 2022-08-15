@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PopUp_Fragments.Myinfo1">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:layout_width="1000dp"
         android:layout_height="1000dp"
+        android:background="@color/MyTransparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" ></View>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"

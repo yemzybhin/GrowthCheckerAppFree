@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Activity2"
     android:background="@color/primarycolor1">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <androidx.fragment.app.FragmentContainerView
+            <FrameLayout
                 android:id="@+id/fr_activity2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -18,7 +14,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-            </androidx.fragment.app.FragmentContainerView>
+            </FrameLayout>
             <androidx.cardview.widget.CardView
                 android:id="@+id/cd_challengestartcancel"
                 android:layout_width="wrap_content"
@@ -38,9 +34,4 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/cancel1" />
             </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

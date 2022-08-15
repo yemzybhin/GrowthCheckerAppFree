@@ -3,6 +3,7 @@ package ade.yemi.growthchecker_free.PopUp_Fragments
 import ade.yemi.growthchecker_free.Activities.Activity2
 import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.AnalyticsPage
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import ade.yemi.roomdatabseapp.Data.ChallengeViewModel
 import android.content.Intent
 import android.net.Uri
 import android.os.Handler
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
@@ -37,6 +40,7 @@ class Menu : DialogFragment(){
         var addiction = view.findViewById<CardView>(R.id.cd_menuAddiction)
         var abouts = view.findViewById<CardView>(R.id.cd_menuSettings)
         var cancel = view.findViewById<CardView>(R.id.cd_homemenucancel)
+        val menulayout = view.findViewById<LinearLayout>(R.id.menulayout)
         var menuname = view.findViewById<TextView>(R.id.tv_menuname)
         var menuage = view.findViewById<TextView>(R.id.tv_menuage)
         var image = view.findViewById<ImageView>(R.id.iv_menuimage)
@@ -45,32 +49,31 @@ class Menu : DialogFragment(){
         var progresstext = view.findViewById<TextView>(R.id.menu_percent)
         var progressview = view.findViewById<View>(R.id.menu_percentshow)
         var baseview = view.findViewById<View>(R.id.baseprogressview)
-        var premiumapp = view.findViewById<CardView>(R.id.cd_premiumapp)
+
+        var animation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in)
+        animation.setInterpolator(AccelerateDecelerateInterpolator())
+//        animation.interpolator(AccelerateDecelerateInterpolator())
+        menulayout.startAnimation(animation)
 
 
         var intent = Intent(requireContext(), Activity2::class.java)
 
         lifecycleScope.launch {
-            val pushresult1 = async {
-                context?.let { DataStoreManager.getString(it, "name") }}
-            val pushresult2 = async {
-                context?.let { DataStoreManager.getInt(it, "ageee") }}
-            val pushresult3 = async {
-                context?.let { DataStoreManager.getInt(it, "picnum") }}
+
             val pushresult4 = async {
                 context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }}
 
-
-            var name = pushresult1.await()!!
-            var age = pushresult2.await()!!
-            var picnum = pushresult3.await()!!
+            var preferencestuff = Preferencestuff(requireContext())
+            var name = preferencestuff.getUserAttributes("userName")
+            var age = preferencestuff.getUserAttributes("userAge")
+            var picnum = preferencestuff.getUserAttributes("displayImage")
             var ungoing = pushresult4.await()
 
 
             when{
-                name.length < 1 -> name = "Anonymous"
+                name!!.length < 1 -> name = "Anonymous"
             }
-            setimage(image, picnum)
+            setimage(image, picnum!!.toInt())
             menuname.text = name
             menuage.text = age.toString()
 
@@ -112,20 +115,15 @@ class Menu : DialogFragment(){
                 }
             })
         myinfo.setOnSingleClickListener {
-            (activity as MainActivity).loading()
-            Handler().postDelayed({
-                dismiss()
-                var dialog = Myinfo1()
-                (activity as MainActivity).ShowMainpopUp(myinfo,dialog)
-            }, 0)
+            myinfo.clicking()
+            myinfo.shortvibrate()
+            dismiss()
+            (activity as MainActivity).shoowinfo()
         }
         addiction.setOnSingleClickListener {
-            (activity as MainActivity).loading()
-            Handler().postDelayed({
+            addiction.shortvibrate()
                 dismiss()
-                var dialog = BehaviouralConcern()
-                (activity as MainActivity).ShowMainpopUp(addiction,dialog)
-            }, 0)
+                (activity as MainActivity).addiction()
         }
         abouts.setOnSingleClickListener {
             abouts.clicking()
@@ -137,17 +135,10 @@ class Menu : DialogFragment(){
                 dismiss()
             }, 0)
         }
-            premiumapp.setOnSingleClickListener {
-                premiumapp.clicking()
-                premiumapp.shortvibrate()
-                var playstorelink = "https://play.google.com/store/apps/details?id=ade.yemi.growthchecker"
-                val uriUri = Uri.parse(playstorelink)
-                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUri)
-                view.context.startActivity(launchBrowser)
-            }
         cancel.setOnSingleClickListener {
             cancel.shortvibrate()
-            dismiss() }
+            dismiss()
+        }
         }
         return view
     }

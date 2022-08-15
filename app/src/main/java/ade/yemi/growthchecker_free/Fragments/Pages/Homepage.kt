@@ -1,6 +1,7 @@
 package ade.yemi.growthchecker_free.Fragments.Pages
 
 import ade.yemi.growthchecker_free.Data.DataStoreManager
+import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.subpages.RunningChallenge
 import ade.yemi.growthchecker_free.Fragments.Pages.subpages.norunningchallenge
 import android.os.Bundle
@@ -37,12 +38,10 @@ class Homepage : BaseViewStubFragment() {
             val pushresult = async {
                 context?.let { DataStoreManager.getBoolean(it, "challengeungoing") }
             }
-            val pushresult1 = async {
-                context?.let { DataStoreManager.getInt(it, "picnum") }
-            }
-            val pushresult2 = async {
-                context?.let { DataStoreManager.getString(it, "name") }
-            }
+
+            var preferencestuff = Preferencestuff(requireContext())
+            username = preferencestuff.getUserAttributes("userName").toString()
+            picnum = preferencestuff.getUserAttributes("displayImage")!!.toInt()
 
             challengeungoin = pushresult.await()!!
             challengeungoing = challengeungoin
@@ -51,8 +50,7 @@ class Homepage : BaseViewStubFragment() {
             }else{
                 replacefragment(RunningChallenge())
             }
-            picnum = pushresult1.await()!!
-            username = pushresult2.await()!!
+
             setimage(image, picnum)
             view.tv_homename.text = "Hi, $username"
             viewModel = ViewModelProviders.of(this@Homepage).get(ChallengeViewModel::class.java)

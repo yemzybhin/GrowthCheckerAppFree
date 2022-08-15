@@ -9,6 +9,7 @@
     <View
         android:layout_width="1000dp"
         android:layout_height="1000dp"
+        android:background="@color/MyTransparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" ></View>
 

@@ -6,9 +6,7 @@ import ade.yemi.growthchecker_free.Data.AllQuotes
 import ade.yemi.growthchecker_free.Data.DataStoreManager
 import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.*
-import ade.yemi.growthchecker_free.PopUp_Fragments.DailyAssessment
-import ade.yemi.growthchecker_free.PopUp_Fragments.Menu
-import ade.yemi.growthchecker_free.PopUp_Fragments.Popup_AddNote
+import ade.yemi.growthchecker_free.PopUp_Fragments.*
 import ade.yemi.growthchecker_free.R
 import ade.yemi.growthchecker_free.Utilities.*
 import ade.yemi.moreapps.Network.RetrofitInterface
@@ -19,6 +17,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.*
+import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -27,6 +26,10 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import kotlinx.android.synthetic.main.fragment_behavioural_concern.*
+import kotlinx.android.synthetic.main.fragment_behavioural_concern.view.*
+import kotlinx.android.synthetic.main.fragment_change_images.*
+import kotlinx.android.synthetic.main.fragment_change_images.view.*
 import kotlinx.android.synthetic.main.loading_popuup.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -200,7 +203,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
 
             //checkpoint()
             homeview.visibility = View.VISIBLE
-
             if (ungoingchallenge == true){
                 challengesscrollview.visibility = View.GONE
             }else{
@@ -330,14 +332,6 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         }
 
     }
-    internal fun ShowMainpopUp(view: View, dialogFragment: DialogFragment){
-        view.clicking()
-        view.shortvibrate()
-        Timer().schedule(100) {
-        }
-        dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.mydialog)
-        dialogFragment.show(supportFragmentManager, "$dialogFragment popup")
-    }
     override fun onBackPressed() {
         finishAffinity()
         finish()
@@ -458,6 +452,233 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
         load.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         load.show()
     }
+
+    internal fun shoowinfo(){
+        var popup = Dialog(this)
+        popup.setCancelable(false)
+        popup.setContentView(R.layout.fragment_myinfo1)
+       popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+       popup.show()
+
+
+       var cancel = popup.findViewById<CardView>(R.id.cd_myinfopopupcancel1)
+       var title = popup.findViewById<TextView>(R.id.tv_myinfotitle)
+       var namee = popup.findViewById<TextView>(R.id.tv_myinfoname)
+       var agee = popup.findViewById<TextView>(R.id.tv_myinfoage)
+       var image = popup.findViewById<ImageView>(R.id.iv_myinfoprofile1)
+       var edit = popup.findViewById<Button>(R.id.btn_myinfoedit1)
+
+
+        var preferencestuff = Preferencestuff(this)
+        var name = preferencestuff.getUserAttributes("userName")
+        var age = preferencestuff.getUserAttributes("userAge")
+        var picnum = preferencestuff.getUserAttributes("displayImage")
+
+        title.text = "Hi, $name"
+        namee.text = name
+        agee.text = age.toString()
+        setimage(image, picnum!!.toInt())
+
+       edit.setOnClickListener {
+               popup.dismiss()
+               myinfo2()
+       }
+       cancel.setOnClickListener {
+           cancel.clicking()
+           cancel.shortvibrate()
+           popup.dismiss()
+       }
+    }
+
+    private fun myinfo2() {
+        var popup = Dialog(this)
+        popup.setCancelable(false)
+        popup.setContentView(R.layout.fragment_myinfo2)
+        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popup.show()
+
+        var image = popup.findViewById<ImageView>(R.id.iv_myinfo2image)
+        var changeimage = popup.findViewById<TextView>(R.id.tv_changeimage)
+        var title = popup.findViewById<TextView>(R.id.tv_myinfotitle2)
+        var namee = popup.findViewById<EditText>(R.id.et_myinfoname)
+        var agee = popup.findViewById<EditText>(R.id.et_myinfoage)
+        var save = popup.findViewById<Button>(R.id.btn_saveMyinfodetails)
+        var cancel = popup.findViewById<CardView>(R.id.cd_myinfopopupcancel22)
+
+
+
+            var preferencestuff = Preferencestuff(this)
+            var name = preferencestuff.getUserAttributes("userName")
+            var age = preferencestuff.getUserAttributes("userAge")
+            var picnum = preferencestuff.getUserAttributes("displayImage")
+
+
+            title.text = "Hi, $name"
+            setimage(image, picnum!!.toInt())
+            namee.setText(name)
+            agee.setText(age.toString())
+
+            save.setOnClickListener {
+                save.clicking()
+                save.shortvibrate()
+                if (namee.text.isEmpty() || agee.text.isEmpty()) {
+                    Toast.makeText(this, "Kindly Enter all details", Toast.LENGTH_SHORT).show()
+                } else {
+                    preferencestuff.setUserAttributes("userName",namee.text.toString() )
+                    preferencestuff.setUserAttributes("userAge",agee.text.toString())
+                   // Toast.makeText(this, "${preferencestuff.getUserAttributes("userName")}", Toast.LENGTH_SHORT).show()
+                    popup.dismiss()
+                }
+            }
+            changeimage.setOnClickListener {
+
+                if (namee.text.isEmpty() || agee.text.isEmpty()) {
+                    Toast.makeText(this, "No detail entered", Toast.LENGTH_SHORT).show()
+                } else {
+                        preferencestuff.setUserAttributes("userName",namee.text.toString() )
+                        preferencestuff.setUserAttributes("userAge",agee.text.toString())
+                        popup.dismiss()
+                        picChange()
+                }
+
+            }
+        cancel.setOnClickListener {
+            cancel.shortvibrate()
+            cancel.clicking()
+            popup.dismiss()
+        }
+    }
+
+    fun picChange(){
+        var popup = Dialog(this)
+        popup.setCancelable(false)
+        popup.setContentView(R.layout.fragment_change_images)
+        popup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popup.show()
+
+        var preferencestuff = Preferencestuff(this)
+        var name = preferencestuff.getUserAttributes("userName")
+        var age = preferencestuff.getUserAttributes("userAge")
+        var picnum = preferencestuff.getUserAttributes("displayImage")
+
+
+            popup.tv_imagenum.text = picnum.toString()
+            setimage(popup.image17, picnum!!.toInt())
+
+        var profilelist = listOf(
+                profileimages(popup.image1, R.drawable.a40),
+                profileimages(popup.image2, R.drawable.a41),
+                profileimages(popup.image3, R.drawable.a42),
+                profileimages(popup.image4, R.drawable.a43),
+                profileimages(popup.image5, R.drawable.a44),
+                profileimages(popup.image6, R.drawable.a45),
+                profileimages(popup.image7, R.drawable.a46),
+                profileimages(popup.image8, R.drawable.a47),
+                profileimages(popup.image9, R.drawable.a48),
+                profileimages(popup.image10, R.drawable.a49),
+                profileimages(popup.image11, R.drawable.a50),
+                profileimages(popup.image12, R.drawable.a51),
+                profileimages(popup.image13, R.drawable.a53),
+                profileimages(popup.image14, R.drawable.a54),
+                profileimages(popup.image15, R.drawable.a55),
+                profileimages(popup.image16, R.drawable.a56),
+                profileimages(popup.image18, R.drawable.a1),
+                profileimages(popup.image19, R.drawable.a2),
+                profileimages(popup.image20, R.drawable.a3),
+                profileimages(popup.image21, R.drawable.a4),
+                profileimages(popup.image22, R.drawable.a5),
+                profileimages(popup.image23, R.drawable.a6),
+                profileimages(popup.image24, R.drawable.a7),
+                profileimages(popup.image25, R.drawable.a8),
+                profileimages(popup.image26, R.drawable.a9),
+                profileimages(popup.image27, R.drawable.a10),
+                profileimages(popup.image28, R.drawable.a11),
+                profileimages(popup.image29, R.drawable.a12),
+                profileimages(popup.image30, R.drawable.a13),
+                profileimages(popup.image31, R.drawable.a14),
+                profileimages(popup.image32, R.drawable.a15),
+                profileimages(popup.image33, R.drawable.a16),
+                profileimages(popup.image34, R.drawable.a17),
+                profileimages(popup.image35, R.drawable.a18),
+                profileimages(popup.image36, R.drawable.a19),
+                profileimages(popup.image37, R.drawable.a20),
+                profileimages(popup.image38, R.drawable.a21),
+                profileimages(popup.image39, R.drawable.a22),
+                profileimages(popup.image40, R.drawable.a23),
+                profileimages(popup.image41, R.drawable.a24),
+                profileimages(popup.image42, R.drawable.a25),
+                profileimages(popup.image43, R.drawable.a26),
+                profileimages(popup.image44, R.drawable.a27),
+                profileimages(popup.image45, R.drawable.a28),
+                profileimages(popup.image46, R.drawable.a29),
+                profileimages(popup.image47, R.drawable.a30),
+                profileimages(popup.image48, R.drawable.a31),
+                profileimages(popup.image49, R.drawable.a32),
+                profileimages(popup.image50, R.drawable.a33),
+                profileimages(popup.image51, R.drawable.a34),
+                profileimages(popup.image52, R.drawable.a35),
+                profileimages(popup.image53, R.drawable.a36),
+                profileimages(popup.image54, R.drawable.a37),
+                profileimages(popup.image55, R.drawable.a38),
+                profileimages(popup.image56, R.drawable.a39), )
+        for (i in profilelist){
+            i.image.setOnClickListener {
+                i.image.clicking()
+                i.image.shortvibrate()
+                popup.tv_imagenum.setText("${profilelist.indexOf(i) + 1}")
+                popup.image17.setImageResource(i.num)
+            }
+        }
+        popup.btn_saveimage.setOnClickListener {
+            popup.btn_saveimage.clicking()
+            popup.btn_saveimage.shortvibrate()
+
+            if (popup.tv_imagenum.text == "0"){
+                //Toast.makeText(requireContext(), "Choose An Image", Toast.LENGTH_SHORT).show()
+            }else{
+                var saveimagenum = popup.tv_imagenum.text.toString().toInt()
+                preferencestuff.setUserAttributes("displayImage", saveimagenum.toString())
+            }
+
+            startActivity(Intent(this, MainActivity::class.java))
+
+        }
+        popup.cd_myinfopopupcancel.setOnClickListener {
+            popup.cd_myinfopopupcancel.clicking()
+            popup.cd_myinfopopupcancel.shortvibrate()
+            popup.dismiss()
+        }
+
+    }
+    internal fun addiction(){
+        var view = Dialog(this)
+        view.setCancelable(false)
+        view.setContentView(R.layout.fragment_behavioural_concern)
+        view.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        view.show()
+
+        var preferencestuff = Preferencestuff(this)
+
+        var addiction = preferencestuff.getAddiction()
+        view.et_addictionword.setText(addiction)
+
+        view.btn_saveaddiction.setOnClickListener {
+            view.btn_saveaddiction.clicking()
+            view.btn_saveaddiction.shortvibrate()
+            if (TextUtils.isEmpty(view.et_addictionword.toString())){
+                Toast.makeText(this, "No addiction specified", Toast.LENGTH_SHORT).show()
+            }else{
+                preferencestuff.setAddiction(view.et_addictionword.text.toString())
+                view.dismiss()
+            }
+        }
+
+        view.cd_myaddictionpopupcancel22.setOnClickListener {
+            view.cd_myaddictionpopupcancel22.clicking()
+            view.cd_myaddictionpopupcancel22.shortvibrate()
+            view.dismiss()
+        }
+    }
     internal fun cancelload(){
         load.dismiss()
     }
@@ -492,6 +713,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                     updatelayout.visibility = View.GONE
                 }
                 updatebutton.setOnClickListener {
+                    updatebutton.clicking()
                     updatebutton.clicking()
                     updatelayout.clearAnimation()
                     updatelayout.visibility = View.GONE

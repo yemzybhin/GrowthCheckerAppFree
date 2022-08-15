@@ -1,16 +1,21 @@
 package ade.yemi.growthchecker_free.Fragments
 
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Adapters.AllAdsAdapter
 import ade.yemi.growthchecker_free.Data.Preferencestuff
 import ade.yemi.growthchecker_free.Fragments.Pages.BaseViewStubFragment
 import ade.yemi.growthchecker_free.R
+import ade.yemi.growthchecker_free.Utilities.clicking
 import ade.yemi.growthchecker_free.Utilities.generateAds
+import ade.yemi.growthchecker_free.Utilities.shortvibrate
 import ade.yemi.moreapps.Network.RetrofitInterface1
 import ade.yemi.moreapps.models.AppContent
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -26,9 +31,16 @@ class AllAds : BaseViewStubFragment(){
     override fun onCreateViewAfterViewStubInflated(view: View, savedInstanceState: Bundle?) {
         var recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
         var progressBar = view.findViewById<ProgressBar>(R.id.showloading)
+        var cancel = view.findViewById<CardView>(R.id.cd_cancelaboutpage)
         progressBar.visibility = View.VISIBLE
         manager = LinearLayoutManager(requireContext())
         getdata(recyclerView, progressBar)
+
+        cancel.setOnClickListener {
+            cancel.clicking()
+            cancel.shortvibrate()
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+        }
     }
     override fun getViewStubLayoutResource(): Int {
         return R.layout.fragment_all_ads

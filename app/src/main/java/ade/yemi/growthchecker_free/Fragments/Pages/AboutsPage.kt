@@ -2,6 +2,7 @@ package ade.yemi.growthchecker_free.Fragments.Pages
 
 
 import ade.yemi.growthchecker_free.Activities.Activity2
+import ade.yemi.growthchecker_free.Activities.MainActivity
 import ade.yemi.growthchecker_free.Adapters.MoreAppsAdapter
 import ade.yemi.growthchecker_free.BuildConfig
 import ade.yemi.growthchecker_free.Data.Preferencestuff
@@ -12,6 +13,7 @@ import ade.yemi.moreapps.Network.RetrofitInterface1
 import ade.yemi.moreapps.models.AllAppDetails
 import ade.yemi.moreapps.models.AppContent
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -69,6 +71,8 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
     private var mRewardedAd: RewardedAd? = null
     private var adcheck = false
 
+    private var admobvisible = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,7 +98,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         var loader = view.findViewById<ProgressBar>(R.id.lt_loader)
         var rateus = view.findViewById<Button>(R.id.btn_rateus)
         var adprogress = view.findViewById<ProgressBar>(R.id.adprogress)
-        //var cancel = view.findViewById<ImageView>(R.id.pastquestionscancel)
+        var cancel = view.findViewById<CardView>(R.id.cd_cancelaboutpage)
         var adspace = view.findViewById<CardView>(R.id.adspace)
         var adimage = view.findViewById<ImageView>(R.id.adimage)
         var loadad = view.findViewById<Button>(R.id.Loadadd)
@@ -112,11 +116,17 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         ad2.setOnClickListener {
             ad2.clicking()
             ad2.shortvibrate()
-            (activity as Activity2).replacefragment("AllAds")
+//            (activity as Activity2).replacefragment("AllAds")
+
+            var intent = Intent(requireActivity(), Activity2::class.java)
+            intent.putExtra("ActivityToset", "AllAds")
+            startActivity(intent)
         }
 
         var buypoints = view.findViewById<Button>(R.id.buy3000Points)
-        billingClient = BillingClient.newBuilder(requireContext()).enablePendingPurchases().setListener(this).build()
+        billingClient = BillingClient.newBuilder(requireContext()).enablePendingPurchases().setListener(
+            this
+        ).build()
         billingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
@@ -163,38 +173,50 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         loadad.setOnClickListener {
             loadad.clicking()
             if(unityspace.visibility == View.VISIBLE || admobspace.visibility == View.VISIBLE || facebookspace.visibility == View.VISIBLE){
-                Toast.makeText(requireContext(), "There is still an AD yet to be viewed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "There is still an AD yet to be viewed",
+                    Toast.LENGTH_SHORT
+                ).show()
             }else{
                 adprogress.visibility = View.VISIBLE
                 Toast.makeText(requireContext(), "Ad is loading. Please Wait", Toast.LENGTH_LONG).show()
-                unityadscon(adprogress,unityspace, facebookspace)
+                unityadscon(adprogress, unityspace, facebookspace)
                 loadRewardedAdAdmob(adprogress, admobspace)
             }
         }
+        cancel.setOnClickListener {
+            cancel.clicking()
+            cancel.shortvibrate()
+            Handler().postDelayed({
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+            }, 0)
+            (activity as Activity2).loading()
+        }
         return view
     }
-    private fun unityadscon(adprogress : ProgressBar,cardView: CardView, cardView2: CardView){
+    private fun unityadscon(adprogress: ProgressBar, cardView: CardView, cardView2: CardView){
         var rewarded = com.unity3d.mediation.RewardedAd(requireActivity(), UNITYREWARDED_ID)
         rewarded.load(object : IRewardedAdLoadListener {
             override fun onRewardedLoaded(p0: com.unity3d.mediation.RewardedAd?) {
                 cardView.visibility = View.VISIBLE
                 adprogress.visibility = View.GONE
-                Toast.makeText(requireContext(), "Ad is loaded. Click to view Ad.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Ad is loaded. Click to view Ad.",Toast.LENGTH_SHORT).show()
                 var animation = AnimationUtils.loadAnimation(requireContext(), R.anim.adscale)
                 cardView.startAnimation(animation)
                 cardView.setOnClickListener {
                     cardView.clicking()
                     rewarded.show(object : IRewardedAdShowListener {
                         override fun onRewardedShowed(p0: com.unity3d.mediation.RewardedAd?) {
-                            // Toast.makeText(requireActivity(), "3", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(requireActivity(), "3", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onRewardedClicked(p0: com.unity3d.mediation.RewardedAd?) {
-                            // Toast.makeText(requireActivity(), "4", Toast.LENGTH_SHORT).show()
+                         //   Toast.makeText(requireActivity(), "4", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onRewardedClosed(p0: com.unity3d.mediation.RewardedAd?) {
-                             //Toast.makeText(requireActivity(), "5", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(requireActivity(), "5", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onRewardedFailedShow(
@@ -202,22 +224,18 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                             p1: ShowError?,
                             p2: String?
                         ) {
-                          //    Toast.makeText(requireActivity(), "6 $p1 $p2", Toast.LENGTH_SHORT).show()
+                         //   Toast.makeText(requireActivity(), "6 $p1 $p2", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onUserRewarded(
                             p0: com.unity3d.mediation.RewardedAd?,
                             p1: IReward?
                         ) {
-                             Toast.makeText(requireActivity(), "7", Toast.LENGTH_SHORT).show()
+                           // Toast.makeText(requireActivity(), "7", Toast.LENGTH_SHORT).show()
                             var prefereceStuffs = Preferencestuff(requireContext())
                             var newpoints = prefereceStuffs.getPoint() + 20
                             prefereceStuffs.setPoint(newpoints)
-                            Toast.makeText(
-                                requireContext(),
-                                "20 Points Added",
-                                Toast.LENGTH_LONG
-                            ).show()
+                          //  Toast.makeText(requireContext(), "20 Points Added", Toast.LENGTH_LONG).show()
                         }
                     })
                     Handler().postDelayed({
@@ -232,10 +250,14 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 p1: LoadError?,
                 p2: String?
             ) {
-               // Toast.makeText(requireActivity(), "${p1}, $p2", Toast.LENGTH_SHORT).show()
-                loadfacebookad(adprogress, cardView2)
-                adprogress.visibility = View.VISIBLE
-                cardView.visibility = View.GONE
+              //  Toast.makeText(requireContext(), "${p1}, $p2", Toast.LENGTH_SHORT).show()
+                if (admobvisible !== true) {
+                    loadfacebookad(adprogress, cardView2)
+                    adprogress.visibility = View.VISIBLE
+                    cardView.visibility = View.GONE
+                } else {
+                    adprogress.visibility = View.GONE
+                }
             }
 
         })
@@ -246,7 +268,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         val rewardedVideoAdListener: RewardedVideoAdListener = object : RewardedVideoAdListener {
             override fun onError(ad: Ad?, error: com.facebook.ads.AdError) {
                 // Rewarded video ad failed to load
-                Toast.makeText(requireContext(), "Rewarded video ad failed to load: ${error.errorMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Rewarded video ad failed to load: ${error.errorMessage}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 progressBar.visibility = View.GONE
                 // Log.e(TAG, "Rewarded video ad failed to load: " + error.getErrorMessage())
             }
@@ -285,7 +311,8 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         rewardedVideoAd!!.loadAd(
             rewardedVideoAd!!.buildLoadAdConfig()
                 .withAdListener(rewardedVideoAdListener)
-                .build())
+                .build()
+        )
     }
 
     private fun confirmtopurchase(){
@@ -314,13 +341,19 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         if (billingClient!!.isReady) {
             initiatePurchase()
         } else {
-            billingClient = BillingClient.newBuilder(requireContext()).enablePendingPurchases().setListener(this).build()
+            billingClient = BillingClient.newBuilder(requireContext()).enablePendingPurchases().setListener(
+                this
+            ).build()
             billingClient!!.startConnection(object : BillingClientStateListener {
                 override fun onBillingSetupFinished(billingResult: BillingResult) {
                     if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                         initiatePurchase()
                     } else {
-                        Toast.makeText(requireContext(), "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error " + billingResult.debugMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
@@ -333,7 +366,8 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         skuList.add(PRODUCT_ID)
         val params = SkuDetailsParams.newBuilder()
         params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
-        billingClient!!.querySkuDetailsAsync(params.build()
+        billingClient!!.querySkuDetailsAsync(
+            params.build()
         )
         { billingResult, skuDetailsList ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
@@ -349,7 +383,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 }
             }
             else {
-                Toast.makeText(requireContext(), " Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    " Error " + billingResult.debugMessage,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -364,7 +402,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
             Toast.makeText(requireContext(), "Purchase Canceled", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "Error " + billingResult.debugMessage, Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Error " + billingResult.debugMessage,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
     fun handlePurchases(purchases: List<Purchase>) {
@@ -386,7 +428,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     billingClient!!.consumeAsync(consumeParams, consumeListener)
                 }
             } else if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.PENDING) {
-                Toast.makeText(requireContext(), "Purchase is Pending. Please complete Transaction", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Purchase is Pending. Please complete Transaction",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (PRODUCT_ID == purchase.sku && purchase.purchaseState == Purchase.PurchaseState.UNSPECIFIED_STATE) {
                 Toast.makeText(requireContext(), "Purchase Status Unknown", Toast.LENGTH_SHORT).show()
             }
@@ -409,7 +455,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
      */
     private fun verifyValidSignature(signedData: String, signature: String): Boolean {
         return try {
-            ade.yemi.growthchecker_free.Utilities.Security.verifyPurchase(base64Key, signedData, signature)
+            ade.yemi.growthchecker_free.Utilities.Security.verifyPurchase(
+                base64Key,
+                signedData,
+                signature
+            )
         } catch (e: IOException) {
             false
         }
@@ -431,8 +481,8 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
 
         call?.enqueue(object : Callback<AllAppDetails?> {
             override fun onResponse(
-                    call: Call<AllAppDetails?>,
-                    response: Response<AllAppDetails?>
+                call: Call<AllAppDetails?>,
+                response: Response<AllAppDetails?>
             ) {
                 var appDetails: AllAppDetails? = response.body() as AllAppDetails
                 var applist = appDetails?.apps
@@ -443,15 +493,14 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                 }
                 retry.visibility = View.GONE
                 loader.visibility = View.GONE
-
                 var touse = AppToJsonString(appDetails!!)
                 Preferencestuff(requireContext()).setloacalApps(touse)
             }
 
             override fun onFailure(call: Call<AllAppDetails?>, t: Throwable) {
 
-                var touse = Preferencestuff(requireContext()).getlocalApps()
-                if (touse != ""){
+                var touse = Preferencestuff(requireActivity()).getlocalApps()
+                if (touse != "") {
                     var appContent = generateApps(requireContext(), touse!!)
                     var applist = appContent?.apps
                     recyclerView.apply {
@@ -459,8 +508,12 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                         layoutManager = manager
                         adapter = myAdapter
                     }
-                }else{
-                    Toast.makeText(requireContext(), "Could not load Apps. Check connection", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Could not load Apps. Check connection",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     retry.visibility = View.VISIBLE
                 }
                 loader.visibility = View.GONE
@@ -479,7 +532,11 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     //loadRewardedAd(progressBar, load)
                 }
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                    Toast.makeText(requireContext(), "Ad failed to show, Check Connection", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Ad failed to show, Check Connection",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     mRewardedAd = null
                 }
                 override fun onAdShowedFullScreenContent() {
@@ -494,7 +551,6 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
             })
         }
     }
-
     private fun loadRewardedAdAdmob(progressBar: ProgressBar, admobspace: CardView) {
 
         if (mRewardedAd == null) {
@@ -506,17 +562,23 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     override fun onAdFailedToLoad(adError: LoadAdError) {
 //                            Toast.makeText(requireContext(), "Ad failed to load, check your connection.", Toast.LENGTH_SHORT).show()
                         //loadfacebookad(progressBar)
-                        progressBar.visibility = View.GONE
+                        admobvisible = false
+                        //progressBar.visibility = View.GONE
                         mIsLoading = false
                         mRewardedAd = null
                     }
 
                     val animation = AnimationUtils.loadAnimation(context, R.anim.adscale)
                     override fun onAdLoaded(rewardedAd: RewardedAd) {
-                        Toast.makeText(requireContext(), "Ad is loaded, click the button to view", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Ad is loaded, click the button to view",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         admobspace.visibility = View.VISIBLE
+                        admobvisible = true
                         admobspace.startAnimation(animation)
-                        progressBar.visibility = View.GONE
+                        //progressBar.visibility = View.GONE
                         mRewardedAd = rewardedAd
                         mIsLoading = false
                         admobspace.setOnClickListener {
@@ -529,7 +591,6 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
             )
         }
     }
-
     private fun getdata1(adspace: CardView, adimage: ImageView, message: TextView){
         var rf = Retrofit.Builder()
             .baseUrl(RetrofitInterface1.BASE_URL)
@@ -539,8 +600,8 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
         var call =API.post
         call?.enqueue(object : Callback<AppContent?> {
             override fun onResponse(
-                    call: Call<AppContent?>,
-                    response: Response<AppContent?>
+                call: Call<AppContent?>,
+                response: Response<AppContent?>
             ) {
                 var appContent: AppContent? = response.body() as AppContent
                 var adslist = appContent?.ads
@@ -550,7 +611,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                     adcheck = true
                     if (adslist!![0].SmallImagelink!!.CheckEmpty() != true) {
                         Glide.with(requireContext()).load(adslist!![0].SmallImagelink).centerCrop()
-                                .into(adimage)
+                            .into(adimage)
                     } else {
                         adimage.visibility = View.GONE
                         adspace.visibility = View.VISIBLE
@@ -566,9 +627,9 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                             startActivity(launchBrowser)
                         } else {
                             Toast.makeText(
-                                    requireContext(),
-                                    "${adslist!![0].Description}",
-                                    Toast.LENGTH_SHORT
+                                requireContext(),
+                                "${adslist!![0].Description}",
+                                Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
@@ -581,7 +642,7 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
             override fun onFailure(call: Call<AppContent?>, t: Throwable) {
                 adspace.visibility = View.GONE
                 var touse = Preferencestuff(requireContext()).getLocalAds()
-                if (touse != ""){
+                if (touse != "") {
                     var appContent = generateAds(requireContext(), touse!!)
                     var adslist = appContent?.ads
 
@@ -589,8 +650,9 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                         adspace.visibility = View.VISIBLE
                         adcheck = true
                         if (adslist!![0].SmallImagelink!!.CheckEmpty() != true) {
-                            Glide.with(requireContext()).load(adslist!![0].SmallImagelink).centerCrop()
-                                    .into(adimage)
+                            Glide.with(requireContext()).load(adslist!![0].SmallImagelink)
+                                .centerCrop()
+                                .into(adimage)
                         } else {
                             adimage.visibility = View.GONE
                             adspace.visibility = View.VISIBLE
@@ -606,9 +668,9 @@ class AboutsPage : Fragment() , PurchasesUpdatedListener {
                                 startActivity(launchBrowser)
                             } else {
                                 Toast.makeText(
-                                        requireContext(),
-                                        "${adslist!![0].Description}",
-                                        Toast.LENGTH_SHORT
+                                    requireContext(),
+                                    "${adslist!![0].Description}",
+                                    Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }

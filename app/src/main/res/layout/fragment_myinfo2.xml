@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PopUp_Fragments.Myinfo2">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:layout_width="1000dp"
         android:layout_height="1000dp"
+        android:background="@color/MyTransparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" ></View>
 
@@ -108,6 +108,8 @@
                     android:textColor="@color/primarycolor2"
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"></EditText>
 
@@ -141,6 +143,8 @@
                     android:textColor="@color/primarycolor2"
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"></EditText>
 

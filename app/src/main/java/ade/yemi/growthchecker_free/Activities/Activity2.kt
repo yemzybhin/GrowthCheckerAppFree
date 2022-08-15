@@ -14,6 +14,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdRequest
@@ -23,21 +25,23 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class Activity2 : AppCompatActivity(), challengecommunicator {
-
+    private val cancl: CardView by lazy {
+        findViewById(R.id.cd_challengestartcancel)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activity2)
-        var cancl = findViewById<CardView>(R.id.cd_challengestartcancel)
         replacefragment(intent.getStringExtra("ActivityToset")!!)
 
 
         cancl.setOnClickListener {
             cancl.clicking()
             cancl.shortvibrate()
-            Timer().schedule(100) {
+            Handler().postDelayed({
                 startActivity(Intent(this@Activity2, MainActivity::class.java))
                 finish()
-            }
+            }, 0)
+            loading()
         }
 
     }
@@ -55,10 +59,20 @@ class Activity2 : AppCompatActivity(), challengecommunicator {
     internal fun replacefragment(string: String) {
         var fragment = Fragment()
         when(string){
-            "challengeview" -> fragment = challengeview()
-            "Aboutspage" -> fragment = AboutsPage()
-            "AllAds" -> fragment = AllAds()
+            "challengeview" ->{
+                fragment = challengeview()
+                cancl.visibility = View.VISIBLE
+            }
+            "Aboutspage" ->{
+                fragment = AboutsPage()
+                cancl.visibility = View.GONE
+            }
+            "AllAds" -> {
+                fragment = AllAds()
+                cancl.visibility = View.GONE
+            }
         }
+
         var bundle = Bundle()
         fragment.arguments = bundle
         bundle.putString("challengeviewChallenge", intent.getStringExtra("challengeviewChallenge"))

@@ -34,4 +34,46 @@ class Preferencestuff {
     fun getlocalApps(): String?{
         return sharef!!.getString("localApps", "")
     }
+
+    fun setUserAttributes(type : String, value: String){
+        var editor = sharef!!.edit()
+        when(type){
+            "userName" -> {
+                editor.putString("userName", value)
+            }
+            "userAge" ->{
+                editor.putString("userAge", value)
+            }
+            "displayImage"->{
+                editor.putString("displayImage", value)
+            }
+        }
+        editor.commit()
+    }
+    fun getUserAttributes(type : String): String?{
+        when(type){
+            "userName" -> {
+                return sharef!!.getString("userName", "Anonymous")
+            }
+            "userAge" ->{
+                return sharef!!.getString("userAge", "0")
+            }
+            "displayImage"->{
+                return sharef!!.getString("displayImage", "0")
+            }
+            else ->{
+                return "No value"
+            }
+        }
+
+    }
+
+    fun setAddiction(appString: String){
+        var editor = sharef!!.edit()
+        editor.putString("addiction", appString)
+        editor.commit()
+    }
+    fun getAddiction(): String?{
+        return sharef!!.getString("addiction", "")
+    }
 }

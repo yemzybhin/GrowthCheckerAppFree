@@ -21,8 +21,6 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2144911759176506~5003122422"/>
 
-
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -33,12 +31,11 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <activity android:name=".Activities.Activity2"
+            android:screenOrientation="portrait"
             android:hardwareAccelerated="true" ></activity>
-        <activity
-            android:name=".splash.WelcomePage"
+        <activity android:name=".splash.WelcomePage"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="false" />
-
         <activity android:name=".splash.SplashScreen"
             android:screenOrientation="portrait"
             android:exported="true"
@@ -48,8 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.MainActivity"
+        <activity android:name=".Activities.MainActivity"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="true" >
 
