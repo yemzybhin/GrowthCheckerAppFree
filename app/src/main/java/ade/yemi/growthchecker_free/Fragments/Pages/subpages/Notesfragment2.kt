@@ -31,11 +31,9 @@ class Notesfragment2 : BaseViewStubFragment(), NoteClickDeleteInterface, NoteCli
     ) {
         var noteRV = view.findViewById<RecyclerView>(R.id.rv_notesrecycler)
         var nonotes = view.findViewById<ImageView>(R.id.nonotescheck)
-
+        var noNotesText = view.findViewById<ImageView>(R.id.nonotestext)
 
         noteRV.layoutManager = LinearLayoutManager(requireContext())
-
-
         val noteRvAdapter = NoteRvAdapter(this, this, this)
         noteRV.adapter = noteRvAdapter
         viewmodal = ViewModelProviders.of(this).get(NoteViewmodel::class.java)
@@ -44,15 +42,14 @@ class Notesfragment2 : BaseViewStubFragment(), NoteClickDeleteInterface, NoteCli
             list?.let {
                 if (it.size != 0){
                     nonotes.visibility = View.GONE
-
+                    noNotesText.visibility = View.GONE
                 }else{
                     nonotes.visibility = View.VISIBLE
+                    noNotesText.visibility = View.VISIBLE
                 }
-
                 noteRvAdapter.updateList(it)
             }
         })
-
     }
 
     override fun getViewStubLayoutResource(): Int {

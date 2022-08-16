@@ -528,6 +528,7 @@ class MainActivity : AppCompatActivity(), NoteCommunicator{
                     preferencestuff.setUserAttributes("userAge",agee.text.toString())
                    // Toast.makeText(this, "${preferencestuff.getUserAttributes("userName")}", Toast.LENGTH_SHORT).show()
                     popup.dismiss()
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
             }
             changeimage.setOnClickListener {
